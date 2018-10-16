@@ -111,3 +111,56 @@ type PaxList struct {
 	Wagon                     string      `json:"wagon"`
 	Seat                      string      `json:"seat"`
 }
+
+// InternalGetBookPriceInfoRS represent "information.get_book_price_info" internal response
+type InternalGetBookPriceInfoRS struct {
+	ErrCode interface{}      `json:"errCode"`
+	ErrMsg  interface{}      `json:"errMsg"`
+	Return  GetBookPriceInfo `json:"return"`
+}
+
+// GetBookPriceInfo type
+type GetBookPriceInfo struct {
+	BookCode         string  `json:"bookCode"`
+	TotalPriceAdult  float64 `json:"totalPriceAdult"`
+	TotalPriceChild  float64 `json:"totalPriceChild"`
+	TotalPriceInfant float64 `json:"totalPriceInfant"`
+	ExtraFee         float64 `json:"extraFee"`
+	TotalPrice       float64 `json:"totalPrice"`
+}
+
+// InternalGetScheduleLiteRS represent "information.get_schedule" internal response
+type InternalGetScheduleLiteRS struct {
+	ErrCode interface{}     `json:"errCode"`
+	ErrMsg  interface{}     `json:"errMsg"`
+	Return  GetScheduleLite `json:"return"`
+}
+
+// GetScheduleLite type
+type GetScheduleLite struct {
+	Origin        string         `json:"origin"`
+	Destination   string         `json:"destination"`
+	DepartureDate string         `json:"departureDate"`
+	ScheduleLites []ScheduleLite `json:"schedule"`
+}
+
+// ScheduleLite type
+type ScheduleLite struct {
+	TrainNo       string              `json:"trainNo"`
+	TrainName     string              `json:"trainName"`
+	DepartureDate string              `json:"departureDate"`
+	ArriveDate    string              `json:"arriveDate"`
+	DepartureTime string              `json:"departureTime"`
+	ArriveTime    string              `json:"arriveTime"`
+	AvailSubClass []AvailSubClassLite `json:"availSubClass"`
+}
+
+// AvailSubClassLite type
+type AvailSubClassLite struct {
+	SubClass      string  `json:"subClass"`
+	SeatAvailable float64 `json:"seatAvailable"`
+	SeatClass     string  `json:"seatClass"`
+	AdultPrice    float64 `json:"adultPrice"`
+	ChildPrice    float64 `json:"childPrice"`
+	InfantPrice   float64 `json:"infantPrice"`
+}
