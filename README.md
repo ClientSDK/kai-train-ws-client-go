@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="https://github.com/ClientSDK/kai-train-ws-client-go">
-    <img src="https://upload.wikimedia.org/wikipedia/id/3/3d/Logo_PT_KAI_%28Persero%29_%28New_version_2016%29.svg" alt="KAI Train Web Service Client for Go" width=275>
+    <img src="https://upload.wikimedia.org/wikipedia/id/3/3d/Logo_PT_KAI_%28Persero%29_%28New_version_2016%29.svg" alt="KAI Train Web Service Client for Go" width=300>
   </a>
 
   <h3 align="center">UnOfficial Go Package Client library for KAI (Kereta Api Indonesia) Train Web Service</h3>
