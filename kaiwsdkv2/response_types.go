@@ -20,3 +20,135 @@ type GetPayTypeRS struct {
 	ErrMsg   interface{}   `json:"err_msg"`
 	PayTypes []interface{} `json:"pay_type"`
 }
+
+// GetAgentBalanceRS represent "information.get_agent_balance" response
+type GetAgentBalanceRS struct {
+	ErrCode      interface{} `json:"err_code"`
+	ErrMsg       interface{} `json:"err_msg"`
+	AgentCode    string      `json:"agent_code"`
+	AgentName    string      `json:"agent_name"`
+	AgentBalance float64     `json:"agent_balance"`
+}
+
+// GetBalanceRS represent "information.get_balance" response
+type GetBalanceRS struct {
+	ErrCode     interface{} `json:"err_code"`
+	ErrMsg      interface{} `json:"err_msg"`
+	BookCode    string      `json:"book_code"`
+	NumCode     interface{} `json:"num_code"`
+	NormalSales float64     `json:"normal_sales"`
+	ExtraFee    float64     `json:"extra_fee"`
+	BookBalance float64     `json:"book_balance"`
+	Discount    float64     `json:"discount"`
+}
+
+// GetBookInfoRS represent "information.get_book_info" response
+type GetBookInfoRS struct {
+	ErrCode       interface{}     `json:"err_code"`
+	ErrMsg        interface{}     `json:"err_msg"`
+	BookCode      string          `json:"book_code"`
+	NumCode       interface{}     `json:"num_code"`
+	Caller        string          `json:"caller"`
+	BookTime      string          `json:"book_time"`
+	TrainNo       string          `json:"train_no"`
+	TrainName     string          `json:"train_name"`
+	Origin        string          `json:"org"`
+	Destination   string          `json:"des"`
+	DepartureDate string          `json:"dep_date"`
+	DepartureTime string          `json:"dep_time"`
+	ArriveDate    string          `json:"arv_date"`
+	ArriveTime    string          `json:"arv_time"`
+	Subclass      string          `json:"subclass"`
+	Class         string          `json:"class"`
+	NormalSales   float64         `json:"normal_sales"`
+	ExtraFee      float64         `json:"extra_fee"`
+	BookBalance   float64         `json:"book_balance"`
+	Discount      float64         `json:"discount"`
+	PaxList       [][]interface{} `json:"pax_list"`
+}
+
+// GetBookPriceInfoRS represent "information.get_book_price_info" response
+type GetBookPriceInfoRS struct {
+	ErrCode          interface{} `json:"err_code"`
+	ErrMsg           interface{} `json:"err_msg"`
+	BookCode         string      `json:"book_code"`
+	TotalPriceAdult  float64     `json:"total_price_adult"`
+	TotalPriceChild  float64     `json:"total_price_child"`
+	TotalPriceInfant float64     `json:"total_price_infant"`
+	ExtraFee         float64     `json:"extra_fee"`
+	TotalPrice       float64     `json:"total_price"`
+}
+
+// GetScheduleLiteRS represent "information.get_schedule_lite" method
+type GetScheduleLiteRS struct {
+	ErrCode       interface{}   `json:"err_code"`
+	ErrMsg        interface{}   `json:"err_msg"`
+	Origin        string        `json:"org"`
+	Destination   string        `json:"des"`
+	DepartureDate string        `json:"dep_date"`
+	Schedules     []interface{} `json:"schedule"`
+}
+
+// GetScheduleRS represent "information.get_schedule" response
+type GetScheduleRS struct {
+	ErrCode       interface{}   `json:"err_code"`
+	ErrMsg        interface{}   `json:"err_msg"`
+	Origin        string        `json:"org"`
+	Destination   string        `json:"des"`
+	DepartureDate string        `json:"dep_date"`
+	Schedules     []interface{} `json:"schedule"`
+}
+
+// GetScheduleV2RS represent "information.get_schedule_v2" response
+type GetScheduleV2RS struct {
+	ErrCode       interface{}   `json:"err_code"`
+	ErrMsg        interface{}   `json:"err_msg"`
+	Origin        string        `json:"org"`
+	Destination   string        `json:"des"`
+	DepartureDate string        `json:"dep_date"`
+	Schedules     []interface{} `json:"schedule"`
+}
+
+// GetSeatMapRS represent "information.get_seat_map" response
+type GetSeatMapRS struct {
+	ErrCode       interface{}   `json:"err_code"`
+	ErrMsg        interface{}   `json:"err_msg"`
+	Origin        string        `json:"org"`
+	Destination   string        `json:"des"`
+	TrainNo       string        `json:"train_no"`
+	DepartureDate string        `json:"dep_date"`
+	SeatMaps      []interface{} `json:"seat_map"`
+}
+
+// GetSeatMapPerSubClassRS represent "information.get_seat_map_per_subclass" response
+type GetSeatMapPerSubClassRS struct {
+	ErrCode       interface{}   `json:"err_code"`
+	ErrMsg        interface{}   `json:"err_msg"`
+	Origin        string        `json:"org"`
+	Destination   string        `json:"des"`
+	TrainNo       string        `json:"train_no"`
+	DepartureDate string        `json:"dep_date"`
+	SeatMaps      []interface{} `json:"seat_map"`
+}
+
+// GetSeatNullRS represent "information.get_seat_null" response
+type GetSeatNullRS struct {
+	ErrCode       interface{}   `json:"err_code"`
+	ErrMsg        interface{}   `json:"err_msg"`
+	Origin        string        `json:"org"`
+	Destination   string        `json:"des"`
+	TrainNo       string        `json:"train_no"`
+	DepartureDate string        `json:"dep_date"`
+	SeatNulls     []interface{} `json:"seat_null"`
+}
+
+// SeatNullPerSubClassRS represent "information.get_seat_null_per_subclass" response
+type SeatNullPerSubClassRS struct {
+	ErrCode       interface{}   `json:"err_code"`
+	ErrMsg        interface{}   `json:"err_msg"`
+	Origin        string        `json:"org"`
+	Destination   string        `json:"des"`
+	TrainNo       string        `json:"train_no"`
+	DepartureDate string        `json:"dep_date"`
+	SeatNulls     []interface{} `json:"seat_null"`
+}
