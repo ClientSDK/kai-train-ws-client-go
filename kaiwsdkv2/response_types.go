@@ -152,3 +152,90 @@ type SeatNullPerSubClassRS struct {
 	DepartureDate string        `json:"dep_date"`
 	SeatNulls     []interface{} `json:"seat_null"`
 }
+
+// BookingRS represent "transaction.booking" response
+type BookingRS struct {
+	ErrCode       interface{}     `json:"err_code"`
+	ErrMsg        interface{}     `json:"err_msg"`
+	Origin        string          `json:"org"`
+	Destination   string          `json:"des"`
+	DepartureDate string          `json:"dep_date"`
+	TrainNo       interface{}     `json:"train_no"`
+	BookCode      string          `json:"book_code"`
+	NumCode       interface{}     `json:"num_code"`
+	PaxNums       []interface{}   `json:"pax_num"`
+	PaxNames      []interface{}   `json:"pax_name"`
+	Seats         [][]interface{} `json:"seat"`
+	NormalSales   float64         `json:"normal_sales"`
+	ExtraFee      float64         `json:"extra_fee"`
+	BookBalance   float64         `json:"book_balance"`
+	Discount      float64         `json:"discount"`
+}
+
+// BookingWithArvInfoRS represent "transaction.booking_with_arv_info" response
+type BookingWithArvInfoRS struct {
+	ErrCode       interface{}     `json:"err_code"`
+	ErrMsg        interface{}     `json:"err_msg"`
+	Origin        string          `json:"org"`
+	Destination   string          `json:"des"`
+	DepartureDate string          `json:"dep_date"`
+	ArriveDate    string          `json:"arv_date"`
+	DepartureTime string          `json:"dep_time"`
+	ArriveTime    string          `json:"arv_time"`
+	TrainNo       interface{}     `json:"train_no"`
+	BookCode      string          `json:"book_code"`
+	NumCode       interface{}     `json:"num_code"`
+	PaxNums       []interface{}   `json:"pax_num"`
+	PaxNames      []interface{}   `json:"pax_name"`
+	Seats         [][]interface{} `json:"seat"`
+	NormalSales   float64         `json:"normal_sales"`
+	ExtraFee      float64         `json:"extra_fee"`
+	BookBalance   float64         `json:"book_balance"`
+	Discount      float64         `json:"discount"`
+}
+
+// CancelBookRS represent "transaction.cancel_book" response
+type CancelBookRS struct {
+	ErrCode      interface{} `json:"err_code"`
+	ErrMsg       interface{} `json:"err_msg"`
+	BookCode     string      `json:"book_code"`
+	Status       string      `json:"status"`
+	RefundAmount float64     `json:"refund_amount"`
+}
+
+// ManualSeatRS represent "transaction.manual_seat" response
+type ManualSeatRS struct {
+	ErrCode   interface{}   `json:"err_code"`
+	ErrMsg    interface{}   `json:"err_msg"`
+	BookCode  string        `json:"book_code"`
+	WagonCode string        `json:"wagon_code"`
+	WagonNo   int64         `json:"wagon_no"`
+	Seats     []interface{} `json:"seat"`
+}
+
+// UpdatePaxRS represent "transaction.update_pax" response
+type UpdatePaxRS struct {
+	ErrCode  interface{}   `json:"err_code"`
+	ErrMsg   interface{}   `json:"err_msg"`
+	BookCode string        `json:"book_code"`
+	PaxNums  []interface{} `json:"pax_num"`
+	PaxNames []interface{} `json:"pax_name"`
+}
+
+// PaymentRS represent "transaction.payment" response
+type PaymentRS struct {
+	ErrCode     interface{} `json:"err_code"`
+	ErrMsg      interface{} `json:"err_msg"`
+	BookCode    string      `json:"book_code"`
+	BookBalance float64     `json:"book_balance"`
+}
+
+// CancelPaymentRS represent "transaction.cancel_payment" response
+type CancelPaymentRS struct {
+	ErrCode     interface{} `json:"err_code"`
+	ErrMsg      interface{} `json:"err_msg"`
+	BookCode    string      `json:"book_code"`
+	NormalSales float64     `json:"normal_sales"`
+	ExtraFee    float64     `json:"extra_fee"`
+	BookBalance float64     `json:"book_balance"`
+}
