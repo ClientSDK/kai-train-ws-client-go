@@ -13,6 +13,8 @@ type Destination struct {
 	DestName string `json:"DestName"`
 }
 
+// --
+
 // InternalGetOriginationRS represent "data.get_org" internal response
 type InternalGetOriginationRS struct {
 	ErrCode interface{}   `json:"errCode"`
@@ -26,6 +28,8 @@ type Origination struct {
 	OriginName string `json:"OriginName"`
 }
 
+// --
+
 // InternalGetPayTypeRS represent "data.get_pay_type" internal response
 type InternalGetPayTypeRS struct {
 	ErrCode interface{} `json:"errCode"`
@@ -37,6 +41,8 @@ type InternalGetPayTypeRS struct {
 type PayType struct {
 	Name string `json:"name"`
 }
+
+// --
 
 // InternalGetAgentBalanceRS represent "information.get_agent_balance" internal response
 type InternalGetAgentBalanceRS struct {
@@ -51,6 +57,8 @@ type GetAgentBalance struct {
 	AgentName    string  `json:"agentName"`
 	AgentBalance float64 `json:"agentBalance"`
 }
+
+// --
 
 // InternalGetBalanceRS represent "information.get_balance" internal response
 type InternalGetBalanceRS struct {
@@ -68,6 +76,8 @@ type GetBalance struct {
 	BookBalance float64     `json:"bookBalance"`
 	Discount    float64     `json:"discount"`
 }
+
+// --
 
 // InternalGetBookInfoRS represent "information.get_book_info" internal response
 type InternalGetBookInfoRS struct {
@@ -112,6 +122,8 @@ type PaxList struct {
 	Seat                      string      `json:"seat"`
 }
 
+// --
+
 // InternalGetBookPriceInfoRS represent "information.get_book_price_info" internal response
 type InternalGetBookPriceInfoRS struct {
 	ErrCode interface{}      `json:"errCode"`
@@ -129,6 +141,8 @@ type GetBookPriceInfo struct {
 	TotalPrice       float64 `json:"totalPrice"`
 }
 
+// --
+
 // InternalGetScheduleLiteRS represent "information.get_schedule" internal response
 type InternalGetScheduleLiteRS struct {
 	ErrCode interface{}     `json:"errCode"`
@@ -141,7 +155,7 @@ type GetScheduleLite struct {
 	Origin        string         `json:"origin"`
 	Destination   string         `json:"destination"`
 	DepartureDate string         `json:"departureDate"`
-	ScheduleLites []ScheduleLite `json:"schedule"`
+	ScheduleLites []ScheduleLite `json:"schedules"`
 }
 
 // ScheduleLite type
@@ -163,4 +177,343 @@ type AvailSubClassLite struct {
 	AdultPrice    float64 `json:"adultPrice"`
 	ChildPrice    float64 `json:"childPrice"`
 	InfantPrice   float64 `json:"infantPrice"`
+}
+
+// --
+
+// InternalGetScheduleV2RS represent "information.get_schedule_v2" internal response
+type InternalGetScheduleV2RS struct {
+	ErrCode interface{}   `json:"errCode"`
+	ErrMsg  interface{}   `json:"errMsg"`
+	Return  GetScheduleV2 `json:"return"`
+}
+
+// GetScheduleV2 type
+type GetScheduleV2 struct {
+	Origin        string       `json:"origin"`
+	Destination   string       `json:"destination"`
+	DepartureDate string       `json:"departureDate"`
+	ScheduleV2s   []ScheduleV2 `json:"schedules"`
+}
+
+// ScheduleV2 type
+type ScheduleV2 struct {
+	TrainNo       string            `json:"trainNo"`
+	TrainName     string            `json:"trainName"`
+	DepartureDate string            `json:"departureDate"`
+	ArriveDate    string            `json:"arriveDate"`
+	DepartureTime string            `json:"departureTime"`
+	ArriveTime    string            `json:"arriveTime"`
+	AvailSubClass []AvailSubClassV2 `json:"availSubClass"`
+}
+
+// AvailSubClassV2 type
+type AvailSubClassV2 struct {
+	SubClass      string  `json:"subClass"`
+	SeatAvailable float64 `json:"seatAvailable"`
+	SeatClass     string  `json:"seatClass"`
+	AdultPrice    float64 `json:"adultPrice"`
+	ChildPrice    float64 `json:"childPrice"`
+	InfantPrice   float64 `json:"infantPrice"`
+}
+
+// --
+
+// InternalGetScheduleRS represent "information.get_schedule" internal response
+type InternalGetScheduleRS struct {
+	ErrCode interface{} `json:"errCode"`
+	ErrMsg  interface{} `json:"errMsg"`
+	Return  GetSchedule `json:"return"`
+}
+
+// GetSchedule type
+type GetSchedule struct {
+	Origin        string     `json:"origin"`
+	Destination   string     `json:"destination"`
+	DepartureDate string     `json:"departureDate"`
+	Schedules     []Schedule `json:"schedules"`
+}
+
+// Schedule type
+type Schedule struct {
+	TrainNo       string          `json:"trainNo"`
+	TrainName     string          `json:"trainName"`
+	DepartureTime string          `json:"departureTime"`
+	ArriveTime    string          `json:"arriveTime"`
+	AvailSubClass []AvailSubClass `json:"availSubClass"`
+}
+
+// AvailSubClass type
+type AvailSubClass struct {
+	SubClass      string  `json:"subClass"`
+	SeatAvailable float64 `json:"seatAvailable"`
+	SeatClass     string  `json:"seatClass"`
+	AdultPrice    float64 `json:"adultPrice"`
+	ChildPrice    float64 `json:"childPrice"`
+	InfantPrice   float64 `json:"infantPrice"`
+}
+
+// --
+
+// InternalGetSeatMapRS represent "information.get_seat_map" internal response
+type InternalGetSeatMapRS struct {
+	ErrCode interface{} `json:"errCode"`
+	ErrMsg  interface{} `json:"errMsg"`
+	Return  GetSeatMap  `json:"return"`
+}
+
+// GetSeatMap type
+type GetSeatMap struct {
+	Origin        string    `json:"origin"`
+	Destination   string    `json:"destination"`
+	TrainNo       string    `json:"trainNo"`
+	DepartureDate string    `json:"departureDate"`
+	SeatMaps      []SeatMap `json:"seatMaps"`
+}
+
+// SeatMap type
+type SeatMap struct {
+	WagonCode string  `json:"wagonCode"`
+	WagonNo   float64 `json:"wagonNo"`
+	Seats     []Seat  `json:"seats"`
+}
+
+// Seat type
+type Seat struct {
+	Row        float64 `json:"row"`
+	Column     float64 `json:"column"`
+	SeatRow    float64 `json:"seatRow"`
+	SeatColumn string  `json:"seatColumn"`
+	SubClass   string  `json:"seatClass"`
+	Status     float64 `json:"status"`
+}
+
+// --
+
+// InternalGetSeatMapPerSubClassRS represent "information.get_seat_map_per_subclass" internal response
+type InternalGetSeatMapPerSubClassRS struct {
+	ErrCode interface{}           `json:"errCode"`
+	ErrMsg  interface{}           `json:"errMsg"`
+	Return  GetSeatMapPerSubClass `json:"return"`
+}
+
+// GetSeatMapPerSubClass type
+type GetSeatMapPerSubClass struct {
+	Origin        string    `json:"origin"`
+	Destination   string    `json:"destination"`
+	TrainNo       string    `json:"trainNo"`
+	DepartureDate string    `json:"departureDate"`
+	SeatMaps      []SeatMap `json:"seatMaps"`
+}
+
+// --
+
+// InternalGetSeatNullRS represent "information.get_seat_null" internal response
+type InternalGetSeatNullRS struct {
+	ErrCode interface{} `json:"errCode"`
+	ErrMsg  interface{} `json:"errMsg"`
+	Return  GetSeatNull `json:"return"`
+}
+
+// GetSeatNull type
+type GetSeatNull struct {
+	Origin        string     `json:"origin"`
+	Destination   string     `json:"destination"`
+	TrainNo       string     `json:"trainNo"`
+	DepartureDate string     `json:"departureDate"`
+	SeatNulls     []SeatNull `json:"seatNulls"`
+}
+
+// SeatNull type
+type SeatNull struct {
+	WagonCode string  `json:"wagonCode"`
+	WagonNo   float64 `json:"wagonNo"`
+	Seats     []SeatN `json:"seats"`
+}
+
+// SeatN type
+type SeatN struct {
+	SeatRow    float64 `json:"seatRow"`
+	SeatColumn string  `json:"seatColumn"`
+	SubClass   string  `json:"seatClass"`
+	Status     float64 `json:"status"`
+}
+
+// --
+
+// InternalGetSeatNullPerSubClassRS represent "information.get_set_null_per_subclass" internal response
+type InternalGetSeatNullPerSubClassRS struct {
+	ErrCode interface{}            `json:"errCode"`
+	ErrMsg  interface{}            `json:"errMsg"`
+	Return  GetSeatNullPerSubClass `json:"return"`
+}
+
+// GetSeatNullPerSubClass type
+type GetSeatNullPerSubClass struct {
+	Origin        string     `json:"origin"`
+	Destination   string     `json:"destination"`
+	TrainNo       string     `json:"trainNo"`
+	DepartureDate string     `json:"departureDate"`
+	SeatNulls     []SeatNull `json:"seatNulls"`
+}
+
+// --
+
+// InternalBookingRS represent "transaction.booking" internal response
+type InternalBookingRS struct {
+	ErrCode interface{} `json:"errCode"`
+	ErrMsg  interface{} `json:"errMsg"`
+	Return  Booking     `json:"return"`
+}
+
+// Booking type
+type Booking struct {
+	Origin        string      `json:"origin"`
+	Destination   string      `json:"destination"`
+	DepartureDate string      `json:"departureDate"`
+	TrainNo       interface{} `json:"trainNo"`
+	BookCode      string      `json:"bookCode"`
+	NumCode       interface{} `json:"numCode"`
+	PaxNums       PaxNum      `json:"paxNums"`
+	PaxNames      []PaxName   `json:"paxNames"`
+	Seats         []PaxSeat   `json:"seats"`
+	NormalSales   float64     `json:"normalSales"`
+	ExtraFee      float64     `json:"extraFee"`
+	BookBalance   float64     `json:"bookBalance"`
+	Discount      float64     `json:"discount"`
+}
+
+// PaxNum type
+type PaxNum struct {
+	AdultCount  int `json:"adultCount"`
+	ChildCount  int `json:"childCount"`
+	InfantCount int `json:"infantCount"`
+}
+
+// PaxName type
+type PaxName struct {
+	Name string `json:"name"`
+}
+
+// PaxSeat type
+type PaxSeat struct {
+	WagonCode string `json:"wagonCode"`
+	WagonNo   string `json:"wagonNo"`
+	SeatRow   string `json:"seatRow"`
+	SeatCol   string `json:"seatCol"`
+}
+
+// --
+
+// InternalBookingWithArvInfoRS represent "transaction.booking_with_arv_info" internal response
+type InternalBookingWithArvInfoRS struct {
+	ErrCode interface{}        `json:"errCode"`
+	ErrMsg  interface{}        `json:"errMsg"`
+	Return  BookingWithArvInfo `json:"return"`
+}
+
+// BookingWithArvInfo type
+type BookingWithArvInfo struct {
+	Origin        string      `json:"origin"`
+	Destination   string      `json:"destination"`
+	DepartureDate string      `json:"departureDate"`
+	ArriveDate    string      `json:"arriveDate"`
+	DepartureTime string      `json:"departureTime"`
+	ArriveTime    string      `json:"arriveTime"`
+	TrainNo       interface{} `json:"trainNo"`
+	BookCode      string      `json:"bookCode"`
+	NumCode       interface{} `json:"numCode"`
+	PaxNums       PaxNum      `json:"paxNums"`
+	PaxNames      []PaxName   `json:"paxNames"`
+	Seats         []PaxSeat   `json:"seats"`
+	NormalSales   float64     `json:"normalSales"`
+	ExtraFee      float64     `json:"extraFee"`
+	BookBalance   float64     `json:"bookBalance"`
+	Discount      float64     `json:"discount"`
+}
+
+// --
+
+// InternalCancelBookRS represent "transaction.cancel_book" internal response
+type InternalCancelBookRS struct {
+	ErrCode interface{} `json:"errCode"`
+	ErrMsg  interface{} `json:"errMsg"`
+	Return  CancelBook  `json:"return"`
+}
+
+// CancelBook type
+type CancelBook struct {
+	BookCode     string  `json:"bookCode"`
+	Status       string  `json:"status"`
+	RefundAmount float64 `json:"refundAmount"`
+}
+
+// --
+
+// InternalManualSeatRS represent "transaction.manual_seat" internal response
+type InternalManualSeatRS struct {
+	ErrCode interface{} `json:"errCode"`
+	ErrMsg  interface{} `json:"errMsg"`
+	Return  ManualSeat  `json:"return"`
+}
+
+// ManualSeat type
+type ManualSeat struct {
+	BookCode  string  `json:"bookCode"`
+	WagonCode string  `json:"wagonCode"`
+	WagonNo   int64   `json:"wagonNo"`
+	Seats     []SeatM `json:"seats"`
+}
+
+// SeatM type
+type SeatM struct {
+	SeatNo string `json:"seatNo"`
+}
+
+// --
+
+// InternalUpdatePaxRS represent "information.update_pax" internal response
+type InternalUpdatePaxRS struct {
+	ErrCode interface{} `json:"errCode"`
+	ErrMsg  interface{} `json:"errMsg"`
+	Return  UpdatePax   `json:"return"`
+}
+
+// UpdatePax type
+type UpdatePax struct {
+	BookCode string    `json:"bookCode"`
+	PaxNums  PaxNum    `json:"paxNums"`
+	PaxNames []PaxName `json:"paxNames"`
+}
+
+// --
+
+// InternalPaymentRS represent "transaction.payment" internal response
+type InternalPaymentRS struct {
+	ErrCode interface{} `json:"errCode"`
+	ErrMsg  interface{} `json:"errMsg"`
+	Return  Payment     `json:"return"`
+}
+
+// Payment type
+type Payment struct {
+	BookCode    string  `json:"bookCode"`
+	BookBalance float64 `json:"bookBalance"`
+}
+
+// --
+
+// InternalCancelPaymentRS represent "transaction.cancel_payment" internal response
+type InternalCancelPaymentRS struct {
+	ErrCode interface{}   `json:"errCode"`
+	ErrMsg  interface{}   `json:"errMsg"`
+	Return  CancelPayment `json:"return"`
+}
+
+// CancelPayment type
+type CancelPayment struct {
+	BookCode    string  `json:"bookBode"`
+	NormalSales float64 `json:"normalSales"`
+	ExtraFee    float64 `json:"extraFee"`
+	BookBalance float64 `json:"bookBalance"`
 }
