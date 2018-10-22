@@ -440,3 +440,32 @@ func TestGetBookInfoRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestGetBookPriceInfoRSOK is a positive test function for "GetBookPriceInfoRS" response type -> "information.get_book_price_info"
+func TestGetBookPriceInfoRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","total_price_adult":1152500,"total_price_child":0,"total_price_infant":0,"extra_fee":0,"total_price":1152500	  }`
+	// test variable
+	var vRS GetBookPriceInfoRS
+	bookCode := "ABMNYZ"
+
+	var totalPriceAdult float64 = 1152500
+	var totalPriceChild float64  // = 0
+	var totalPriceInfant float64 // = 0
+	var extraFee float64         // = 0
+	var totalPrice float64 = 1152500
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
+
+	assert.Equal(t, totalPriceAdult, vRS.TotalPriceAdult, "should be equal!")
+	assert.Equal(t, totalPriceChild, vRS.TotalPriceChild, "should be equal!")
+	assert.Equal(t, totalPriceInfant, vRS.TotalPriceInfant, "should be equal!")
+	assert.Equal(t, extraFee, vRS.ExtraFee, "should be equal!")
+	assert.Equal(t, totalPrice, vRS.TotalPrice, "should be equal!")
+
+	assert.Nil(t, err)
+}
