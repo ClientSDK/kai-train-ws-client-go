@@ -175,7 +175,53 @@ func TestGetSeatMapRSOK(t *testing.T) {
 	var seatRow float64 = 1
 	seatColumn := "A"
 	subClass := "C"
-	var status float64 = 0
+	var status float64 // = 0
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	wagonInfo0 := reflect.ValueOf(vRS.SeatMaps[0])
+	seatInfo := wagonInfo0.Index(2).Interface().([]interface{})
+	seatInfo0 := reflect.ValueOf(seatInfo[0])
+
+	// test logic
+	assert.Equal(t, org, vRS.Origin, "should be equal!")
+	assert.Equal(t, des, vRS.Destination, "should be equal!")
+	assert.Equal(t, trainNo, vRS.TrainNo, "should be equal!")
+	assert.Equal(t, lenWagon, len(vRS.SeatMaps), "should be equal!")
+
+	assert.Equal(t, wagonCode, wagonInfo0.Index(0).Interface().(string), "should be equal!")
+	assert.Equal(t, wagonNo, wagonInfo0.Index(1).Interface().(float64), "should be equal!")
+
+	assert.Equal(t, row, seatInfo0.Index(0).Interface().(float64), "should be equal!")
+	assert.Equal(t, column, seatInfo0.Index(1).Interface().(float64), "should be equal!")
+	assert.Equal(t, seatRow, seatInfo0.Index(2).Interface().(float64), "should be equal!")
+	assert.Equal(t, seatColumn, seatInfo0.Index(3).Interface().(string), "should be equal!")
+	assert.Equal(t, subClass, seatInfo0.Index(4).Interface().(string), "should be equal!")
+	assert.Equal(t, status, seatInfo0.Index(5).Interface().(float64), "should be equal!")
+
+	assert.Nil(t, err)
+}
+
+// TestGetSeatMapPerSubClassRSOK is a positive test function for "GetSeatMapPerSubClassRS" response type -> "information.get_seat_map_per_subclass"
+func TestGetSeatMapPerSubClassRSOK(t *testing.T) {
+	// fake response
+	str := `{ "err_code": 0, "org": "BD", "des": "GMR", "train_no": "10501", "dep_date": "20190919", "seat_map": [["PREMIUM",1,[[1,1,1,"A","C",0],[1,2,1,"B","C",0],[1,4,1,"C","C",0],[1,5,1,"D","C",0],[1,6,1,"E","C",0],[2,1,2,"A","C",0],[2,2,2,"B","C",0],[2,4,2,"C","C",0],[2,5,2,"D","C",0],[2,6,2,"E","C",0],[3,1,3,"A","C",0],[3,2,3,"B","C",0],[3,4,3,"C","C",0],[3,5,3,"D","C",0],[3,6,3,"E","C",0],[4,1,4,"A","C",0],[4,2,4,"B","C",0],[4,4,4,"C","C",0],[4,5,4,"D","C",0],[4,6,4,"E","C",0],[5,1,5,"A","C",0],[5,2,5,"B","C",0],[5,4,5,"C","C",0],[5,5,5,"D","C",0],[5,6,5,"E","C",0],[6,1,6,"A","C",0],[6,2,6,"B","C",0],[6,4,6,"C","C",0],[6,5,6,"D","C",0],[6,6,6,"E","C",0],[7,1,7,"A","C",0],[7,2,7,"B","C",0],[7,4,7,"C","C",0],[7,5,7,"D","C",0],[7,6,7,"E","C",0],[8,1,8,"A","C",0],[8,2,8,"B","C",0],[8,4,8,"C","C",0],[8,5,8,"D","C",0],[8,6,8,"E","C",0],[9,1,9,"A","C",0],[9,2,9,"B","C",0],[9,4,9,"C","C",0],[9,5,9,"D","C",0],[9,6,9,"E","C",0],[10,1,10,"A","C",0],[10,2,10,"B","C",0],[10,4,10,"C","C",0],[10,5,10,"D","C",0],[10,6,10,"E","C",0],[11,1,11,"A","C",0],[11,2,11,"B","C",0],[11,4,11,"C","C",0],[11,5,11,"D","C",0],[11,6,11,"E","C",0],[12,1,12,"A","C",0],[12,2,12,"B","C",0],[12,4,12,"C","C",0],[12,5,12,"D","C",0],[12,6,12,"E","C",0],[13,1,13,"A","C",0],[13,2,13,"B","C",0],[13,4,13,"C","C",0],[13,5,13,"D","C",0],[13,6,13,"E","C",0],[14,1,14,"A","C",0],[14,2,14,"B","C",0],[14,4,14,"C","C",0],[14,5,14,"D","C",0],[14,6,14,"E","C",0],[15,1,15,"A","C",0],[15,2,15,"B","C",0],[15,4,15,"C","C",0],[15,5,15,"D","C",0],[15,6,15,"E","C",0],[16,1,16,"A","C",0],[16,2,16,"B","C",0],[16,4,16,"C","C",0],[16,5,16,"D","C",0],[16,6,16,"E","C",0],[17,1,17,"A","C",0],[17,2,17,"B","C",0],[17,4,17,"C","C",0],[17,5,17,"D","C",0],[17,6,17,"E","C",0]]],["PREMIUM",2,[[1,1,1,"A","C",0],[1,2,1,"B","C",0],[1,4,1,"C","C",0],[1,5,1,"D","C",0],[1,6,1,"E","C",0],[2,1,2,"A","C",0],[2,2,2,"B","C",0],[2,4,2,"C","C",0],[2,5,2,"D","C",0],[2,6,2,"E","C",0],[3,1,3,"A","C",0],[3,2,3,"B","C",0],[3,4,3,"C","C",0],[3,5,3,"D","C",0],[3,6,3,"E","C",0],[4,1,4,"A","C",0],[4,2,4,"B","C",0],[4,4,4,"C","C",0],[4,5,4,"D","C",0],[4,6,4,"E","C",0],[5,1,5,"A","C",0],[5,2,5,"B","C",0],[5,4,5,"C","C",0],[5,5,5,"D","C",0],[5,6,5,"E","C",0],[6,1,6,"A","C",0],[6,2,6,"B","C",0],[6,4,6,"C","C",0],[6,5,6,"D","C",0],[6,6,6,"E","C",0],[7,1,7,"A","C",0],[7,2,7,"B","C",0],[7,4,7,"C","C",0],[7,5,7,"D","C",0],[7,6,7,"E","C",0],[8,1,8,"A","C",0],[8,2,8,"B","C",0],[8,4,8,"C","C",0],[8,5,8,"D","C",0],[8,6,8,"E","C",0],[9,1,9,"A","C",0],[9,2,9,"B","C",0],[9,4,9,"C","C",0],[9,5,9,"D","C",0],[9,6,9,"E","C",0],[10,1,10,"A","C",0],[10,2,10,"B","C",0],[10,4,10,"C","C",0],[10,5,10,"D","C",0],[10,6,10,"E","C",0],[11,1,11,"A","C",0],[11,2,11,"B","C",0],[11,4,11,"C","C",0],[11,5,11,"D","C",0],[11,6,11,"E","C",0],[12,1,12,"A","C",0],[12,2,12,"B","C",0],[12,4,12,"C","C",0],[12,5,12,"D","C",0],[12,6,12,"E","C",0],[13,1,13,"A","C",0],[13,2,13,"B","C",0],[13,4,13,"C","C",0],[13,5,13,"D","C",0],[13,6,13,"E","C",0],[14,1,14,"A","C",0],[14,2,14,"B","C",0],[14,4,14,"C","C",0],[14,5,14,"D","C",0],[14,6,14,"E","C",0],[15,1,15,"A","C",0],[15,2,15,"B","C",0],[15,4,15,"C","C",0],[15,5,15,"D","C",0],[15,6,15,"E","C",0],[16,1,16,"A","C",0],[16,2,16,"B","C",0],[16,4,16,"C","C",0],[16,5,16,"D","C",0],[16,6,16,"E","C",0],[17,1,17,"A","C",0],[17,2,17,"B","C",0],[17,4,17,"C","C",0],[17,5,17,"D","C",0],[17,6,17,"E","C",0]]]] }`
+
+	// test variable
+	var vRS GetSeatMapPerSubClassRS
+	org := "BD"
+	des := "GMR"
+	trainNo := "10501"
+	lenWagon := 2
+	wagonCode := "PREMIUM"
+	var wagonNo float64 = 1
+	var row float64 = 1
+	var column float64 = 1
+	var seatRow float64 = 1
+	seatColumn := "A"
+	subClass := "C"
+	var status float64 // = 0
 
 	// test function
 	err := json.Unmarshal([]byte(str), &vRS)
