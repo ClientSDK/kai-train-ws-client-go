@@ -29,6 +29,7 @@ func TestGetDestinationRSOK(t *testing.T) {
 	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, desLen, len(vRS.Destinations), "should be equal!")
 	assert.Equal(t, desItemLen, len(vRS.Destinations[0]), "should be equal")
+
 	assert.Nil(t, err)
 }
 
@@ -53,6 +54,7 @@ func TestGetOriginationRSOK(t *testing.T) {
 	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, orgLen, len(vRS.Originations), "should be equal!")
 	assert.Equal(t, orgItemLen, len(vRS.Originations[0]), "should be equal")
+
 	assert.Nil(t, err)
 }
 
@@ -63,7 +65,7 @@ func TestGetPayTypeRSOK(t *testing.T) {
 	str := `{ "err_code": 0,  "pay_type": ["TUNAI","000009","EDC BNI"]}`
 
 	// test expected values
-	var errCode float64 = 0
+	var errCode float64 // = 0
 	payTypeLen := 3
 
 	// test variable
@@ -75,6 +77,7 @@ func TestGetPayTypeRSOK(t *testing.T) {
 	// test logic
 	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, payTypeLen, len(vRS.PayTypes), "should be equal!")
+
 	assert.Nil(t, err)
 }
 
@@ -96,6 +99,7 @@ func TestGetScheduleRSOK(t *testing.T) {
 	assert.Equal(t, org, vRS.Origin, "should be equal!")
 	assert.Equal(t, des, vRS.Destination, "should be equal!")
 	assert.Equal(t, lenSchedule, len(vRS.Schedules), "should be equal!")
+
 	assert.Nil(t, err)
 }
 
@@ -121,8 +125,10 @@ func TestGetScheduleV2RSOK(t *testing.T) {
 	assert.Equal(t, org, vRS.Origin, "should be equal!")
 	assert.Equal(t, des, vRS.Destination, "should be equal!")
 	assert.Equal(t, lenSchedule, len(vRS.Schedules), "should be equal!")
+
 	assert.Equal(t, arriveDateTrip1, tripInfo.Index(3).Interface().(string), "should be equal!")
 	assert.Equal(t, arriveTimeTrip1, tripInfo.Index(5).Interface().(string), "should be equal!")
+
 	assert.Nil(t, err)
 }
 
@@ -151,9 +157,11 @@ func TestGetScheduleLiteRSOK(t *testing.T) {
 	assert.Equal(t, org, vRS.Origin, "should be equal!")
 	assert.Equal(t, des, vRS.Destination, "should be equal!")
 	assert.Equal(t, lenSchedule, len(vRS.Schedules), "should be equal!")
+
 	assert.Equal(t, arriveDateTrip1, tripInfo.Index(3).Interface().(string), "should be equal!")
 	assert.Equal(t, arriveTimeTrip1, tripInfo.Index(5).Interface().(string), "should be equal!")
 	assert.Equal(t, seatAvailTrip1Class1, subClass.Index(1).Interface().(float64), "should be equal!")
+
 	assert.Nil(t, err)
 }
 
@@ -329,6 +337,28 @@ func TestGetSeatNullPerSubClassRSOK(t *testing.T) {
 	assert.Equal(t, seatColumn, seatInfo0.Index(1).Interface().(string), "should be equal!")
 	assert.Equal(t, subClass, seatInfo0.Index(2).Interface().(string), "should be equal!")
 	assert.Equal(t, status, seatInfo0.Index(3).Interface().(float64), "should be equal!")
+
+	assert.Nil(t, err)
+}
+
+// TestGetAgentBalanceRSOK is a positive test function for "GetAgentBalance" response type -> "information.get_agent_balance"
+func TestGetAgentBalanceRSOK(t *testing.T) {
+	// fake response
+	str := `{ "err_code": 0, "agent_code": "KAI_AGENT_CODE", "agent_name":"KAI_AGENT_NAME","agent_balance":20188102 }`
+
+	// test variable
+	var vRS GetAgentBalanceRS
+	agentCode := "KAI_AGENT_CODE"
+	agentName := "KAI_AGENT_NAME"
+	var agentBalance float64 = 20188102
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, agentCode, vRS.AgentCode, "should be equal!")
+	assert.Equal(t, agentName, vRS.AgentName, "should be equal!")
+	assert.Equal(t, agentBalance, vRS.AgentBalance, "should be equal!")
 
 	assert.Nil(t, err)
 }
