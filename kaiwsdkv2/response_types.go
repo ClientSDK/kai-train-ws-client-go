@@ -142,8 +142,8 @@ type GetSeatNullRS struct {
 	SeatNulls     []interface{} `json:"seat_null"`
 }
 
-// SeatNullPerSubClassRS represent "information.get_seat_null_per_subclass" response
-type SeatNullPerSubClassRS struct {
+// GetSeatNullPerSubClassRS represent "information.get_seat_null_per_subclass" response
+type GetSeatNullPerSubClassRS struct {
 	ErrCode       interface{}   `json:"err_code"`
 	ErrMsg        interface{}   `json:"err_msg"`
 	Origin        string        `json:"org"`
