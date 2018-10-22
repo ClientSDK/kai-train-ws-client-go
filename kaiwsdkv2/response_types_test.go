@@ -248,3 +248,45 @@ func TestGetSeatMapPerSubClassRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestGetSeatNullRSOK is a positive test function for "GetSeatNullRS" response type -> "information.get_seat_null"
+func TestGetSeatNullRSOK(t *testing.T) {
+	// fake response
+	str := `{ "err_code": 0, "org": "BD", "des": "GMR", "train_no": "10501", "dep_date": "20181101", "seat_null": [["PREMIUM",1,[[1,"A","C",0],[1,"B","C",0],[1,"C","C",0],[1,"D","C",0],[1,"E","C",0],[2,"A","C",0],[2,"B","C",0],[2,"C","C",0],[2,"D","C",0],[2,"E","C",0],[3,"A","C",0],[3,"B","C",0],[3,"C","C",0],[3,"D","C",0],[3,"E","C",0],[4,"A","C",0],[4,"B","C",0],[4,"C","C",0],[4,"D","C",0],[4,"E","C",0],[5,"A","C",0],[5,"B","C",0],[5,"C","C",0],[5,"D","C",0],[5,"E","C",0],[6,"A","C",0],[6,"B","C",0],[6,"C","C",0],[6,"D","C",0],[6,"E","C",0],[7,"A","C",0],[7,"B","C",0],[7,"C","C",0],[7,"D","C",0],[7,"E","C",0],[8,"A","C",0],[8,"B","C",0],[8,"C","C",0],[8,"D","C",0],[8,"E","C",0],[9,"A","C",0],[9,"B","C",0],[9,"C","C",0],[9,"D","C",0],[9,"E","C",0],[10,"A","C",0],[10,"B","C",0],[10,"C","C",0],[10,"D","C",0],[10,"E","C",0],[11,"A","C",0],[11,"B","C",0],[11,"C","C",0],[11,"D","C",0],[11,"E","C",0],[12,"A","C",0],[12,"B","C",0],[12,"C","C",0],[12,"D","C",0],[12,"E","C",0],[13,"A","C",0],[13,"B","C",0],[13,"C","C",0],[13,"D","C",0],[13,"E","C",0],[14,"A","C",0],[14,"B","C",0],[14,"C","C",0],[14,"D","C",0],[14,"E","C",0],[15,"A","C",0],[15,"B","C",0],[15,"C","C",0],[15,"D","C",0],[15,"E","C",0],[16,"A","C",0],[16,"B","C",0],[16,"C","C",0],[16,"D","C",0],[16,"E","C",0],[17,"A","C",0],[17,"B","C",0],[17,"C","C",0],[17,"D","C",0],[17,"E","C",0]]],["PREMIUM",2,[[1,"A","C",0],[1,"B","C",0],[1,"C","C",0],[1,"D","C",0],[1,"E","C",0],[2,"A","C",0],[2,"B","C",0],[2,"C","C",0],[2,"D","C",0],[2,"E","C",0],[3,"A","C",0],[3,"B","C",0],[3,"C","C",0],[3,"D","C",0],[3,"E","C",0],[4,"A","C",0],[4,"B","C",0],[4,"C","C",0],[4,"D","C",0],[4,"E","C",0],[5,"A","C",0],[5,"B","C",0],[5,"C","C",0],[5,"D","C",0],[5,"E","C",0],[6,"A","C",0],[6,"B","C",0],[6,"C","C",0],[6,"D","C",0],[6,"E","C",0],[7,"A","C",0],[7,"B","C",0],[7,"C","C",0],[7,"D","C",0],[7,"E","C",0],[8,"A","C",0],[8,"B","C",0],[8,"C","C",0],[8,"D","C",0],[8,"E","C",0],[9,"A","C",0],[9,"B","C",0],[9,"C","C",0],[9,"D","C",0],[9,"E","C",0],[10,"A","C",0],[10,"B","C",0],[10,"C","C",0],[10,"D","C",0],[10,"E","C",0],[11,"A","C",0],[11,"B","C",0],[11,"C","C",0],[11,"D","C",0],[11,"E","C",0],[12,"A","C",0],[12,"B","C",0],[12,"C","C",0],[12,"D","C",0],[12,"E","C",0],[13,"A","C",0],[13,"B","C",0],[13,"C","C",0],[13,"D","C",0],[13,"E","C",0],[14,"A","C",0],[14,"B","C",0],[14,"C","C",0],[14,"D","C",0],[14,"E","C",0],[15,"A","C",0],[15,"B","C",0],[15,"C","C",0],[15,"D","C",0],[15,"E","C",0],[16,"A","C",0],[16,"B","C",0],[16,"C","C",0],[16,"D","C",0],[16,"E","C",0],[17,"A","C",0],[17,"B","C",0],[17,"C","C",0],[17,"D","C",0],[17,"E","C",0]]]]}`
+
+	// test variable
+	var vRS GetSeatNullRS
+	org := "BD"
+	des := "GMR"
+	trainNo := "10501"
+	lenWagon := 2
+	wagonCode := "PREMIUM"
+	var wagonNo float64 = 1
+	var seatRow float64 = 1
+	seatColumn := "A"
+	subClass := "C"
+	var status float64 // = 0
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	wagonInfo0 := reflect.ValueOf(vRS.SeatNulls[0])
+	seatInfo := wagonInfo0.Index(2).Interface().([]interface{})
+	seatInfo0 := reflect.ValueOf(seatInfo[0])
+
+	// test logic
+	assert.Equal(t, org, vRS.Origin, "should be equal!")
+	assert.Equal(t, des, vRS.Destination, "should be equal!")
+	assert.Equal(t, trainNo, vRS.TrainNo, "should be equal!")
+	assert.Equal(t, lenWagon, len(vRS.SeatNulls), "should be equal!")
+
+	assert.Equal(t, wagonCode, wagonInfo0.Index(0).Interface().(string), "should be equal!")
+	assert.Equal(t, wagonNo, wagonInfo0.Index(1).Interface().(float64), "should be equal!")
+
+	assert.Equal(t, seatRow, seatInfo0.Index(0).Interface().(float64), "should be equal!")
+	assert.Equal(t, seatColumn, seatInfo0.Index(1).Interface().(string), "should be equal!")
+	assert.Equal(t, subClass, seatInfo0.Index(2).Interface().(string), "should be equal!")
+	assert.Equal(t, status, seatInfo0.Index(3).Interface().(float64), "should be equal!")
+
+	assert.Nil(t, err)
+}
