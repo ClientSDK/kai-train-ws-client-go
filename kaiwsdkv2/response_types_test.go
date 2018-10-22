@@ -362,3 +362,31 @@ func TestGetAgentBalanceRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestGetBalanceRSOK is a positive test function for "GetBalance" response type -> "information.get_balance"
+func TestGetBalanceRSOK(t *testing.T) {
+	// fake response
+	str := `{ "err_code": 0, "book_code": "ABMNYZ", "num_code": 9998123456789, "normal_sales": 290000, "extra_fee": 0, "book_balance": 282500,"discount":-7500 }`
+
+	// test variable
+	var vRS GetBalanceRS
+	bookCode := "ABMNYZ"
+	var numCode float64 = 9998123456789
+	var normalSales float64 = 290000
+	var extraFee float64 // = 0
+	var bookBalance float64 = 282500
+	var discount float64 = -7500
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
+	assert.Equal(t, numCode, vRS.NumCode, "should be equal!")
+	assert.Equal(t, normalSales, vRS.NormalSales, "should be equal!")
+	assert.Equal(t, extraFee, vRS.ExtraFee, "should be equal!")
+	assert.Equal(t, bookBalance, vRS.BookBalance, "should be equal!")
+	assert.Equal(t, discount, vRS.Discount, "should be equal!")
+
+	assert.Nil(t, err)
+}
