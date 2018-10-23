@@ -517,3 +517,57 @@ func TestBookingRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestBookingWithArvInfoRSOK is a positive test function for "BookingWithArvInfoRS" response type -> "transaction.booking_with_arv_info"
+func TestBookingWithArvInfoRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"org":"YK","des":"SGU","dep_date":"20190919","arv_date":"20190919","dep_time":"0052","arv_time":"0538","train_no":"44","book_code":"ABMNYZ","num_code":"9998123456789","pax_num":[4,0,4],"pax_name":["ARGO PARAHYANGAN","RANGGA PARAHYANGAN","SRI PARAHYANGAN","NUR PARAHYANGAN","AMARTA PARAHYANGAN","UPAYA PARAHYANGAN","WEDARI PARAHYANGAN","RATRI PARAHYANGAN"],"seat":[["EKS","1","3","A"],["EKS","1","3","B"],["EKS","1","4","A"],["EKS","1","4","B"],["","","",""],["","","",""],["","","",""],["","","",""]],"normal_sales":1160000,"extra_fee":0,"book_balance":1152500,"discount":-7500	}`
+
+	// test variable
+	var vRS BookingWithArvInfoRS
+	bookCode := "ABMNYZ"
+	numCode := "9998123456789"
+	departureDate := "20190919"
+	departuteTime := "0052"
+	arriveDate := "20190919"
+	arriveTime := "0538"
+	trainNo := "44"
+
+	var adultCount float64 = 4
+	paxName0 := "ARGO PARAHYANGAN"
+	wagonCode := "EKS"
+
+	var normalSales float64 = 1160000
+	var extraFee float64 // = 0
+	var bookBalance float64 = 1152500
+	var discount float64 = -7500
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	seats := vRS.Seats
+
+	seat0 := reflect.ValueOf(seats[0])
+
+	// test logic
+	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
+
+	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
+	assert.Equal(t, numCode, vRS.NumCode, "should be equal!")
+	assert.Equal(t, departureDate, vRS.DepartureDate, "should be equal!")
+	assert.Equal(t, departuteTime, vRS.DepartureTime, "should be equal!")
+	assert.Equal(t, arriveDate, vRS.ArriveDate, "should be equal!")
+	assert.Equal(t, arriveTime, vRS.ArriveTime, "should be equal!")
+	assert.Equal(t, trainNo, vRS.TrainNo, "should be equal!")
+
+	assert.Equal(t, adultCount, vRS.PaxNums[0], "should be equal!")
+	assert.Equal(t, paxName0, vRS.PaxNames[0], "should be equal!")
+	assert.Equal(t, wagonCode, seat0.Index(0).Interface().(string), "should be equal!")
+
+	assert.Equal(t, normalSales, vRS.NormalSales, "should be equal!")
+	assert.Equal(t, extraFee, vRS.ExtraFee, "should be equal!")
+	assert.Equal(t, bookBalance, vRS.BookBalance, "should be equal!")
+	assert.Equal(t, discount, vRS.Discount, "should be equal!")
+
+	assert.Nil(t, err)
+}
