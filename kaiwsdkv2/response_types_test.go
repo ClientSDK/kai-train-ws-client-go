@@ -661,3 +661,27 @@ func TestPaymentRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestCancelPaymentRSOK is a positive test function for "CancelPaymentRS" response type -> "transaction.cancel_payment"
+func TestCancelPaymentRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","normal_sales":25200,"extra_fee":5000,"book_balance":30200}`
+
+	// test variable
+	var vRS CancelPaymentRS
+	bookCode := "ABMNYZ"
+	var normalSales float64 = 25200
+	var extraFee float64 = 5000
+	var bookBalance float64 = 30200
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
+	assert.Equal(t, normalSales, vRS.NormalSales, "should be equal!")
+	assert.Equal(t, extraFee, vRS.ExtraFee, "should be equal!")
+	assert.Equal(t, bookBalance, vRS.BookBalance, "should be equal!")
+
+	assert.Nil(t, err)
+}
