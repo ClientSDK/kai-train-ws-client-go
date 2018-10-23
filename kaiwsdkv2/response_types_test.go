@@ -618,3 +618,26 @@ func TestManualSeatRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestUpdatePaxRSOK is a positive test function for "UpdatePaxRS" response type -> "transaction.update_pax"
+func TestUpdatePaxRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","pax_num":[1,0,1],"pax_name":["ARGO PARAHYANGAN","RATRI PARAHYANGAN"]		}`
+
+	// test variable
+	var vRS UpdatePaxRS
+	bookCode := "ABMNYZ"
+	var adultCount float64 = 1
+	paxName0 := "ARGO PARAHYANGAN"
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
+
+	assert.Equal(t, adultCount, vRS.PaxNums[0], "should be equal!")
+	assert.Equal(t, paxName0, vRS.PaxNames[0], "should be equal!")
+
+	assert.Nil(t, err)
+}
