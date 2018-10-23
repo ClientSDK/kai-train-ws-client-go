@@ -592,3 +592,29 @@ func TestCancelBookRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestManualSeatRSOK is a positive test function for "ManualSeatRS" response type -> "transaction.manual_seat"
+func TestManualSeatRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","wagon_code":"EKS","wagon_no":1,"seat":["5A","5B","5C","5D"]	  }`
+
+	// test variable
+	var vRS ManualSeatRS
+	bookCode := "ABMNYZ"
+	wagonCode := "EKS"
+	var wagonNo int64 = 1
+	seat0 := "5A"
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
+
+	assert.Equal(t, wagonCode, vRS.WagonCode, "should be equal!")
+	assert.Equal(t, wagonNo, vRS.WagonNo, "should be equal!")
+
+	assert.Equal(t, seat0, vRS.Seats[0], "should be equal!")
+
+	assert.Nil(t, err)
+}
