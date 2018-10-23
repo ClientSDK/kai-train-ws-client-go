@@ -1,20 +1,5 @@
 package kaiwsdkv2
 
-// InternalGetDestinationRS represent "data.get_des" internal response
-type InternalGetDestinationRS struct {
-	ErrCode interface{}   `json:"errCode"`
-	ErrMsg  interface{}   `json:"errMsg"`
-	Return  []Destination `json:"return"`
-}
-
-// Destination type
-type Destination struct {
-	DestCode string `json:"DestCode"`
-	DestName string `json:"DestName"`
-}
-
-// --
-
 // InternalGetOriginationRS represent "data.get_org" internal response
 type InternalGetOriginationRS struct {
 	ErrCode interface{}   `json:"errCode"`
@@ -26,6 +11,21 @@ type InternalGetOriginationRS struct {
 type Origination struct {
 	OriginCode string `json:"OriginCode"`
 	OriginName string `json:"OriginName"`
+}
+
+// --
+
+// InternalGetDestinationRS represent "data.get_des" internal response
+type InternalGetDestinationRS struct {
+	ErrCode interface{}   `json:"errCode"`
+	ErrMsg  interface{}   `json:"errMsg"`
+	Return  []Destination `json:"return"`
+}
+
+// Destination type
+type Destination struct {
+	DestCode string `json:"DestCode"`
+	DestName string `json:"DestName"`
 }
 
 // --
