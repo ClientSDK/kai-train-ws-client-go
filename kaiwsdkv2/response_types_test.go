@@ -501,7 +501,6 @@ func TestBookingRSOK(t *testing.T) {
 	// test logic
 	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
 
-	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
 	assert.Equal(t, numCode, vRS.NumCode, "should be equal!")
 	assert.Equal(t, departureDate, vRS.DepartureDate, "should be equal!")
 	assert.Equal(t, trainNo, vRS.TrainNo, "should be equal!")
@@ -552,7 +551,6 @@ func TestBookingWithArvInfoRSOK(t *testing.T) {
 	// test logic
 	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
 
-	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
 	assert.Equal(t, numCode, vRS.NumCode, "should be equal!")
 	assert.Equal(t, departureDate, vRS.DepartureDate, "should be equal!")
 	assert.Equal(t, departuteTime, vRS.DepartureTime, "should be equal!")
@@ -568,6 +566,29 @@ func TestBookingWithArvInfoRSOK(t *testing.T) {
 	assert.Equal(t, extraFee, vRS.ExtraFee, "should be equal!")
 	assert.Equal(t, bookBalance, vRS.BookBalance, "should be equal!")
 	assert.Equal(t, discount, vRS.Discount, "should be equal!")
+
+	assert.Nil(t, err)
+}
+
+// TestCancelBookRSOK is a positive test function for "CancelBookRS" response type -> "transaction.cancel_book"
+func TestCancelBookRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","status":"XX","refund_amount":0	  }`
+
+	// test variable
+	var vRS CancelBookRS
+	bookCode := "ABMNYZ"
+	status := "XX"
+	var refundAmount float64 // = 0
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
+
+	assert.Equal(t, status, vRS.Status, "should be equal!")
+	assert.Equal(t, refundAmount, vRS.RefundAmount, "should be equal!")
 
 	assert.Nil(t, err)
 }
