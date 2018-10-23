@@ -641,3 +641,23 @@ func TestUpdatePaxRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestPaymentRSOK is a positive test function for "PaymentRS" response type -> "transaction.payment"
+func TestPaymentRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","book_balance":0		}`
+
+	// test variable
+	var vRS PaymentRS
+	bookCode := "ABMNYZ"
+	var bookBalance float64 //= 0
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, bookCode, vRS.BookCode, "should be equal!")
+	assert.Equal(t, bookBalance, vRS.BookBalance, "should be equal!")
+
+	assert.Nil(t, err)
+}
