@@ -464,3 +464,46 @@ func TestInternalGetBookPriceInfoRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalBookingRSOK is a positive test function for "InternalBookingRS" internal response type <- mapping from "transaction.booking"
+func TestInternalBookingRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"origin":"YK","destination":"SGU","departureDate":"20190919","trainNo":"44","bookCode":"ABMNYZ","numCode":"9998123456789","paxNums":{"adultCount":4,"childCount":0,"infantCount":4},"paxNames":[{"name":"ARGO PARAHYANGAN"},{"name":"RANGGA PARAHYANGAN"},{"name":"SRI PARAHYANGAN"},{"name":"NUR PARAHYANGAN"},{"name":"AMARTA PARAHYANGAN"},{"name":"UPAYA PARAHYANGAN"},{"name":"WEDARI PARAHYANGAN"},{"name":"RATRI PARAHYANGAN"}],"seats":[{"wagonCode":"EKS","wagonNo":"1","seatRow":"3","seatCol":"A"},{"wagonCode":"EKS","wagonNo":"1","seatRow":"3","seatCol":"B"},{"wagonCode":"EKS","wagonNo":"1","seatRow":"4","seatCol":"A"},{"wagonCode":"EKS","wagonNo":"1","seatRow":"4","seatCol":"B"},{"wagonCode":"","wagonNo":"","seatRow":"","seatCol":""},{"wagonCode":"","wagonNo":"","seatRow":"","seatCol":""},{"wagonCode":"","wagonNo":"","seatRow":"","seatCol":""},{"wagonCode":"","wagonNo":"","seatRow":"","seatCol":""}],"normalSales":1160000,"extraFee":0,"bookBalance":1152500,"discount":-7500}}`
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	numCode := "9998123456789"
+	trainNo := "44"
+	var normalSales float64 = 1160000
+	var extraFee float64 // = 0
+	var bookBalance float64 = 1152500
+	var discount float64 = -7500
+	var adultCount int = 4
+	paxName0 := "ARGO PARAHYANGAN"
+	wagonCode0 := "EKS"
+
+	// test variable
+	var vRS InternalBookingRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+
+	assert.Equal(t, bookCode, vRS.Return.BookCode, "should be equal")
+	assert.Equal(t, numCode, vRS.Return.NumCode, "should be equal")
+	assert.Equal(t, trainNo, vRS.Return.TrainNo, "should be equal")
+
+	assert.Equal(t, normalSales, vRS.Return.NormalSales, "should be equal")
+	assert.Equal(t, extraFee, vRS.Return.ExtraFee, "should be equal")
+	assert.Equal(t, bookBalance, vRS.Return.BookBalance, "should be equal")
+	assert.Equal(t, discount, vRS.Return.Discount, "should be equal")
+
+	assert.Equal(t, adultCount, vRS.Return.PaxNums.AdultCount, "should be equal")
+	assert.Equal(t, paxName0, vRS.Return.PaxNames[0].Name, "should be equal")
+	assert.Equal(t, wagonCode0, vRS.Return.Seats[0].WagonCode, "should be equal")
+
+	assert.Nil(t, err)
+}
