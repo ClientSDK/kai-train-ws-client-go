@@ -431,3 +431,36 @@ func TestInternalGetBookInfoRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalGetBookPriceInfoRSOK is a positive test function for "InternalGetBookPriceInfoRS" internal response type <- mapping from "information.get_book_price_info"
+func TestInternalGetBookPriceInfoRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"bookCode":"ABMNYZ","totalPriceAdult":1152500,"totalPriceChild":0,"totalPriceInfant":0,"extraFee":0,"totalPrice":1152500}}`
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	var totalPriceAdult float64 = 1152500
+	var totalPriceChild float64  // = 0
+	var totalPriceInfant float64 // = 0
+	var extraFee float64         // = 0
+	var totalPrice float64 = 1152500
+
+	// test variable
+	var vRS InternalGetBookPriceInfoRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+
+	assert.Equal(t, bookCode, vRS.Return.BookCode, "should be equal")
+	assert.Equal(t, totalPriceAdult, vRS.Return.TotalPriceAdult, "should be equal")
+	assert.Equal(t, totalPriceChild, vRS.Return.TotalPriceChild, "should be equal")
+	assert.Equal(t, totalPriceInfant, vRS.Return.TotalPriceInfant, "should be equal")
+	assert.Equal(t, extraFee, vRS.Return.ExtraFee, "should be equal")
+	assert.Equal(t, totalPrice, vRS.Return.TotalPrice, "should be equal")
+
+	assert.Nil(t, err)
+}
