@@ -554,3 +554,30 @@ func TestInternalBookingWithArvInfoRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalCancelBookRSOK is a positive test function for "InternalCancelBookRS" internal response type <- mapping from "transaction.booking_with_arv_info"
+func TestInternalCancelBookRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"bookCode":"ABMNYZ","status":"XX","refundAmount":0}}`
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	status := "XX"
+	var refundAmount float64 // = 0
+
+	// test variable
+	var vRS InternalCancelBookRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+
+	assert.Equal(t, bookCode, vRS.Return.BookCode, "should be equal")
+	assert.Equal(t, status, vRS.Return.Status, "should be equal")
+	assert.Equal(t, refundAmount, vRS.Return.RefundAmount, "should be equal")
+
+	assert.Nil(t, err)
+}
