@@ -155,7 +155,7 @@ type GetScheduleLite struct {
 	Origin        string         `json:"origin"`
 	Destination   string         `json:"destination"`
 	DepartureDate string         `json:"departureDate"`
-	ScheduleLites []ScheduleLite `json:"schedules"`
+	Schedules     []ScheduleLite `json:"schedules"`
 }
 
 // ScheduleLite type

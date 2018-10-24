@@ -148,3 +148,40 @@ func TestInternalGetScheduleV2RSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalGetScheduleLiteRSOK is a positive test function for "InternalGetScheduleLiteRS" internal response type <- mapping from "information.get_schedule_lite"
+func TestInternalGetScheduleLiteRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"origin":"BD","destination":"GMR","departureDate":"20190919","schedules":[{"trainNo":"10501","trainName":"ARGO PARAHYANGAN PREMIUM","departureDate":"20190919","arriveDate":"20190919","departureTime":"0415","arriveTime":"0725","availSubClass":[{"subClass":"C","seatAvailable":0,"seatClass":"K","adultPrice":100000,"childPrice":0,"infantPrice":0}]},{"trainNo":"710","trainName":"RANGKAS JAYA","departureDate":"20190919","arriveDate":"20190919","departureTime":"0800","arriveTime":"1115","availSubClass":[{"subClass":"C","seatAvailable":0,"seatClass":"K","adultPrice":80000,"childPrice":0,"infantPrice":0}]},{"trainNo":"77A","trainName":"ARGO GOPAR","departureDate":"20190919","arriveDate":"20190919","departureTime":"1200","arriveTime":"1500","availSubClass":[{"subClass":"A","seatAvailable":0,"seatClass":"E","adultPrice":100000,"childPrice":0,"infantPrice":0},{"subClass":"B","seatAvailable":0,"seatClass":"B","adultPrice":90000,"childPrice":0,"infantPrice":0},{"subClass":"C","seatAvailable":0,"seatClass":"K","adultPrice":60000,"childPrice":0,"infantPrice":0}]},{"trainNo":"P05","trainName":"ARGO PARAHYANGAN","departureDate":"20190919","arriveDate":"20190919","departureTime":"2000","arriveTime":"2300","availSubClass":[{"subClass":"A","seatAvailable":0,"seatClass":"E","adultPrice":200000,"childPrice":0,"infantPrice":0},{"subClass":"B","seatAvailable":0,"seatClass":"B","adultPrice":150000,"childPrice":0,"infantPrice":0},{"subClass":"C","seatAvailable":0,"seatClass":"K","adultPrice":60000,"childPrice":0,"infantPrice":0}]}]}}`
+
+	// test expected values
+	errCode := "0"
+	org := "BD"
+	des := "GMR"
+	schedLen := 4
+	trainNo0 := "10501"
+	trainName0 := "ARGO PARAHYANGAN PREMIUM"
+	arvDate0 := "20190919"
+	arvTime0 := "0725"
+	var seatAvailable0_0 float64 // = 0
+
+	// test variable
+	var vRS InternalGetScheduleLiteRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+	assert.Equal(t, org, vRS.Return.Origin, "should be equal")
+	assert.Equal(t, des, vRS.Return.Destination, "should be equal")
+
+	assert.Equal(t, schedLen, len(vRS.Return.Schedules), "should be equal!")
+	assert.Equal(t, trainNo0, vRS.Return.Schedules[0].TrainNo, "should be equal!")
+	assert.Equal(t, trainName0, vRS.Return.Schedules[0].TrainName, "should be equal!")
+	assert.Equal(t, arvDate0, vRS.Return.Schedules[0].ArriveDate, "should be equal!")
+	assert.Equal(t, arvTime0, vRS.Return.Schedules[0].ArriveTime, "should be equal!")
+	assert.Equal(t, seatAvailable0_0, vRS.Return.Schedules[0].AvailSubClass[0].SeatAvailable, "should be equal!")
+
+	assert.Nil(t, err)
+}
