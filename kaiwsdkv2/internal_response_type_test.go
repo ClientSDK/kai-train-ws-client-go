@@ -662,3 +662,32 @@ func TestInternalPaymentRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalCancelPaymentRSOK is a positive test function for "InternalCancelPaymentRS" internal response type <- mapping from "transaction.cancel_payment"
+func TestInternalCancelPaymentRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"bookBode":"ABMNYZ","normalSales":25200,"extraFee":5000,"bookBalance":30200}}`
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	var normalSales float64 = 25200
+	var extraFee float64 = 5000
+	var bookBalance float64 = 30200
+
+	// test variable
+	var vRS InternalCancelPaymentRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+
+	assert.Equal(t, bookCode, vRS.Return.BookCode, "should be equal")
+	assert.Equal(t, normalSales, vRS.Return.NormalSales, "should be equal")
+	assert.Equal(t, extraFee, vRS.Return.ExtraFee, "should be equal")
+	assert.Equal(t, bookBalance, vRS.Return.BookBalance, "should be equal")
+
+	assert.Nil(t, err)
+}
