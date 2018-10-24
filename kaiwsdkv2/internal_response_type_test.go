@@ -581,3 +581,32 @@ func TestInternalCancelBookRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalManualSeatRSOK is a positive test function for "InternalManualSeatRS" internal response type <- mapping from "transaction.manual_seat"
+func TestInternalManualSeatRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"bookCode":"ABMNYZ","wagonCode":"EKS","wagonNo":1,"seats":[{"seatNo":"5A"},{"seatNo":"5B"},{"seatNo":"5C"},{"seatNo":"5D"}]}}`
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	wagonCode := "EKS"
+	var wagonNo int64 = 1
+	seatNo0 := "5A"
+
+	// test variable
+	var vRS InternalManualSeatRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+
+	assert.Equal(t, bookCode, vRS.Return.BookCode, "should be equal")
+	assert.Equal(t, wagonCode, vRS.Return.WagonCode, "should be equal")
+	assert.Equal(t, wagonNo, vRS.Return.WagonNo, "should be equal")
+	assert.Equal(t, seatNo0, vRS.Return.Seats[0].SeatNo, "should be equal")
+
+	assert.Nil(t, err)
+}
