@@ -392,3 +392,42 @@ func TestInternalGetBalanceRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalGetBookInfoRSOK is a positive test function for "InternalGetBookInfoRS" internal response type <- mapping from "information.get_book_info"
+func TestInternalGetBookInfoRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"bookCode":"ABMNYZ","numCode":"9998123456789","caller":"02130303030","bookTime":"19-SEP-2019 07:08:58","trainNo":"44","trainName":"BIMA","origin":"YK (YOGYAKARTA)","destination":"SGU (SURABAYAGUBENG)","departureDate":"19-SEP-19","departureTime":"0052","arriveDate":"19-SEP-19","arriveTime":"0538","subclass":"A","class":"E","normalSales":1160000,"extraFee":0,"bookBalance":1152500,"discount":-7500,"paxList":[{"paxName":"ARGO PARAHYANGAN","IdentityNo":"3101010101810001","paxType":"A","ticketUnitNo":"","ticketUnitPrintingCounter":0,"eTicketNo":"","eTicketPrintingCounter":0,"wagon":"EKS-1","seat":"3A"},{"paxName":"RANGGA PARAHYANGAN","IdentityNo":"3101010101810002","paxType":"A","ticketUnitNo":"","ticketUnitPrintingCounter":0,"eTicketNo":"","eTicketPrintingCounter":0,"wagon":"EKS-1","seat":"3B"},{"paxName":"SRI PARAHYANGAN","IdentityNo":"3101010101810003","paxType":"A","ticketUnitNo":"","ticketUnitPrintingCounter":0,"eTicketNo":"","eTicketPrintingCounter":0,"wagon":"EKS-1","seat":"4A"},{"paxName":"NUR PARAHYANGAN","IdentityNo":"3101010101810004","paxType":"A","ticketUnitNo":"","ticketUnitPrintingCounter":0,"eTicketNo":"","eTicketPrintingCounter":0,"wagon":"EKS-1","seat":"4B"},{"paxName":"AMARTA PARAHYANGAN","IdentityNo":"","paxType":"I","ticketUnitNo":"","ticketUnitPrintingCounter":0,"eTicketNo":"","eTicketPrintingCounter":0,"wagon":"-","seat":""},{"paxName":"UPAYA PARAHYANGAN","IdentityNo":"","paxType":"I","ticketUnitNo":"","ticketUnitPrintingCounter":0,"eTicketNo":"","eTicketPrintingCounter":0,"wagon":"-","seat":""},{"paxName":"WEDARI PARAHYANGAN","IdentityNo":"","paxType":"I","ticketUnitNo":"","ticketUnitPrintingCounter":0,"eTicketNo":"","eTicketPrintingCounter":0,"wagon":"-","seat":""},{"paxName":"RATRI PARAHYANGAN","IdentityNo":"","paxType":"I","ticketUnitNo":"","ticketUnitPrintingCounter":0,"eTicketNo":"","eTicketPrintingCounter":0,"wagon":"-","seat":""}]}}`
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	numCode := "9998123456789"
+	class := "E"
+	var normalSales float64 = 1160000
+	var extraFee float64 // = 0
+	var bookBalance float64 = 1152500
+	var discount float64 = -7500
+	paxName0 := "ARGO PARAHYANGAN"
+
+	// test variable
+	var vRS InternalGetBookInfoRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+
+	assert.Equal(t, bookCode, vRS.Return.BookCode, "should be equal")
+	assert.Equal(t, numCode, vRS.Return.NumCode, "should be equal")
+	assert.Equal(t, class, vRS.Return.Class, "should be equal")
+
+	assert.Equal(t, normalSales, vRS.Return.NormalSales, "should be equal!")
+	assert.Equal(t, extraFee, vRS.Return.ExtraFee, "should be equal!")
+	assert.Equal(t, bookBalance, vRS.Return.BookBalance, "should be equal!")
+	assert.Equal(t, discount, vRS.Return.Discount, "should be equal!")
+
+	assert.Equal(t, paxName0, vRS.Return.PaxList[0].PaxName, "should be equal!")
+
+	assert.Nil(t, err)
+}
