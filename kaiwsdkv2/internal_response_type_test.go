@@ -610,3 +610,30 @@ func TestInternalManualSeatRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalUpdatePaxRSOK is a positive test function for "InternalUpdatePaxRS" internal response type <- mapping from "transaction.update_pax"
+func TestInternalUpdatePaxRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"bookCode":"ABMNYZ","paxNums":{"adultCount":1,"childCount":0,"infantCount":1},"paxNames":[{"name":"ARGO PARAHYANGAN"},{"name":"RATRI PARAHYANGAN"}]}}`
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	var adultCount int = 1
+	paxName0 := "ARGO PARAHYANGAN"
+
+	// test variable
+	var vRS InternalUpdatePaxRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+
+	assert.Equal(t, bookCode, vRS.Return.BookCode, "should be equal")
+	assert.Equal(t, adultCount, vRS.Return.PaxNums.AdultCount, "should be equal")
+	assert.Equal(t, paxName0, vRS.Return.PaxNames[0].Name, "should be equal")
+
+	assert.Nil(t, err)
+}
