@@ -332,3 +332,30 @@ func TestInternalGetSeatNullPerSubClassRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalGetAgentBalanceRSOK is a positive test function for "InternalGetAgentBalanceRS" internal response type <- mapping from "information.get_agent_balance"
+func TestInternalGetAgentBalanceRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"agentCode":"KAI_AGENT_CODE","agentName":"KAI_AGENT_NAME","agentBalance":20188102}}`
+
+	// test expected values
+	errCode := "0"
+	agentCode := "KAI_AGENT_CODE"
+	agentName := "KAI_AGENT_NAME"
+	var agentBalance float64 = 20188102
+
+	// test variable
+	var vRS InternalGetAgentBalanceRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+
+	assert.Equal(t, agentCode, vRS.Return.AgentCode, "should be equal")
+	assert.Equal(t, agentName, vRS.Return.AgentName, "should be equal")
+	assert.Equal(t, agentBalance, vRS.Return.AgentBalance, "should be equal!")
+
+	assert.Nil(t, err)
+}
