@@ -193,7 +193,7 @@ type GetScheduleV2 struct {
 	Origin        string       `json:"origin"`
 	Destination   string       `json:"destination"`
 	DepartureDate string       `json:"departureDate"`
-	ScheduleV2s   []ScheduleV2 `json:"schedules"`
+	Schedules     []ScheduleV2 `json:"schedules"`
 }
 
 // ScheduleV2 type
