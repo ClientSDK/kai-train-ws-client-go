@@ -637,3 +637,28 @@ func TestInternalUpdatePaxRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalPaymentRSOK is a positive test function for "InternalPaymentRS" internal response type <- mapping from "transaction.payment"
+func TestInternalPaymentRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"bookCode":"ABMNYZ","bookBalance":0}}`
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	var bookBalance float64 // = 0
+
+	// test variable
+	var vRS InternalPaymentRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+
+	assert.Equal(t, bookCode, vRS.Return.BookCode, "should be equal")
+	assert.Equal(t, bookBalance, vRS.Return.BookBalance, "should be equal")
+
+	assert.Nil(t, err)
+}
