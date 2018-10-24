@@ -10,7 +10,7 @@ import (
 // StdKAIErrorMessage type
 type StdKAIErrorMessage struct {
 	ErrCode string `json:"err_code"`
-	ErrMsg  string `jsin:"err_msg"`
+	ErrMsg  string `json:"err_msg"`
 }
 
 // TrasformStandardKAIResponse is a function to trasform KAI response to Internal KAI Standard Payload
@@ -36,4 +36,35 @@ func TrasformStandardKAIResponse(kaiResponse []byte) []byte {
 	}
 
 	return result
+}
+
+// DebugHTTP is function to debug HTTP Request/Response
+func DebugHTTP(data []byte, err error) {
+	if err == nil {
+		fmt.Printf("%s\n\n", data)
+	} else {
+		log.Fatalf("%s\n\n", err)
+	}
+}
+
+// DebugHTTPRequest is a function to debug HTTP Request
+func DebugHTTPRequest(data []byte, err error) {
+	fmt.Println("[DEBUG]:: DebugHTTPRequest")
+	fmt.Println("=============================")
+	fmt.Println("Request: ")
+	fmt.Println("-----------------------------")
+	DebugHTTP(data, err)
+	fmt.Println("-----------------------------")
+	fmt.Println("End-Request: ")
+}
+
+// DebugHTTPResponse is a function to debug HTTP Response
+func DebugHTTPResponse(data []byte, err error) {
+	fmt.Println("[DEBUG]:: DebugHTTPResponse")
+	fmt.Println("=============================")
+	fmt.Println("Response: ")
+	fmt.Println("-----------------------------")
+	DebugHTTP(data, err)
+	fmt.Println("-----------------------------")
+	fmt.Println("End-Response: ")
 }
