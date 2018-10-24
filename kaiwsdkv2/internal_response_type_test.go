@@ -359,3 +359,36 @@ func TestInternalGetAgentBalanceRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestInternalGetBalanceRSOK is a positive test function for "InternalGetBalanceRS" internal response type <- mapping from "information.get_balance"
+func TestInternalGetBalanceRSOK(t *testing.T) {
+	// fake schema
+	str := `{"errCode":"0","errMsg":null,"return":{"bookCode":"ABMNYZ","numCode":9998123456789,"normalSales":290000,"extraFee":0,"bookBalance":282500,"discount":-7500}}`
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	var numCode float64 = 9998123456789
+	var normalSales float64 = 290000
+	var extraFee float64 // = 0
+	var bookBalance float64 = 282500
+	var discount float64 = -7500
+
+	// test variable
+	var vRS InternalGetBalanceRS
+
+	// test function
+	err := json.Unmarshal([]byte(str), &vRS)
+
+	// test logic
+	assert.Equal(t, errCode, vRS.ErrCode, "should be equal!")
+
+	assert.Equal(t, bookCode, vRS.Return.BookCode, "should be equal")
+	assert.Equal(t, numCode, vRS.Return.NumCode, "should be equal")
+	assert.Equal(t, normalSales, vRS.Return.NormalSales, "should be equal!")
+	assert.Equal(t, extraFee, vRS.Return.ExtraFee, "should be equal!")
+	assert.Equal(t, bookBalance, vRS.Return.BookBalance, "should be equal!")
+	assert.Equal(t, discount, vRS.Return.Discount, "should be equal!")
+
+	assert.Nil(t, err)
+}
