@@ -705,3 +705,24 @@ func MakeInternalBookingWithArvInfoRS(input BookingWithArvInfoRS) (result *Inter
 
 	return result, nil
 }
+
+// MakeInternalCancelBookRS is a function to mapping from CancelBookRS to InternalCancelBookRS ("transaction.cancel_book")
+func MakeInternalCancelBookRS(input CancelBookRS) (result *InternalCancelBookRS, err error) {
+
+	var vRS InternalCancelBookRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn CancelBook
+
+	vReturn.BookCode = input.BookCode
+	vReturn.Status = input.Status
+	vReturn.RefundAmount = input.RefundAmount
+
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}

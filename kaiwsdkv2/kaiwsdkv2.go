@@ -593,3 +593,33 @@ func (c *KAIHttpClient) CallBookingWithArvInfo(params map[string]string, debug b
 	// send to caller
 	return resp, nil
 }
+
+// CallCancelBook is a function to call KAI "transaction.cancel_book" method
+func (c *KAIHttpClient) CallCancelBook(params map[string]string, debug bool) (*InternalCancelBookRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("transaction", "cancel_book", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS CancelBookRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalCancelBookRS
+
+	resp, err = MakeInternalCancelBookRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}
