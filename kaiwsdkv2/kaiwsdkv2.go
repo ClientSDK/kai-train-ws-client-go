@@ -1,6 +1,7 @@
 package kaiwsdkv2
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
@@ -105,4 +106,34 @@ func (c *KAIHttpClient) doGetRequest(params string, debug bool) ([]byte, error) 
 	}
 
 	return ioutil.ReadAll(resp.Body)
+}
+
+// CallGetOrigination is a function to call KAI "data.get_org" method
+func (c *KAIHttpClient) CallGetOrigination(debug bool) (*InternalGetOriginationRS, error) {
+
+	// call to KAI
+	params := make(map[string]string)
+	err := c.Call("data", "get_org", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS GetOriginationRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalGetOriginationRS
+
+	resp, err = MakeInternalGetOriginationRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
 }
