@@ -338,3 +338,47 @@ func TestMakeInternalGetSeatMapPerSubClassRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalGetSeatNullRSOK is a positive test function for "MakeInternalGetSeatNullRS" mapper method
+func TestMakeInternalGetSeatNullRSOK(t *testing.T) {
+	// fake response
+	str := `{ "err_code": 0, "org": "BD", "des": "GMR", "train_no": "10501", "dep_date": "20190919", "seat_null": [["PREMIUM",1,[[1,"A","C",0],[1,"B","C",0],[1,"C","C",0],[1,"D","C",0],[1,"E","C",0],[2,"A","C",0],[2,"B","C",0],[2,"C","C",0],[2,"D","C",0],[2,"E","C",0],[3,"A","C",0],[3,"B","C",0],[3,"C","C",0],[3,"D","C",0],[3,"E","C",0],[4,"A","C",0],[4,"B","C",0],[4,"C","C",0],[4,"D","C",0],[4,"E","C",0],[5,"A","C",0],[5,"B","C",0],[5,"C","C",0],[5,"D","C",0],[5,"E","C",0],[6,"A","C",0],[6,"B","C",0],[6,"C","C",0],[6,"D","C",0],[6,"E","C",0],[7,"A","C",0],[7,"B","C",0],[7,"C","C",0],[7,"D","C",0],[7,"E","C",0],[8,"A","C",0],[8,"B","C",0],[8,"C","C",0],[8,"D","C",0],[8,"E","C",0],[9,"A","C",0],[9,"B","C",0],[9,"C","C",0],[9,"D","C",0],[9,"E","C",0],[10,"A","C",0],[10,"B","C",0],[10,"C","C",0],[10,"D","C",0],[10,"E","C",0],[11,"A","C",0],[11,"B","C",0],[11,"C","C",0],[11,"D","C",0],[11,"E","C",0],[12,"A","C",0],[12,"B","C",0],[12,"C","C",0],[12,"D","C",0],[12,"E","C",0],[13,"A","C",0],[13,"B","C",0],[13,"C","C",0],[13,"D","C",0],[13,"E","C",0],[14,"A","C",0],[14,"B","C",0],[14,"C","C",0],[14,"D","C",0],[14,"E","C",0],[15,"A","C",0],[15,"B","C",0],[15,"C","C",0],[15,"D","C",0],[15,"E","C",0],[16,"A","C",0],[16,"B","C",0],[16,"C","C",0],[16,"D","C",0],[16,"E","C",0],[17,"A","C",0],[17,"B","C",0],[17,"C","C",0],[17,"D","C",0],[17,"E","C",0]]],["PREMIUM",2,[[1,"A","C",0],[1,"B","C",0],[1,"C","C",0],[1,"D","C",0],[1,"E","C",0],[2,"A","C",0],[2,"B","C",0],[2,"C","C",0],[2,"D","C",0],[2,"E","C",0],[3,"A","C",0],[3,"B","C",0],[3,"C","C",0],[3,"D","C",0],[3,"E","C",0],[4,"A","C",0],[4,"B","C",0],[4,"C","C",0],[4,"D","C",0],[4,"E","C",0],[5,"A","C",0],[5,"B","C",0],[5,"C","C",0],[5,"D","C",0],[5,"E","C",0],[6,"A","C",0],[6,"B","C",0],[6,"C","C",0],[6,"D","C",0],[6,"E","C",0],[7,"A","C",0],[7,"B","C",0],[7,"C","C",0],[7,"D","C",0],[7,"E","C",0],[8,"A","C",0],[8,"B","C",0],[8,"C","C",0],[8,"D","C",0],[8,"E","C",0],[9,"A","C",0],[9,"B","C",0],[9,"C","C",0],[9,"D","C",0],[9,"E","C",0],[10,"A","C",0],[10,"B","C",0],[10,"C","C",0],[10,"D","C",0],[10,"E","C",0],[11,"A","C",0],[11,"B","C",0],[11,"C","C",0],[11,"D","C",0],[11,"E","C",0],[12,"A","C",0],[12,"B","C",0],[12,"C","C",0],[12,"D","C",0],[12,"E","C",0],[13,"A","C",0],[13,"B","C",0],[13,"C","C",0],[13,"D","C",0],[13,"E","C",0],[14,"A","C",0],[14,"B","C",0],[14,"C","C",0],[14,"D","C",0],[14,"E","C",0],[15,"A","C",0],[15,"B","C",0],[15,"C","C",0],[15,"D","C",0],[15,"E","C",0],[16,"A","C",0],[16,"B","C",0],[16,"C","C",0],[16,"D","C",0],[16,"E","C",0],[17,"A","C",0],[17,"B","C",0],[17,"C","C",0],[17,"D","C",0],[17,"E","C",0]]]]}`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	orgCode := "BD"
+	desCode := "GMR"
+	departDate := "20190919"
+	trainNo := "10501"
+	smLen := 2
+	wagonCode := "PREMIUM"
+	var statusAvail0_0 float64 // = 0
+
+	// test variable
+	var vRS GetSeatNullRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalGetSeatNullRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, orgCode, result.Return.Origin, "sould be equal!")
+	assert.Equal(t, desCode, result.Return.Destination, "sould be equal!")
+	assert.Equal(t, departDate, result.Return.DepartureDate, "sould be equal!")
+	assert.Equal(t, trainNo, result.Return.TrainNo, "sould be equal!")
+	assert.Equal(t, smLen, len(result.Return.SeatNulls), "sould be equal!")
+
+	assert.Equal(t, wagonCode, result.Return.SeatNulls[0].WagonCode, "sould be equal!")
+	assert.Equal(t, statusAvail0_0, result.Return.SeatNulls[0].Seats[0].Status, "sould be equal!")
+
+	assert.Nil(t, err)
+}
