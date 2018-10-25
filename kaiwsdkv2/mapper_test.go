@@ -616,3 +616,44 @@ func TestMakeInternalBookingRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalBookingWithArvInfoRS is a positive test function for "MakeInternalBookingWithArvInfoRS" mapper method
+func TestMakeInternalBookingWithArvInfoRS(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"org":"YK","des":"SGU","dep_date":"20190919","arv_date":"20190919","dep_time":"0052","arv_time":"0538","train_no":"44","book_code":"ABMNYZ","num_code":"9998123456789","pax_num":[4,0,4],"pax_name":["ARGO PARAHYANGAN","RANGGA PARAHYANGAN","SRI PARAHYANGAN","NUR PARAHYANGAN","AMARTA PARAHYANGAN","UPAYA PARAHYANGAN","WEDARI PARAHYANGAN","RATRI PARAHYANGAN"],"seat":[["EKS","1","3","A"],["EKS","1","3","B"],["EKS","1","4","A"],["EKS","1","4","B"],["","","",""],["","","",""],["","","",""],["","","",""]],"normal_sales":1160000,"extra_fee":0,"book_balance":1152500,"discount":-7500	}`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	numCode := "9998123456789"
+	arriveDate := "20190919"
+	var adultCount int = 4
+	paxName0 := "ARGO PARAHYANGAN"
+	wagonCode0 := "EKS"
+
+	// test variable
+	var vRS BookingWithArvInfoRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalBookingWithArvInfoRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
+	assert.Equal(t, numCode, result.Return.NumCode, "sould be equal!")
+	assert.Equal(t, arriveDate, result.Return.ArriveDate, "sould be equal!")
+	assert.Equal(t, adultCount, result.Return.PaxNums.AdultCount, "sould be equal!")
+	assert.Equal(t, paxName0, result.Return.PaxNames[0].Name, "sould be equal!")
+	assert.Equal(t, wagonCode0, result.Return.Seats[0].WagonCode, "sould be equal!")
+
+	assert.Nil(t, err)
+}

@@ -563,3 +563,33 @@ func (c *KAIHttpClient) CallBooking(params map[string]string, debug bool) (*Inte
 	// send to caller
 	return resp, nil
 }
+
+// CallBookingWithArvInfo is a function to call KAI "transaction.booking_with_arv_info" method
+func (c *KAIHttpClient) CallBookingWithArvInfo(params map[string]string, debug bool) (*InternalBookingWithArvInfoRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("transaction", "booking_with_arv_info", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS BookingWithArvInfoRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalBookingWithArvInfoRS
+
+	resp, err = MakeInternalBookingWithArvInfoRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}

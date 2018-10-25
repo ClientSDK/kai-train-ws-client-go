@@ -641,3 +641,67 @@ func MakeInternalBookingRS(input BookingRS) (result *InternalBookingRS, err erro
 
 	return result, nil
 }
+
+// MakeInternalBookingWithArvInfoRS is a function to mapping from BookingWithArvInfoRS to InternalBookingRS ("transaction.booking_with_arv_info")
+func MakeInternalBookingWithArvInfoRS(input BookingWithArvInfoRS) (result *InternalBookingWithArvInfoRS, err error) {
+
+	var vRS InternalBookingWithArvInfoRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn BookingWithArvInfo
+
+	vReturn.Origin = input.Origin
+	vReturn.Destination = input.Destination
+	vReturn.DepartureDate = input.DepartureDate
+	vReturn.ArriveDate = input.ArriveDate
+	vReturn.DepartureTime = input.DepartureTime
+	vReturn.ArriveTime = input.ArriveTime
+
+	vReturn.TrainNo = input.TrainNo
+	vReturn.BookCode = input.BookCode
+	vReturn.NumCode = input.NumCode
+
+	// PaxNums       PaxNum
+	vReturn.PaxNums = PaxNum{}
+	if input.PaxNums != nil {
+		vReturn.PaxNums = PaxNum{
+			AdultCount:  input.PaxNums[0],
+			ChildCount:  input.PaxNums[1],
+			InfantCount: input.PaxNums[2],
+		}
+	}
+
+	// PaxNames      []PaxName
+	var vArrPaxName []PaxName
+	for _, v := range input.PaxNames {
+		vArrPaxName = append(vArrPaxName, PaxName{Name: v})
+	}
+	vReturn.PaxNames = vArrPaxName
+
+	// Seats         []PaxSeat
+	var vArrPaxSeat []PaxSeat
+	for _, v := range input.Seats {
+
+		vArrPaxSeat = append(vArrPaxSeat,
+			PaxSeat{
+				WagonCode: fmt.Sprintf("%s", v[0]),
+				WagonNo:   fmt.Sprintf("%s", v[1]),
+				SeatRow:   fmt.Sprintf("%s", v[2]),
+				SeatCol:   fmt.Sprintf("%s", v[3]),
+			})
+	}
+	vReturn.Seats = vArrPaxSeat
+
+	vReturn.NormalSales = input.NormalSales
+	vReturn.ExtraFee = input.ExtraFee
+	vReturn.BookBalance = input.BookBalance
+	vReturn.Discount = input.Discount
+
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}

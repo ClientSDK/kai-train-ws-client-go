@@ -609,3 +609,64 @@ func TestCallBookingFalse(t *testing.T) {
 
 	assert.Nil(t, nil)
 }
+
+// TestCallBookingWithArvInfoFalse is a negative test function for "KAIHttpClient.CallBookingWithArvInfo" method
+func TestCallBookingWithArvInfoFalse(t *testing.T) {
+
+	// init http client
+	httpClient := makeHTTPClient()
+
+	kaiClient, err := NewKAIHttpClient(httpClient, kaiServerURL, kaiRQID)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// test variable
+	var vRS *InternalBookingWithArvInfoRS
+
+	// test expected values
+	// errCode := "002000"
+	// errMsg := "Invalid Request. IP Address or Requester ID are not registered"
+
+	// test function
+	params := make(map[string]string)
+
+	params["train_no"] = "44"
+	params["org"] = "YK"
+	params["des"] = "SGU"
+	params["dep_date"] = "20180303"
+	params["subclass"] = "A"
+	params["num_pax_adult"] = "4"
+	// params["num_pax_child"] = "0"
+	params["num_pax_infant"] = "4"
+	params["caller"] = "02130303030"
+	params["adult_name_1"] = "ARGO PARAHYANGAN"
+	params["adult_birthdate_1"] = "19900302"
+	params["adult_mobile_1"] = "0815123456"
+	params["adult_id_no_1"] = "3101010101810001"
+	params["adult_name_2"] = "RANGGA PARAHYANGAN"
+	params["adult_birthdate_2"] = "19900301"
+	params["adult_mobile_2"] = "0815123451"
+	params["adult_id_no_2"] = "3101010101810002"
+	params["adult_name_3"] = "SRI PARAHYANGAN"
+	params["adult_birthdate_3"] = "19900305"
+	params["adult_mobile_3"] = "0815123452"
+	params["adult_id_no_3"] = "3101010101810003"
+	params["adult_name_4"] = "NUR PARAHYANGAN"
+	params["adult_birthdate_4"] = "19900308"
+	params["adult_mobile_4"] = "0815123453"
+	params["adult_id_no_4"] = "3101010101810004"
+	params["infant_name_1"] = "AMARTA PARAHYANGAN"
+	params["infant_name_2"] = "UPAYA PARAHYANGAN"
+	params["infant_name_3"] = "WEDARI PARAHYANGAN"
+	params["infant_name_4"] = "RATRI PARAHYANGAN"
+
+	vRS, err = kaiClient.CallBookingWithArvInfo(params, false)
+
+	// test logic
+	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
+	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
+
+	assert.Nil(t, nil)
+}
