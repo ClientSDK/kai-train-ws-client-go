@@ -1,8 +1,11 @@
 package kaiwsdkv2
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
-// MakeInternalGetOriginationRS is a function to mapping from GetOriginationRS to InternalGetOriginationRS ("information.get_org")
+// MakeInternalGetOriginationRS is a function to mapping from GetOriginationRS to InternalGetOriginationRS ("data.get_org")
 func MakeInternalGetOriginationRS(input GetOriginationRS) (result *InternalGetOriginationRS, err error) {
 
 	var vRS InternalGetOriginationRS
@@ -21,7 +24,7 @@ func MakeInternalGetOriginationRS(input GetOriginationRS) (result *InternalGetOr
 	return result, nil
 }
 
-// MakeInternalGetDestinationRS is a function to mapping from GetDestinationRS to InternalGetDestinationRS ("information.get_des")
+// MakeInternalGetDestinationRS is a function to mapping from GetDestinationRS to InternalGetDestinationRS ("data.get_des")
 func MakeInternalGetDestinationRS(input GetDestinationRS) (result *InternalGetDestinationRS, err error) {
 	var vRS InternalGetDestinationRS
 
@@ -39,7 +42,7 @@ func MakeInternalGetDestinationRS(input GetDestinationRS) (result *InternalGetDe
 	return result, nil
 }
 
-// MakeInternalGetPayTypeRS is a function to mapping from GetPayTypeRS to InternalGetDestinationRS ("information.get_des")
+// MakeInternalGetPayTypeRS is a function to mapping from GetPayTypeRS to InternalGetDestinationRS ("data.get_des")
 func MakeInternalGetPayTypeRS(input GetPayTypeRS) (result *InternalGetPayTypeRS, err error) {
 	var vRS InternalGetPayTypeRS
 
@@ -50,6 +53,62 @@ func MakeInternalGetPayTypeRS(input GetPayTypeRS) (result *InternalGetPayTypeRS,
 	for _, v := range input.PayTypes {
 		vReturn = append(vReturn, PayType{Name: fmt.Sprintf("%s", v)})
 	}
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}
+
+// MakeInternalGetScheduleRS is a function to mapping from GetScheduleRS to InternalGetScheduleRS ("information.get_schedule")
+func MakeInternalGetScheduleRS(input GetScheduleRS) (result *InternalGetScheduleRS, err error) {
+	var vRS InternalGetScheduleRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn GetSchedule
+
+	vReturn.Origin = input.Origin
+	vReturn.Destination = input.Destination
+	vReturn.DepartureDate = input.DepartureDate
+
+	var vArrSchedule []Schedule
+
+	for _, s := range input.Schedules {
+		tripInfo := reflect.ValueOf(s)
+
+		vSchedule := Schedule{
+			TrainNo:       tripInfo.Index(0).Interface().(string),
+			TrainName:     tripInfo.Index(1).Interface().(string),
+			DepartureTime: tripInfo.Index(2).Interface().(string),
+			ArriveTime:    tripInfo.Index(3).Interface().(string),
+		}
+
+		subClass := tripInfo.Index(4).Interface().([]interface{})
+		var vArrSubClass []AvailSubClass
+
+		for _, sc := range subClass {
+
+			scInfo := reflect.ValueOf(sc)
+
+			vSubClass := AvailSubClass{
+				SubClass:      scInfo.Index(0).Interface().(string),
+				SeatAvailable: scInfo.Index(1).Interface().(float64),
+				SeatClass:     scInfo.Index(2).Interface().(string),
+				AdultPrice:    scInfo.Index(3).Interface().(float64),
+				ChildPrice:    scInfo.Index(4).Interface().(float64),
+				InfantPrice:   scInfo.Index(5).Interface().(float64),
+			}
+
+			vArrSubClass = append(vArrSubClass, vSubClass)
+		}
+
+		vSchedule.AvailSubClass = vArrSubClass
+		vArrSchedule = append(vArrSchedule, vSchedule)
+	}
+
+	vReturn.Schedules = vArrSchedule
 	vRS.Return = vReturn
 
 	result = &vRS

@@ -109,3 +109,45 @@ func TestMakeInternalGetPayTypeRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalGetScheduleRSOK is a positive test function for "MakeInternalGetScheduleRS" mapper method
+func TestMakeInternalGetScheduleRSOK(t *testing.T) {
+	// fake response
+	str := `{ "err_code": 0, "org": "BD", "des": "GMR", "dep_date": "20190919", "schedule": [["10501","ARGO PARAHYANGAN PREMIUM","0415","0725",[["C",800,"K",100000,0,0]]],["710","RANGKAS JAYA","0800","1115",[["C",424,"K",80000,0,0]]],["77A","ARGO GOPAR","1200","1500",[["A",49,"E",100000,0,0],["B",50,"B",90000,0,0],["C",49,"K",60000,0,0]]],["P05","ARGO PARAHYANGAN","2000","2300",[["A",0,"E",200000,0,0],["B",0,"B",150000,0,0],["C",240,"K",60000,0,0]]]] }`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	orgCode := "BD"
+	desCode := "GMR"
+	departDate := "20190919"
+	schedLen := 4
+	tripTrainNo0 := "10501"
+	tripTrainName0 := "ARGO PARAHYANGAN PREMIUM"
+
+	// test variable
+	var vRS GetScheduleRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalGetScheduleRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, orgCode, result.Return.Origin, "sould be equal!")
+	assert.Equal(t, desCode, result.Return.Destination, "sould be equal!")
+	assert.Equal(t, departDate, result.Return.DepartureDate, "sould be equal!")
+	assert.Equal(t, schedLen, len(result.Return.Schedules), "sould be equal!")
+
+	assert.Equal(t, tripTrainNo0, result.Return.Schedules[0].TrainNo, "sould be equal!")
+	assert.Equal(t, tripTrainName0, result.Return.Schedules[0].TrainName, "sould be equal!")
+
+	assert.Nil(t, err)
+}

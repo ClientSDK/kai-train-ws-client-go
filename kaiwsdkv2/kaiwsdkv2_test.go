@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -142,6 +143,42 @@ func TestCallGetPayTypeFalse(t *testing.T) {
 
 	// test function
 	vRS, err = kaiClient.CallGetPayType(false)
+
+	// test logic
+	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
+	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
+
+	assert.Nil(t, nil)
+}
+
+// TestCallGetScheduleFalse is a negative test function for "KAIHttpClient.CallGetSchedule" method
+func TestCallGetScheduleFalse(t *testing.T) {
+
+	// init http client
+	httpClient := makeHTTPClient()
+
+	kaiClient, err := NewKAIHttpClient(httpClient, kaiServerURL, kaiRQID)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// test variable
+	var vRS *InternalGetScheduleRS
+
+	// test expected values
+	// errCode := "002000"
+	// errMsg := "Invalid Request. IP Address or Requester ID are not registered"
+
+	// test function
+	params := make(map[string]string)
+
+	params["org"] = "BD"
+	params["des"] = "GMR"
+	currentDate := time.Now().Local()
+	params["dep_date"] = currentDate.AddDate(0, 0, 7).Format("20060102")
+
+	vRS, err = kaiClient.CallGetSchedule(params, false)
 
 	// test logic
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
