@@ -447,3 +447,37 @@ func TestCallGetAgentBalanceFalse(t *testing.T) {
 
 	assert.Nil(t, nil)
 }
+
+// TestCallGetBalanceFalse is a negative test function for "KAIHttpClient.CallGetBalance" method
+func TestCallGetBalanceFalse(t *testing.T) {
+
+	// init http client
+	httpClient := makeHTTPClient()
+
+	kaiClient, err := NewKAIHttpClient(httpClient, kaiServerURL, kaiRQID)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// test variable
+	var vRS *InternalGetBalanceRS
+
+	// test expected values
+	// errCode := "002000"
+	// errMsg := "Invalid Request. IP Address or Requester ID are not registered"
+
+	// test function
+	params := make(map[string]string)
+
+	params["book_code"] = "ABMNYZ"
+	params["num_code"] = "9998123456789"
+
+	vRS, err = kaiClient.CallGetBalance(params, false)
+
+	// test logic
+	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
+	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
+
+	assert.Nil(t, nil)
+}

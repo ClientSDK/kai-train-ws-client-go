@@ -369,12 +369,12 @@ func TestInternalGetAgentBalanceRSOK(t *testing.T) {
 // TestInternalGetBalanceRSOK is a positive test function for "InternalGetBalanceRS" internal response type <- mapping from "information.get_balance"
 func TestInternalGetBalanceRSOK(t *testing.T) {
 	// fake schema
-	str := `{"errCode":"0","errMsg":null,"return":{"bookCode":"ABMNYZ","numCode":9998123456789,"normalSales":290000,"extraFee":0,"bookBalance":282500,"discount":-7500}}`
+	str := `{"errCode":"0","errMsg":null,"return":{"bookCode":"ABMNYZ","numCode":"9998123456789","normalSales":290000,"extraFee":0,"bookBalance":282500,"discount":-7500}}`
 
 	// test expected values
 	errCode := "0"
 	bookCode := "ABMNYZ"
-	var numCode float64 = 9998123456789
+	numCode := "9998123456789"
 	var normalSales float64 = 290000
 	var extraFee float64 // = 0
 	var bookBalance float64 = 282500

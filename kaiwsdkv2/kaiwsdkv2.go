@@ -443,3 +443,33 @@ func (c *KAIHttpClient) CallGetAgentBalance(debug bool) (*InternalGetAgentBalanc
 	// send to caller
 	return resp, nil
 }
+
+// CallGetBalance is a function to call KAI "information.get_balance" method
+func (c *KAIHttpClient) CallGetBalance(params map[string]string, debug bool) (*InternalGetBalanceRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("information", "get_balance", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS GetBalanceRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalGetBalanceRS
+
+	resp, err = MakeInternalGetBalanceRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}

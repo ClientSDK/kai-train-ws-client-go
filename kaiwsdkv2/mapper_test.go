@@ -463,3 +463,38 @@ func TestMakeInternalGetAgentBalanceRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalGetBalanceRSOK is a positive test function for "MakeInternalGetBalanceRS" mapper method
+func TestMakeInternalGetBalanceRSOK(t *testing.T) {
+	// fake response
+	str := `{ "err_code": 0, "book_code": "ABMNYZ", "num_code": 9998123456789, "normal_sales": 290000, "extra_fee": 0, "book_balance": 282500,"discount":-7500 }`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	numCode := "9998123456789"
+	var normalSales float64 = 290000
+
+	// test variable
+	var vRS GetBalanceRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalGetBalanceRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
+	assert.Equal(t, numCode, result.Return.NumCode, "sould be equal!")
+	assert.Equal(t, normalSales, result.Return.NormalSales, "sould be equal!")
+
+	assert.Nil(t, err)
+}

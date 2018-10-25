@@ -478,3 +478,27 @@ func MakeInternalGetAgentBalanceRS(input GetAgentBalanceRS) (result *InternalGet
 
 	return result, nil
 }
+
+// MakeInternalGetBalanceRS is a function to mapping from GetBalanceRS to InternalGetAgentBalanceRS ("information.get_agent_balance")
+func MakeInternalGetBalanceRS(input GetBalanceRS) (result *InternalGetBalanceRS, err error) {
+
+	var vRS InternalGetBalanceRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn GetBalance
+
+	vReturn.BookCode = input.BookCode
+	vReturn.NumCode = fmt.Sprintf("%.f", input.NumCode)
+	vReturn.NormalSales = input.NormalSales
+	vReturn.ExtraFee = input.ExtraFee
+	vReturn.BookBalance = input.BookBalance
+	vReturn.Discount = input.Discount
+
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}

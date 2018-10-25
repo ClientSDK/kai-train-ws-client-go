@@ -75,12 +75,12 @@ type InternalGetBalanceRS struct {
 
 // GetBalance type
 type GetBalance struct {
-	BookCode    string      `json:"bookCode"`
-	NumCode     interface{} `json:"numCode"`
-	NormalSales float64     `json:"normalSales"`
-	ExtraFee    float64     `json:"extraFee"`
-	BookBalance float64     `json:"bookBalance"`
-	Discount    float64     `json:"discount"`
+	BookCode    string  `json:"bookCode"`
+	NumCode     string  `json:"numCode"`
+	NormalSales float64 `json:"normalSales"`
+	ExtraFee    float64 `json:"extraFee"`
+	BookBalance float64 `json:"bookBalance"`
+	Discount    float64 `json:"discount"`
 }
 
 // --
