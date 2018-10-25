@@ -173,3 +173,61 @@ func MakeInternalGetScheduleV2RS(input GetScheduleV2RS) (result *InternalGetSche
 
 	return result, nil
 }
+
+// MakeInternalGetScheduleLiteRS is a function to mapping from GetScheduleLiteRS to InternalGetScheduleLiteRS ("information.get_schedule_lite")
+func MakeInternalGetScheduleLiteRS(input GetScheduleLiteRS) (result *InternalGetScheduleLiteRS, err error) {
+	var vRS InternalGetScheduleLiteRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn GetScheduleLite
+
+	vReturn.Origin = input.Origin
+	vReturn.Destination = input.Destination
+	vReturn.DepartureDate = input.DepartureDate
+
+	var vArrSchedule []ScheduleLite
+
+	for _, s := range input.Schedules {
+		tripInfo := reflect.ValueOf(s)
+
+		vSchedule := ScheduleLite{
+			TrainNo:       tripInfo.Index(0).Interface().(string),
+			TrainName:     tripInfo.Index(1).Interface().(string),
+			DepartureDate: tripInfo.Index(2).Interface().(string),
+			ArriveDate:    tripInfo.Index(3).Interface().(string),
+			DepartureTime: tripInfo.Index(4).Interface().(string),
+			ArriveTime:    tripInfo.Index(5).Interface().(string),
+		}
+
+		subClass := tripInfo.Index(6).Interface().([]interface{})
+		var vArrSubClass []AvailSubClassLite
+
+		for _, sc := range subClass {
+
+			scInfo := reflect.ValueOf(sc)
+
+			vSubClass := AvailSubClassLite{
+				SubClass:      scInfo.Index(0).Interface().(string),
+				SeatAvailable: scInfo.Index(1).Interface().(float64),
+				SeatClass:     scInfo.Index(2).Interface().(string),
+				AdultPrice:    scInfo.Index(3).Interface().(float64),
+				ChildPrice:    scInfo.Index(4).Interface().(float64),
+				InfantPrice:   scInfo.Index(5).Interface().(float64),
+			}
+
+			vArrSubClass = append(vArrSubClass, vSubClass)
+		}
+
+		vSchedule.AvailSubClass = vArrSubClass
+		vArrSchedule = append(vArrSchedule, vSchedule)
+	}
+
+	vReturn.Schedules = vArrSchedule
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}
