@@ -38,3 +38,21 @@ func MakeInternalGetDestinationRS(input GetDestinationRS) (result *InternalGetDe
 
 	return result, nil
 }
+
+// MakeInternalGetPayTypeRS is a function to mapping from GetPayTypeRS to InternalGetDestinationRS ("information.get_des")
+func MakeInternalGetPayTypeRS(input GetPayTypeRS) (result *InternalGetPayTypeRS, err error) {
+	var vRS InternalGetPayTypeRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn []PayType
+	for _, v := range input.PayTypes {
+		vReturn = append(vReturn, PayType{Name: fmt.Sprintf("%s", v)})
+	}
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}

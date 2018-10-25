@@ -167,3 +167,33 @@ func (c *KAIHttpClient) CallGetDestination(debug bool) (*InternalGetDestinationR
 	// send to caller
 	return resp, nil
 }
+
+// CallGetPayType is a function to call KAI "data.get_pay_type" method
+func (c *KAIHttpClient) CallGetPayType(debug bool) (*InternalGetPayTypeRS, error) {
+
+	// call to KAI
+	params := make(map[string]string)
+	err := c.Call("data", "get_des", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS GetPayTypeRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalGetPayTypeRS
+
+	resp, err = MakeInternalGetPayTypeRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}

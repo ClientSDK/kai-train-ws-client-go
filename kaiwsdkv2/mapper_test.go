@@ -76,3 +76,36 @@ func TestMakeInternalGetDestinationRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalGetPayTypeRSOK is a positive test function for "MakeInternalGetPayTypeRS" mapper method
+func TestMakeInternalGetPayTypeRSOK(t *testing.T) {
+	// fake response
+	str := `{ "err_code": 0,  "pay_type": ["TUNAI","000009","EDC BNI"]}`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	ptLen := 3
+	ptName := "TUNAI"
+
+	// test variable
+	var vRS GetPayTypeRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalGetPayTypeRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, ptLen, len(result.Return), "sould be equal!")
+	assert.Equal(t, ptName, result.Return[0].Name, "sould be equal!")
+
+	assert.Nil(t, err)
+}
