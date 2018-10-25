@@ -533,3 +533,33 @@ func (c *KAIHttpClient) CallGetBookPriceInfo(params map[string]string, debug boo
 	// send to caller
 	return resp, nil
 }
+
+// CallBooking is a function to call KAI "transaction.booking" method
+func (c *KAIHttpClient) CallBooking(params map[string]string, debug bool) (*InternalBookingRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("transaction", "booking", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS BookingRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalBookingRS
+
+	resp, err = MakeInternalBookingRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}

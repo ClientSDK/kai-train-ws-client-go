@@ -488,7 +488,7 @@ func TestBookingRSOK(t *testing.T) {
 	departureDate := "20190919"
 	trainNo := "44"
 
-	var adultCount float64 = 4
+	var adultCount int = 4
 	paxName0 := "ARGO PARAHYANGAN"
 	wagonCode := "EKS"
 

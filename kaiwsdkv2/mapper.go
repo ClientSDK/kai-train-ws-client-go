@@ -581,3 +581,63 @@ func MakeInternalGetBookPriceInfoRS(input GetBookPriceInfoRS) (result *InternalG
 
 	return result, nil
 }
+
+// MakeInternalBookingRS is a function to mapping from BookingRS to InternalBookingRS ("transaction.booking")
+func MakeInternalBookingRS(input BookingRS) (result *InternalBookingRS, err error) {
+
+	var vRS InternalBookingRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn Booking
+
+	vReturn.Origin = input.Origin
+	vReturn.Destination = input.Destination
+	vReturn.DepartureDate = input.DepartureDate
+	vReturn.TrainNo = input.TrainNo
+	vReturn.BookCode = input.BookCode
+	vReturn.NumCode = input.NumCode
+
+	// PaxNums       PaxNum
+	vReturn.PaxNums = PaxNum{}
+	if input.PaxNums != nil {
+		vReturn.PaxNums = PaxNum{
+			AdultCount:  input.PaxNums[0],
+			ChildCount:  input.PaxNums[1],
+			InfantCount: input.PaxNums[2],
+		}
+	}
+
+	// PaxNames      []PaxName
+	var vArrPaxName []PaxName
+	for _, v := range input.PaxNames {
+		vArrPaxName = append(vArrPaxName, PaxName{Name: v})
+	}
+	vReturn.PaxNames = vArrPaxName
+
+	// Seats         []PaxSeat
+	var vArrPaxSeat []PaxSeat
+	for _, v := range input.Seats {
+
+		vArrPaxSeat = append(vArrPaxSeat,
+			PaxSeat{
+				WagonCode: fmt.Sprintf("%s", v[0]),
+				WagonNo:   fmt.Sprintf("%s", v[1]),
+				SeatRow:   fmt.Sprintf("%s", v[2]),
+				SeatCol:   fmt.Sprintf("%s", v[3]),
+			})
+	}
+	vReturn.Seats = vArrPaxSeat
+
+	vReturn.NormalSales = input.NormalSales
+	vReturn.ExtraFee = input.ExtraFee
+	vReturn.BookBalance = input.BookBalance
+	vReturn.Discount = input.Discount
+
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}

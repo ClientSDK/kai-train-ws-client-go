@@ -169,8 +169,8 @@ type BookingRS struct {
 	TrainNo       interface{}     `json:"train_no"`
 	BookCode      string          `json:"book_code"`
 	NumCode       interface{}     `json:"num_code"`
-	PaxNums       []interface{}   `json:"pax_num"`
-	PaxNames      []interface{}   `json:"pax_name"`
+	PaxNums       []int           `json:"pax_num"`
+	PaxNames      []string        `json:"pax_name"`
 	Seats         [][]interface{} `json:"seat"`
 	NormalSales   float64         `json:"normal_sales"`
 	ExtraFee      float64         `json:"extra_fee"`
