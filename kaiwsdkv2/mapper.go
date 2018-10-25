@@ -20,3 +20,21 @@ func MakeInternalGetOriginationRS(input GetOriginationRS) (result *InternalGetOr
 
 	return result, nil
 }
+
+// MakeInternalGetDestinationRS is a function to mapping from GetDestinationRS to InternalGetDestinationRS ("information.get_des")
+func MakeInternalGetDestinationRS(input GetDestinationRS) (result *InternalGetDestinationRS, err error) {
+	var vRS InternalGetDestinationRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn []Destination
+	for _, v := range input.Destinations {
+		vReturn = append(vReturn, Destination{DestCode: fmt.Sprintf("%s", v[0]), DestName: fmt.Sprintf("%s", v[1])})
+	}
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}

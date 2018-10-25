@@ -137,3 +137,33 @@ func (c *KAIHttpClient) CallGetOrigination(debug bool) (*InternalGetOriginationR
 	// send to caller
 	return resp, nil
 }
+
+// CallGetDestination is a function to call KAI "data.get_des" method
+func (c *KAIHttpClient) CallGetDestination(debug bool) (*InternalGetDestinationRS, error) {
+
+	// call to KAI
+	params := make(map[string]string)
+	err := c.Call("data", "get_des", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS GetDestinationRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalGetDestinationRS
+
+	resp, err = MakeInternalGetDestinationRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}
