@@ -383,3 +383,33 @@ func (c *KAIHttpClient) CallGetSeatNull(params map[string]string, debug bool) (*
 	// send to caller
 	return resp, nil
 }
+
+// CallGetSeatNullPerSubClass is a function to call KAI "information.get_seat_null_per_subclass" method
+func (c *KAIHttpClient) CallGetSeatNullPerSubClass(params map[string]string, debug bool) (*InternalGetSeatNullPerSubClassRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("information", "get_seat_null_per_subclass", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS GetSeatNullPerSubClassRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalGetSeatNullPerSubClassRS
+
+	resp, err = MakeInternalGetSeatNullPerSubClassRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}

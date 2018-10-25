@@ -403,3 +403,57 @@ func MakeInternalGetSeatNullRS(input GetSeatNullRS) (result *InternalGetSeatNull
 
 	return result, nil
 }
+
+// MakeInternalGetSeatNullPerSubClassRS is a function to mapping from GetSeatNullPerSubClassRS to InternalGetSeatNullPerSubClassRS ("information.get_seat_null_per_subclass")
+func MakeInternalGetSeatNullPerSubClassRS(input GetSeatNullPerSubClassRS) (result *InternalGetSeatNullPerSubClassRS, err error) {
+	var vRS InternalGetSeatNullPerSubClassRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn GetSeatNullPerSubClass
+
+	vReturn.Origin = input.Origin
+	vReturn.Destination = input.Destination
+	vReturn.TrainNo = input.TrainNo
+	vReturn.DepartureDate = input.DepartureDate
+
+	var vArrSeatNull []SeatNull
+
+	for _, s := range input.SeatNulls {
+
+		tripInfo := reflect.ValueOf(s)
+
+		vSeatNull := SeatNull{
+			WagonCode: tripInfo.Index(0).Interface().(string),
+			WagonNo:   tripInfo.Index(1).Interface().(float64),
+		}
+
+		seat := tripInfo.Index(2).Interface().([]interface{})
+		var vArrSeatN []SeatN
+
+		for _, sc := range seat {
+
+			scInfo := reflect.ValueOf(sc)
+
+			vSeatN := SeatN{
+				SeatRow:    scInfo.Index(0).Interface().(float64),
+				SeatColumn: scInfo.Index(1).Interface().(string),
+				SubClass:   scInfo.Index(2).Interface().(string),
+				Status:     scInfo.Index(3).Interface().(float64),
+			}
+
+			vArrSeatN = append(vArrSeatN, vSeatN)
+		}
+
+		vSeatNull.Seats = vArrSeatN
+		vArrSeatNull = append(vArrSeatNull, vSeatNull)
+	}
+
+	vReturn.SeatNulls = vArrSeatNull
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}
