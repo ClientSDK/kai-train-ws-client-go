@@ -4,7 +4,6 @@
 
 // Author: ClientSDK Team (muharihar)
 
-// Response Types
 package kaiwsdkv2
 
 // GetDestinationRS represent "data.get_des" response

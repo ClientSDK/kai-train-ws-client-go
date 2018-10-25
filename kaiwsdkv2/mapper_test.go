@@ -4,7 +4,6 @@
 
 // Author: ClientSDK Team (muharihar)
 
-// Mapper test
 package kaiwsdkv2
 
 import (

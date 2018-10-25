@@ -4,7 +4,6 @@
 
 // Author: ClientSDK Team (muharihar)
 
-// Package kaiwsdkv2 HTTP Client Core
 package kaiwsdkv2
 
 import (

@@ -4,7 +4,6 @@
 
 // Author: ClientSDK Team (muharihar)
 
-// Internal Response Types
 package kaiwsdkv2
 
 // InternalGetOriginationRS represent "data.get_org" internal response

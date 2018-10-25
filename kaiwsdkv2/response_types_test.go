@@ -4,7 +4,6 @@
 
 // Author: ClientSDK Team (muharihar)
 
-// Response Type Test
 package kaiwsdkv2
 
 import (

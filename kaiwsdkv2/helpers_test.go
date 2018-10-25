@@ -4,7 +4,6 @@
 
 // Author: ClientSDK Team (muharihar)
 
-// Helpers Test
 package kaiwsdkv2
 
 import (
