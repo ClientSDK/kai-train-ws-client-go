@@ -151,3 +151,49 @@ func TestMakeInternalGetScheduleRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalGetScheduleV2RSOK is a positive test function for "MakeInternalGetScheduleV2RS" mapper method
+func TestMakeInternalGetScheduleV2RSOK(t *testing.T) {
+	// fake response
+	str := `{ "err_code": 0, "org": "BD", "des": "GMR", "dep_date": "20190919", "schedule": [["10501","ARGO PARAHYANGAN PREMIUM","20190919","20190919","0415","0725",[["C",800,"K",100000,0,0]]],["710","RANGKAS JAYA","20190919","20190919","0800","1115",[["C",424,"K",80000,0,0]]],["77A","ARGO GOPAR","20190919","20190919","1200","1500",[["A",49,"E",100000,0,0],["B",50,"B",90000,0,0],["C",49,"K",60000,0,0]]],["P05","ARGO PARAHYANGAN","20190919","20190919","2000","2300",[["A",0,"E",200000,0,0],["B",0,"B",150000,0,0],["C",240,"K",60000,0,0]]]] }`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	orgCode := "BD"
+	desCode := "GMR"
+	departDate := "20190919"
+	schedLen := 4
+	tripTrainNo0 := "10501"
+	tripTrainName0 := "ARGO PARAHYANGAN PREMIUM"
+	tripDepDate0 := "20190919"
+	tripArvDate0 := "20190919"
+
+	// test variable
+	var vRS GetScheduleV2RS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalGetScheduleV2RS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, orgCode, result.Return.Origin, "sould be equal!")
+	assert.Equal(t, desCode, result.Return.Destination, "sould be equal!")
+	assert.Equal(t, departDate, result.Return.DepartureDate, "sould be equal!")
+	assert.Equal(t, schedLen, len(result.Return.Schedules), "sould be equal!")
+
+	assert.Equal(t, tripTrainNo0, result.Return.Schedules[0].TrainNo, "sould be equal!")
+	assert.Equal(t, tripTrainName0, result.Return.Schedules[0].TrainName, "sould be equal!")
+	assert.Equal(t, tripDepDate0, result.Return.Schedules[0].DepartureDate, "sould be equal!")
+	assert.Equal(t, tripArvDate0, result.Return.Schedules[0].ArriveDate, "sould be equal!")
+
+	assert.Nil(t, err)
+}

@@ -227,3 +227,33 @@ func (c *KAIHttpClient) CallGetSchedule(params map[string]string, debug bool) (*
 	// send to caller
 	return resp, nil
 }
+
+// CallGetScheduleV2 is a function to call KAI "information.get_schedule_v2" method
+func (c *KAIHttpClient) CallGetScheduleV2(params map[string]string, debug bool) (*InternalGetScheduleV2RS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("information", "get_schedule_v2", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS GetScheduleV2RS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalGetScheduleV2RS
+
+	resp, err = MakeInternalGetScheduleV2RS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}
