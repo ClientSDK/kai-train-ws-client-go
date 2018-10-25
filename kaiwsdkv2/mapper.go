@@ -238,7 +238,7 @@ func MakeInternalGetScheduleLiteRS(input GetScheduleLiteRS) (result *InternalGet
 	return result, nil
 }
 
-// MakeInternalGetSeatMapRS is a function to mapping from GetSeatMapRS to InternalGetScheduleLiteRS ("information.get_schedule_lite")
+// MakeInternalGetSeatMapRS is a function to mapping from GetSeatMapRS to InternalGetScheduleLiteRS ("information.get_seat_map")
 func MakeInternalGetSeatMapRS(input GetSeatMapRS) (result *InternalGetSeatMapRS, err error) {
 	var vRS InternalGetSeatMapRS
 
@@ -246,6 +246,62 @@ func MakeInternalGetSeatMapRS(input GetSeatMapRS) (result *InternalGetSeatMapRS,
 	vRS.ErrMsg = input.ErrMsg
 
 	var vReturn GetSeatMap
+
+	vReturn.Origin = input.Origin
+	vReturn.Destination = input.Destination
+	vReturn.TrainNo = input.TrainNo
+	vReturn.DepartureDate = input.DepartureDate
+
+	var vArrSeatMap []SeatMap
+
+	for _, s := range input.SeatMaps {
+
+		tripInfo := reflect.ValueOf(s)
+
+		vSeatMap := SeatMap{
+			WagonCode: tripInfo.Index(0).Interface().(string),
+			WagonNo:   tripInfo.Index(1).Interface().(float64),
+		}
+
+		seat := tripInfo.Index(2).Interface().([]interface{})
+		var vArrSeat []Seat
+
+		for _, sc := range seat {
+
+			scInfo := reflect.ValueOf(sc)
+
+			vSeat := Seat{
+				Row:        scInfo.Index(0).Interface().(float64),
+				Column:     scInfo.Index(1).Interface().(float64),
+				SeatRow:    scInfo.Index(2).Interface().(float64),
+				SeatColumn: scInfo.Index(3).Interface().(string),
+				SubClass:   scInfo.Index(4).Interface().(string),
+				Status:     scInfo.Index(5).Interface().(float64),
+			}
+
+			vArrSeat = append(vArrSeat, vSeat)
+		}
+
+		vSeatMap.Seats = vArrSeat
+		vArrSeatMap = append(vArrSeatMap, vSeatMap)
+	}
+
+	vReturn.SeatMaps = vArrSeatMap
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}
+
+// MakeInternalGetSeatMapPerSubClassRS is a function to mapping from GetSeatMapPerSubClassRS to InternalGetSeatMapPerSubClassRS ("information.get_seat_map_per_subclass")
+func MakeInternalGetSeatMapPerSubClassRS(input GetSeatMapPerSubClassRS) (result *InternalGetSeatMapPerSubClassRS, err error) {
+	var vRS InternalGetSeatMapPerSubClassRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn GetSeatMapPerSubClass
 
 	vReturn.Origin = input.Origin
 	vReturn.Destination = input.Destination

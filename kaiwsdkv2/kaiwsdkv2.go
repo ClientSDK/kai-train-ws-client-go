@@ -323,3 +323,33 @@ func (c *KAIHttpClient) CallGetSeatMap(params map[string]string, debug bool) (*I
 	// send to caller
 	return resp, nil
 }
+
+// CallGetSeatMapPerSubClass is a function to call KAI "information.get_seat_map_per_subclass" method
+func (c *KAIHttpClient) CallGetSeatMapPerSubClass(params map[string]string, debug bool) (*InternalGetSeatMapPerSubClassRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("information", "get_seat_map_per_subclass", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS GetSeatMapPerSubClassRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalGetSeatMapPerSubClassRS
+
+	resp, err = MakeInternalGetSeatMapPerSubClassRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}
