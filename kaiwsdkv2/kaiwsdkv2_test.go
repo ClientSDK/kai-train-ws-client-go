@@ -1,3 +1,10 @@
+// Copyright 2018 The ClientSDK Team Authors. All rights reserved.
+// Use of this source code is governed by a Apache 2.0-style
+// license that can be found in the LICENSE file.
+
+// Author: ClientSDK Team (muharihar)
+
+// Package kaiwsdkv2 test
 package kaiwsdkv2
 
 import (
