@@ -536,3 +536,44 @@ func TestMakeInternalGetBookInfoRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalGetBookPriceInfoRSOK is a positive test function for "MakeInternalGetBookPriceInfoRS" mapper method
+func TestMakeInternalGetBookPriceInfoRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","total_price_adult":1152500,"total_price_child":0,"total_price_infant":0,"extra_fee":0,"total_price":1152500	  }`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	var totalPriceAdult float64 = 1152500
+	var totalPriceChild float64  // = 0
+	var totalPriceInfant float64 // = 0
+	var extraFee float64         // = 0
+	var totalPrice float64 = 1152500
+
+	// test variable
+	var vRS GetBookPriceInfoRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalGetBookPriceInfoRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
+	assert.Equal(t, totalPriceAdult, result.Return.TotalPriceAdult, "sould be equal!")
+	assert.Equal(t, totalPriceChild, result.Return.TotalPriceChild, "sould be equal!")
+	assert.Equal(t, totalPriceInfant, result.Return.TotalPriceInfant, "sould be equal!")
+	assert.Equal(t, extraFee, result.Return.ExtraFee, "sould be equal!")
+	assert.Equal(t, totalPrice, result.Return.TotalPrice, "sould be equal!")
+
+	assert.Nil(t, err)
+}

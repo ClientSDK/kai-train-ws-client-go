@@ -503,3 +503,33 @@ func (c *KAIHttpClient) CallGetBookInfo(params map[string]string, debug bool) (*
 	// send to caller
 	return resp, nil
 }
+
+// CallGetBookPriceInfo is a function to call KAI "information.get_book_price_info" method
+func (c *KAIHttpClient) CallGetBookPriceInfo(params map[string]string, debug bool) (*InternalGetBookPriceInfoRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("information", "get_book_price_info", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS GetBookPriceInfoRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalGetBookPriceInfoRS
+
+	resp, err = MakeInternalGetBookPriceInfoRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}

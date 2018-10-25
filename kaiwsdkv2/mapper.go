@@ -557,3 +557,27 @@ func MakeInternalGetBookInfoRS(input GetBookInfoRS) (result *InternalGetBookInfo
 
 	return result, nil
 }
+
+// MakeInternalGetBookPriceInfoRS is a function to mapping from GetBookPriceInfoRS to InternalGetBookPriceInfoRS ("information.get_book_price_info")
+func MakeInternalGetBookPriceInfoRS(input GetBookPriceInfoRS) (result *InternalGetBookPriceInfoRS, err error) {
+
+	var vRS InternalGetBookPriceInfoRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn GetBookPriceInfo
+
+	vReturn.BookCode = input.BookCode
+	vReturn.TotalPriceAdult = input.TotalPriceAdult
+	vReturn.TotalPriceChild = input.TotalPriceChild
+	vReturn.TotalPriceInfant = input.TotalPriceInfant
+	vReturn.ExtraFee = input.ExtraFee
+	vReturn.TotalPrice = input.TotalPrice
+
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}
