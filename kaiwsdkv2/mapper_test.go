@@ -428,3 +428,38 @@ func TestMakeInternalGetSeatNullPerSubClassRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalGetAgentBalanceRSOK is a positive test function for "MakeInternalGetAgentBalanceRS" mapper method
+func TestMakeInternalGetAgentBalanceRSOK(t *testing.T) {
+	// fake response
+	str := `{ "err_code": 0, "agent_code": "KAI_AGENT_CODE", "agent_name":"KAI_AGENT_NAME","agent_balance":20188102 }`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	agentCode := "KAI_AGENT_CODE"
+	agentName := "KAI_AGENT_NAME"
+	var agentBalance float64 = 20188102
+
+	// test variable
+	var vRS GetAgentBalanceRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalGetAgentBalanceRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, agentCode, result.Return.AgentCode, "sould be equal!")
+	assert.Equal(t, agentName, result.Return.AgentName, "sould be equal!")
+	assert.Equal(t, agentBalance, result.Return.AgentBalance, "sould be equal!")
+
+	assert.Nil(t, err)
+}

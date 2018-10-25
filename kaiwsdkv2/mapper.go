@@ -457,3 +457,24 @@ func MakeInternalGetSeatNullPerSubClassRS(input GetSeatNullPerSubClassRS) (resul
 
 	return result, nil
 }
+
+// MakeInternalGetAgentBalanceRS is a function to mapping from GetAgentBalanceRS to InternalGetAgentBalanceRS ("information.get_agent_balance")
+func MakeInternalGetAgentBalanceRS(input GetAgentBalanceRS) (result *InternalGetAgentBalanceRS, err error) {
+
+	var vRS InternalGetAgentBalanceRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn GetAgentBalance
+
+	vReturn.AgentCode = input.AgentCode
+	vReturn.AgentName = input.AgentName
+	vReturn.AgentBalance = input.AgentBalance
+
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}

@@ -45,6 +45,10 @@ func TestCallFalse(t *testing.T) {
 
 	kaiClient, err := NewKAIHttpClient(httpClient, kaiServerURL, kaiRQID)
 
+	// the default value for user agent is "RailTicket-B2B", you don't need to setup User-Agent by default
+	// this is only for coverage test purpose
+	kaiClient.SetUserAgent("RailTicket-B2B")
+
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -407,6 +411,35 @@ func TestCallGetSeatNullPerSubClassFalse(t *testing.T) {
 	params["subclass"] = "C"
 
 	vRS, err = kaiClient.CallGetSeatNullPerSubClass(params, false)
+
+	// test logic
+	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
+	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
+
+	assert.Nil(t, nil)
+}
+
+// TestCallGetAgentBalanceFalse is a negative test function for "KAIHttpClient.CallGetAgentBalance" method
+func TestCallGetAgentBalanceFalse(t *testing.T) {
+
+	// init http client
+	httpClient := makeHTTPClient()
+
+	kaiClient, err := NewKAIHttpClient(httpClient, kaiServerURL, kaiRQID)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// test variable
+	var vRS *InternalGetAgentBalanceRS
+
+	// test expected values
+	// errCode := "002000"
+	// errMsg := "Invalid Request. IP Address or Requester ID are not registered"
+
+	// test function
+	vRS, err = kaiClient.CallGetAgentBalance(false)
 
 	// test logic
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")

@@ -413,3 +413,33 @@ func (c *KAIHttpClient) CallGetSeatNullPerSubClass(params map[string]string, deb
 	// send to caller
 	return resp, nil
 }
+
+// CallGetAgentBalance is a function to call KAI "information.get_agent_balance" method
+func (c *KAIHttpClient) CallGetAgentBalance(debug bool) (*InternalGetAgentBalanceRS, error) {
+
+	// call to KAI
+	params := make(map[string]string)
+	err := c.Call("information", "get_agent_balance", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS GetAgentBalanceRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalGetAgentBalanceRS
+
+	resp, err = MakeInternalGetAgentBalanceRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}
