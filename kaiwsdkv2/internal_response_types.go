@@ -94,25 +94,25 @@ type InternalGetBookInfoRS struct {
 
 // GetBookInfo type
 type GetBookInfo struct {
-	BookCode      string      `json:"bookCode"`
-	NumCode       interface{} `json:"numCode"`
-	Caller        string      `json:"caller"`
-	BookTime      string      `json:"bookTime"`
-	TrainNo       string      `json:"trainNo"`
-	TrainName     string      `json:"trainName"`
-	Origin        string      `json:"origin"`
-	Destination   string      `json:"destination"`
-	DepartureDate string      `json:"departureDate"`
-	DepartureTime string      `json:"departureTime"`
-	ArriveDate    string      `json:"arriveDate"`
-	ArriveTime    string      `json:"arriveTime"`
-	Subclass      string      `json:"subclass"`
-	Class         string      `json:"class"`
-	NormalSales   float64     `json:"normalSales"`
-	ExtraFee      float64     `json:"extraFee"`
-	BookBalance   float64     `json:"bookBalance"`
-	Discount      float64     `json:"discount"`
-	PaxList       []PaxList   `json:"paxList"`
+	BookCode      string    `json:"bookCode"`
+	NumCode       string    `json:"numCode"`
+	Caller        string    `json:"caller"`
+	BookTime      string    `json:"bookTime"`
+	TrainNo       string    `json:"trainNo"`
+	TrainName     string    `json:"trainName"`
+	Origin        string    `json:"origin"`
+	Destination   string    `json:"destination"`
+	DepartureDate string    `json:"departureDate"`
+	DepartureTime string    `json:"departureTime"`
+	ArriveDate    string    `json:"arriveDate"`
+	ArriveTime    string    `json:"arriveTime"`
+	SubClass      string    `json:"subClass"`
+	Class         string    `json:"class"`
+	NormalSales   float64   `json:"normalSales"`
+	ExtraFee      float64   `json:"extraFee"`
+	BookBalance   float64   `json:"bookBalance"`
+	Discount      float64   `json:"discount"`
+	PaxList       []PaxList `json:"paxList"`
 }
 
 // PaxList type

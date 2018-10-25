@@ -64,7 +64,7 @@ type GetBookInfoRS struct {
 	DepartureTime string          `json:"dep_time"`
 	ArriveDate    string          `json:"arv_date"`
 	ArriveTime    string          `json:"arv_time"`
-	Subclass      string          `json:"subclass"`
+	SubClass      string          `json:"subclass"`
 	Class         string          `json:"class"`
 	NormalSales   float64         `json:"normal_sales"`
 	ExtraFee      float64         `json:"extra_fee"`

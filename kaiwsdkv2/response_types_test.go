@@ -400,7 +400,7 @@ func TestGetBalanceRSOK(t *testing.T) {
 // TestGetBookInfoRSOK is a positive test function for "GetBookInfoRS" response type -> "information.get_book_info"
 func TestGetBookInfoRSOK(t *testing.T) {
 	// fake response
-	str := `{"err_code":0,"book_code":"ABMNYZ","num_code":9998123456789,"caller":"02130303030","book_time":"19-SEP-2019 09:19:59","train_no":"44","train_name":"BIMA","org":"YK (YOGYAKARTA)","des":"SGU (SURABAYA GUBENG)","dep_date":"09-SEP-19","dep_time":"0052","arv_date":"09-SEP-19","arv_time":"0538","subclass":"A","class":"E","normal_sales":1160000,"extra_fee":0,"book_balance":1152500,"discount":-7500,"pax_list":[["ARGO PARAHYANGAN","3101010101810001","A","",0,"",0,"EKS-1","3A"],["RANGGA PARAHYANGAN","3101010101810002","A","",0,"",0,"EKS-1","3B"],["SRI PARAHYANGAN","3101010101810003","A","",0,"",0,"EKS-1","4A"],["NUR PARAHYANGAN","3101010101810004","A","",0,"",0,"EKS-1","4B"],["AMARTA PARAHYANGAN","","I","",0,"",0,"-",""],["UPAYA PARAHYANGAN","","I","",0,"",0,"-",""],["WEDARI PARAHYANGAN","","I","",0,"",0,"-",""],["RATRI PARAHYANGAN","","I","",0,"",0,"-",""]]}`
+	str := `{"err_code":0,"book_code":"ABMNYZ","num_code":9998123456789,"caller":"02130303030","book_time":"19-SEP-2019 09:19:59","train_no":"44","train_name":"BIMA","org":"YK (YOGYAKARTA)","des":"SGU (SURABAYA GUBENG)","dep_date":"09-SEP-19","dep_time":"0052","arv_date":"09-SEP-19","arv_time":"0538","subClass":"A","class":"E","normal_sales":1160000,"extra_fee":0,"book_balance":1152500,"discount":-7500,"pax_list":[["ARGO PARAHYANGAN","3101010101810001","A","",0,"",0,"EKS-1","3A"],["RANGGA PARAHYANGAN","3101010101810002","A","",0,"",0,"EKS-1","3B"],["SRI PARAHYANGAN","3101010101810003","A","",0,"",0,"EKS-1","4A"],["NUR PARAHYANGAN","3101010101810004","A","",0,"",0,"EKS-1","4B"],["AMARTA PARAHYANGAN","","I","",0,"",0,"-",""],["UPAYA PARAHYANGAN","","I","",0,"",0,"-",""],["WEDARI PARAHYANGAN","","I","",0,"",0,"-",""],["RATRI PARAHYANGAN","","I","",0,"",0,"-",""]]}`
 
 	// test variable
 	var vRS GetBookInfoRS
@@ -434,7 +434,7 @@ func TestGetBookInfoRSOK(t *testing.T) {
 	assert.Equal(t, trainName, vRS.TrainName, "should be equal!")
 	assert.Equal(t, departureDate, vRS.DepartureDate, "should be equal!")
 	assert.Equal(t, departureTime, vRS.DepartureTime, "should be equal!")
-	assert.Equal(t, subClass, vRS.Subclass, "should be equal!")
+	assert.Equal(t, subClass, vRS.SubClass, "should be equal!")
 	assert.Equal(t, class, vRS.Class, "should be equal!")
 
 	assert.Equal(t, paxName1, paxInfo0.Index(0).Interface().(string), "should be equal!")

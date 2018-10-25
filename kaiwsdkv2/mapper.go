@@ -502,3 +502,58 @@ func MakeInternalGetBalanceRS(input GetBalanceRS) (result *InternalGetBalanceRS,
 
 	return result, nil
 }
+
+// MakeInternalGetBookInfoRS is a function to mapping from GetBookInfoRS to InternalGetBookInfoRS ("information.get_book_info")
+func MakeInternalGetBookInfoRS(input GetBookInfoRS) (result *InternalGetBookInfoRS, err error) {
+
+	var vRS InternalGetBookInfoRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn GetBookInfo
+
+	vReturn.BookCode = input.BookCode
+	vReturn.NumCode = fmt.Sprintf("%.f", input.NumCode)
+	vReturn.Caller = input.Caller
+	vReturn.BookTime = input.BookTime
+	vReturn.TrainNo = input.TrainNo
+	vReturn.TrainName = input.TrainName
+	vReturn.Origin = input.Origin
+	vReturn.Destination = input.Destination
+	vReturn.DepartureDate = input.DepartureDate
+	vReturn.DepartureTime = input.DepartureTime
+	vReturn.ArriveDate = input.ArriveDate
+	vReturn.ArriveTime = input.ArriveTime
+	vReturn.SubClass = input.SubClass
+	vReturn.Class = input.Class
+	vReturn.NormalSales = input.NormalSales
+	vReturn.ExtraFee = input.ExtraFee
+	vReturn.BookBalance = input.BookBalance
+	vReturn.Discount = input.Discount
+	// PaxList       []PaxList
+
+	var vArrPaxList []PaxList
+
+	for _, v := range input.PaxList {
+		vPaxList := PaxList{
+			PaxName:                   fmt.Sprintf("%s", v[0]),
+			IdentityNo:                fmt.Sprintf("%s", v[1]),
+			PaxType:                   fmt.Sprintf("%s", v[2]),
+			TicketUnitNo:              fmt.Sprintf("%s", v[3]),
+			TicketUnitPrintingCounter: v[4],
+			ETicketNo:                 fmt.Sprintf("%s", v[5]),
+			ETicketPrintingCounter:    v[6],
+			Wagon:                     fmt.Sprintf("%s", v[7]),
+			Seat:                      fmt.Sprintf("%s", v[8]),
+		}
+		vArrPaxList = append(vArrPaxList, vPaxList)
+	}
+
+	vReturn.PaxList = vArrPaxList
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}
