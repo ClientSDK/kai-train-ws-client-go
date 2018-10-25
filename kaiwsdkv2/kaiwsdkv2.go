@@ -287,3 +287,33 @@ func (c *KAIHttpClient) CallGetScheduleLite(params map[string]string, debug bool
 	// send to caller
 	return resp, nil
 }
+
+// CallGetSeatMap is a function to call KAI "information.get_seat_map" method
+func (c *KAIHttpClient) CallGetSeatMap(params map[string]string, debug bool) (*InternalGetSeatMapRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("information", "get_seat_map", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS GetSeatMapRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalGetSeatMapRS
+
+	resp, err = MakeInternalGetSeatMapRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}

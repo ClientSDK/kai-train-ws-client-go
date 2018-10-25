@@ -258,3 +258,40 @@ func TestCallGetScheduleLiteFalse(t *testing.T) {
 
 	assert.Nil(t, nil)
 }
+
+// TestCallGetSeatMapFalse is a negative test function for "KAIHttpClient.CallGetSeatMap" method
+func TestCallGetSeatMapFalse(t *testing.T) {
+
+	// init http client
+	httpClient := makeHTTPClient()
+
+	kaiClient, err := NewKAIHttpClient(httpClient, kaiServerURL, kaiRQID)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// test variable
+	var vRS *InternalGetSeatMapRS
+
+	// test expected values
+	// errCode := "002000"
+	// errMsg := "Invalid Request. IP Address or Requester ID are not registered"
+
+	// test function
+	params := make(map[string]string)
+
+	params["org"] = "BD"
+	params["des"] = "GMR"
+	currentDate := time.Now().Local()
+	params["dep_date"] = currentDate.AddDate(0, 0, 7).Format("20060102")
+	params["train_no"] = "10501"
+
+	vRS, err = kaiClient.CallGetSeatMap(params, false)
+
+	// test logic
+	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
+	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
+
+	assert.Nil(t, nil)
+}
