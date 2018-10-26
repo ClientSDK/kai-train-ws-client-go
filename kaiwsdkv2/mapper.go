@@ -726,3 +726,30 @@ func MakeInternalCancelBookRS(input CancelBookRS) (result *InternalCancelBookRS,
 
 	return result, nil
 }
+
+// MakeInternalManualSeatRS is a function to mapping from ManualSeatRS to InternalManualSeatRS ("transaction.manual_seat")
+func MakeInternalManualSeatRS(input ManualSeatRS) (result *InternalManualSeatRS, err error) {
+
+	var vRS InternalManualSeatRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn ManualSeat
+
+	vReturn.BookCode = input.BookCode
+	vReturn.WagonCode = input.WagonCode
+	vReturn.WagonNo = input.WagonNo
+
+	var vArrSeatM []SeatM
+	for _, v := range input.Seats {
+		vArrSeatM = append(vArrSeatM, SeatM{SeatNo: fmt.Sprintf("%s", v)})
+	}
+	vReturn.Seats = vArrSeatM
+
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}

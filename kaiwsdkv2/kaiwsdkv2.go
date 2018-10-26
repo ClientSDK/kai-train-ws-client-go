@@ -623,3 +623,33 @@ func (c *KAIHttpClient) CallCancelBook(params map[string]string, debug bool) (*I
 	// send to caller
 	return resp, nil
 }
+
+// CallManualSeat is a function to call KAI "transaction.manual_seat" method
+func (c *KAIHttpClient) CallManualSeat(params map[string]string, debug bool) (*InternalManualSeatRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("transaction", "manual_seat", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS ManualSeatRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalManualSeatRS
+
+	resp, err = MakeInternalManualSeatRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}

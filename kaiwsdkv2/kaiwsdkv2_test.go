@@ -704,3 +704,39 @@ func TestCancelBookFalse(t *testing.T) {
 
 	assert.Nil(t, nil)
 }
+
+// TestCallManualSeatFalse is a negative test function for "KAIHttpClient.CallManualSeat" method
+func TestCallManualSeatFalse(t *testing.T) {
+
+	// init http client
+	httpClient := makeHTTPClient()
+
+	kaiClient, err := NewKAIHttpClient(httpClient, kaiServerURL, kaiRQID)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// test variable
+	var vRS *InternalManualSeatRS
+
+	// test expected values
+	// errCode := "002000"
+	// errMsg := "Invalid Request. IP Address or Requester ID are not registered"
+
+	// test function
+	params := make(map[string]string)
+
+	params["book_code"] = "ABMNYZ"
+	params["wagon_code"] = "EKS"
+	params["wagon_no"] = "1"
+	params["seat"] = "5A,5B,5C,5D"
+
+	vRS, err = kaiClient.CallManualSeat(params, false)
+
+	// test logic
+	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
+	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
+
+	assert.Nil(t, nil)
+}

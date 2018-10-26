@@ -692,3 +692,41 @@ func TestMakeInternalCancelBookRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalManualSeatRSOK is a positive test function for "MakeInternalManualSeatRS" mapper method
+func TestMakeInternalManualSeatRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","wagon_code":"EKS","wagon_no":1,"seat":["5A","5B","5C","5D"]	  }`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	wagonCode := "EKS"
+	var wagonNo int64 = 1
+	seat0 := "5A"
+
+	// test variable
+	var vRS ManualSeatRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalManualSeatRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
+	assert.Equal(t, wagonCode, result.Return.WagonCode, "sould be equal!")
+	assert.Equal(t, wagonNo, result.Return.WagonNo, "sould be equal!")
+
+	assert.Equal(t, seat0, result.Return.Seats[0].SeatNo, "sould be equal!")
+
+	assert.Nil(t, err)
+}
