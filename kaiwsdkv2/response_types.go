@@ -224,7 +224,7 @@ type UpdatePaxRS struct {
 	ErrCode  interface{}   `json:"err_code"`
 	ErrMsg   interface{}   `json:"err_msg"`
 	BookCode string        `json:"book_code"`
-	PaxNums  []interface{} `json:"pax_num"`
+	PaxNums  []int         `json:"pax_num"`
 	PaxNames []interface{} `json:"pax_name"`
 }
 

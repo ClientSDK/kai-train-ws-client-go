@@ -753,3 +753,37 @@ func MakeInternalManualSeatRS(input ManualSeatRS) (result *InternalManualSeatRS,
 
 	return result, nil
 }
+
+// MakeInternalUpdatePaxRS is a function to mapping from UpdatePaxRS to InternalUpdatePaxRS ("transaction.update_pax")
+func MakeInternalUpdatePaxRS(input UpdatePaxRS) (result *InternalUpdatePaxRS, err error) {
+
+	var vRS InternalUpdatePaxRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn UpdatePax
+
+	vReturn.BookCode = input.BookCode
+
+	vReturn.PaxNums = PaxNum{}
+	if input.PaxNums != nil {
+		vReturn.PaxNums = PaxNum{
+			AdultCount:  input.PaxNums[0],
+			ChildCount:  input.PaxNums[1],
+			InfantCount: input.PaxNums[2],
+		}
+	}
+
+	var vArrPaxName []PaxName
+	for _, v := range input.PaxNames {
+		vArrPaxName = append(vArrPaxName, PaxName{Name: fmt.Sprintf("%s", v)})
+	}
+	vReturn.PaxNames = vArrPaxName
+
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}

@@ -740,3 +740,45 @@ func TestCallManualSeatFalse(t *testing.T) {
 
 	assert.Nil(t, nil)
 }
+
+// TestCallUpdatePaxFalse is a negative test function for "KAIHttpClient.CallUpdatePax" method
+func TestCallUpdatePaxFalse(t *testing.T) {
+
+	// init http client
+	httpClient := makeHTTPClient()
+
+	kaiClient, err := NewKAIHttpClient(httpClient, kaiServerURL, kaiRQID)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// test variable
+	var vRS *InternalUpdatePaxRS
+
+	// test expected values
+	// errCode := "002000"
+	// errMsg := "Invalid Request. IP Address or Requester ID are not registered"
+
+	// test function
+	params := make(map[string]string)
+
+	params["book_code"] = "ABMNYZ"
+	params["num_pax_adult"] = "1"
+	// params["num_pax_child"] = "0"
+	params["num_pax_infant"] = "1"
+	params["adult_name_1"] = "ARGOMULYO PARAHYANGAN"
+	params["adult_birthdate_1"] = "198100101"
+	params["adult_mobile_1"] = "08112345678"
+	params["adult_id_no_1"] = "U11183"
+	params["infant_name_1"] = "AMARTANI PARAHYANGAN"
+	params["infant_birthdate_1"] = "20180202"
+
+	vRS, err = kaiClient.CallUpdatePax(params, false)
+
+	// test logic
+	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
+	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
+
+	assert.Nil(t, nil)
+}

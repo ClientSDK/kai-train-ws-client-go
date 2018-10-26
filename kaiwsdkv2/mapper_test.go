@@ -730,3 +730,38 @@ func TestMakeInternalManualSeatRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalUpdatePaxRSOK is a positive test function for "MakeInternalUpdatePaxRS" mapper method
+func TestMakeInternalUpdatePaxRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","pax_num":[1,0,1],"pax_name":["ARGO PARAHYANGAN","RATRI PARAHYANGAN"]		}`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	var adultCount int = 1
+	name0 := "ARGO PARAHYANGAN"
+
+	// test variable
+	var vRS UpdatePaxRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalUpdatePaxRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
+	assert.Equal(t, adultCount, result.Return.PaxNums.AdultCount, "sould be equal!")
+	assert.Equal(t, name0, result.Return.PaxNames[0].Name, "sould be equal!")
+
+	assert.Nil(t, err)
+}

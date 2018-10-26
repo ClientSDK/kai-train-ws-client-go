@@ -633,7 +633,7 @@ func TestUpdatePaxRSOK(t *testing.T) {
 	// test variable
 	var vRS UpdatePaxRS
 	bookCode := "ABMNYZ"
-	var adultCount float64 = 1
+	var adultCount int = 1
 	paxName0 := "ARGO PARAHYANGAN"
 
 	// test function
