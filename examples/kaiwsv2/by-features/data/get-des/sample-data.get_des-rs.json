@@ -1,0 +1,14 @@
+{
+    "errCode": "0",
+    "errMsg": null,
+    "return": [
+        {
+            "DestCode": "AK",
+            "DestName": "ANGKE"
+        },
+        {
+            "DestCode": "YK",
+            "DestName": "YOGYAKARTA"
+        }
+    ]
+}

@@ -47,13 +47,13 @@ func main() {
 	}
 
 	// call KAI web service method
-	callGetOrigination(kaiClient)
+	callGetDestination(kaiClient)
 }
 
-func callGetOrigination(kaiClient *kaiwsdkv2.KAIHttpClient) {
+func callGetDestination(kaiClient *kaiwsdkv2.KAIHttpClient) {
 
 	// params := make(map[string]string)
-	vRS, err := kaiClient.CallGetOrigination(false)
+	vRS, err := kaiClient.CallGetDestination(false)
 
 	if err != nil {
 		log.Fatal(err)
@@ -62,8 +62,8 @@ func callGetOrigination(kaiClient *kaiwsdkv2.KAIHttpClient) {
 	// sample how to Access Response
 	// fmt.Println(vRS.ErrCode)
 	// fmt.Println(vRS.ErrMsg)
-	// fmt.Println(vRS.Return[0].OriginCode)
-	// fmt.Println(vRS.Return[0].OriginName)
+	// fmt.Println(vRS.Return[0].DestCode)
+	// fmt.Println(vRS.Return[0].DestName)
 
 	json, _ := json.Marshal(vRS)
 	fmt.Println(string(json))
