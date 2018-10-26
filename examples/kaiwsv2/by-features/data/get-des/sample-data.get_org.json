@@ -1,0 +1,14 @@
+{
+    "errCode": "0",
+    "errMsg": null,
+    "return": [
+        {
+            "OriginCode": "AK",
+            "OriginName": "ANGKE"
+        },
+        {
+            "OriginCode": "YK",
+            "OriginName": "YOGYAKARTA"
+        }
+    ]
+}

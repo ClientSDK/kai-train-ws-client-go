@@ -39,7 +39,7 @@ go get github.com/ClientSDK/kai-train-ws-client-go/kaiwsdkv2
 
 ### KAI Train Web Service Agent requirements
 - KAI Train (RailTicket) Agent Credential Account (RQID)
-- KAI Train (RailTicket) Web Service Access (IP Whitelist) ( [Production](https://railticket.kereta-api.co.id) )
+- KAI Train (RailTicket) Web Service Access (IP Whitelist) ( [Production Server](https://railticket.kereta-api.co.id), [Demo Server](http://ws.demo.kai.sqiva.com))
 
 ## Example
 
