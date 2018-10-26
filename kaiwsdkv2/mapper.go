@@ -787,3 +787,23 @@ func MakeInternalUpdatePaxRS(input UpdatePaxRS) (result *InternalUpdatePaxRS, er
 
 	return result, nil
 }
+
+// MakeInternalPaymentRS is a function to mapping from PaymentRS to InternalPaymentRS ("transaction.payment")
+func MakeInternalPaymentRS(input PaymentRS) (result *InternalPaymentRS, err error) {
+
+	var vRS InternalPaymentRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn Payment
+
+	vReturn.BookCode = input.BookCode
+	vReturn.BookBalance = input.BookBalance
+
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}

@@ -683,3 +683,33 @@ func (c *KAIHttpClient) CallUpdatePax(params map[string]string, debug bool) (*In
 	// send to caller
 	return resp, nil
 }
+
+// CallPayment is a function to call KAI "transaction.payment" method
+func (c *KAIHttpClient) CallPayment(params map[string]string, debug bool) (*InternalPaymentRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("transaction", "payment", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS PaymentRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalPaymentRS
+
+	resp, err = MakeInternalPaymentRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}

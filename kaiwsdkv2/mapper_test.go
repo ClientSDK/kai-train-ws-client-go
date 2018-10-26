@@ -765,3 +765,36 @@ func TestMakeInternalUpdatePaxRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalPaymentRSOK is a positive test function for "MakeInternalPaymentRS" mapper method
+func TestMakeInternalPaymentRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","book_balance":0		}`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	var bookBalance float64 // = 0
+
+	// test variable
+	var vRS PaymentRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalPaymentRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
+	assert.Equal(t, bookBalance, result.Return.BookBalance, "sould be equal!")
+
+	assert.Nil(t, err)
+}
