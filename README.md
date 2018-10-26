@@ -24,7 +24,7 @@
 ##### KAI Train Web Service Version 2
 
 ```bash
-...
+go get github.com/ClientSDK/kai-train-ws-client-go/kaiwsdkv2
 ```
 
 ## Prerequisites
@@ -32,14 +32,14 @@
 - [KAI Train Web Service Client for Go (kaiwsdkv2 GoLang package) ](https://github.com/ClientSDK/kai-train-ws-client-go)
 
 ```bash
-...
+go get github.com/ClientSDK/kai-train-ws-client-go/kaiwsdkv2
 ```
 
 - A Text Editor or an IDE
 
 ### KAI Train Web Service Agent requirements
-- ...
-- ...
+- KAI Train (RailTicket) Agent Credential Account (RQID)
+- KAI Train (RailTicket) Web Service Access (IP Whitelist) ( [Production](https://railticket.kereta-api.co.id) )
 
 ## Example
 
