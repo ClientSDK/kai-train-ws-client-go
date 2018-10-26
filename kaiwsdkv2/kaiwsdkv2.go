@@ -713,3 +713,33 @@ func (c *KAIHttpClient) CallPayment(params map[string]string, debug bool) (*Inte
 	// send to caller
 	return resp, nil
 }
+
+// CallCancelPayment is a function to call KAI "transaction.cancel_payment" method
+func (c *KAIHttpClient) CallCancelPayment(params map[string]string, debug bool) (*InternalCancelPaymentRS, error) {
+
+	// call to KAI
+	// params := make(map[string]string)
+	err := c.Call("transaction", "cancel_payment", params, debug)
+	if err != nil {
+		return nil, err
+	}
+
+	// convert to struct
+	var vRS CancelPaymentRS
+
+	err = json.Unmarshal(c.KAIResponseBody, &vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// make internal response
+	var resp *InternalCancelPaymentRS
+
+	resp, err = MakeInternalCancelPaymentRS(vRS)
+	if err != nil {
+		return nil, err
+	}
+
+	// send to caller
+	return resp, nil
+}

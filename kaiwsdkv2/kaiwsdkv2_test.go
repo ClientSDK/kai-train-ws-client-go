@@ -816,3 +816,36 @@ func TestCallPaymentFalse(t *testing.T) {
 
 	assert.Nil(t, nil)
 }
+
+// TestCallCancelPaymentFalse is a negative test function for "KAIHttpClient.CallCancelPayment" method
+func TestCallCancelPaymentFalse(t *testing.T) {
+
+	// init http client
+	httpClient := makeHTTPClient()
+
+	kaiClient, err := NewKAIHttpClient(httpClient, kaiServerURL, kaiRQID)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// test variable
+	var vRS *InternalCancelPaymentRS
+
+	// test expected values
+	// errCode := "002000"
+	// errMsg := "Invalid Request. IP Address or Requester ID are not registered"
+
+	// test function
+	params := make(map[string]string)
+
+	params["book_code"] = "ABMNYZ"
+
+	vRS, err = kaiClient.CallCancelPayment(params, false)
+
+	// test logic
+	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
+	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
+
+	assert.Nil(t, nil)
+}

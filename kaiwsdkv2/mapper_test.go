@@ -798,3 +798,36 @@ func TestMakeInternalPaymentRSOK(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+// TestMakeInternalCancelPaymentRSOK is a positive test function for "MakeInternalCancelPaymentRS" mapper method
+func TestMakeInternalCancelPaymentRSOK(t *testing.T) {
+	// fake response
+	str := `{"err_code":0,"book_code":"ABMNYZ","normal_sales":25200,"extra_fee":5000,"book_balance":30200}`
+
+	// transform to standard response
+	stdStr := TrasformStandardKAIResponse([]byte(str))
+
+	// test expected values
+	errCode := "0"
+	bookCode := "ABMNYZ"
+	var normalSales float64 = 25200
+
+	// test variable
+	var vRS CancelPaymentRS
+
+	// test function
+	err := json.Unmarshal(stdStr, &vRS)
+
+	result, err := MakeInternalCancelPaymentRS(vRS)
+
+	// r, _ := json.Marshal(result)
+	// fmt.Println(string(r))
+
+	// test logic
+	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+
+	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
+	assert.Equal(t, normalSales, result.Return.NormalSales, "sould be equal!")
+
+	assert.Nil(t, err)
+}

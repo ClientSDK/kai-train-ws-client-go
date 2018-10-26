@@ -807,3 +807,25 @@ func MakeInternalPaymentRS(input PaymentRS) (result *InternalPaymentRS, err erro
 
 	return result, nil
 }
+
+// MakeInternalCancelPaymentRS is a function to mapping from CancelPaymentRS to InternalCancelPaymentRS ("transaction.cancel_payment")
+func MakeInternalCancelPaymentRS(input CancelPaymentRS) (result *InternalCancelPaymentRS, err error) {
+
+	var vRS InternalCancelPaymentRS
+
+	vRS.ErrCode = input.ErrCode
+	vRS.ErrMsg = input.ErrMsg
+
+	var vReturn CancelPayment
+
+	vReturn.BookCode = input.BookCode
+	vReturn.NormalSales = input.NormalSales
+	vReturn.ExtraFee = input.ExtraFee
+	vReturn.BookBalance = input.BookBalance
+
+	vRS.Return = vReturn
+
+	result = &vRS
+
+	return result, nil
+}
