@@ -7,6 +7,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -27,10 +28,19 @@ func makeHTTPClient() *http.Client {
 	proxyURL, _ := url.Parse("http://proxy-ip-address:proxy-port")
 	//proxyURL, _ := url.Parse("http://proxy-user:proxy-password@proxy-ip-address:proxy-port")
 
-	// Initiate http client with transport
-	// httpClient := &http.Client{Transport: &http.Transport{}}
-	// Using Proxy if needed
-	httpClient := &http.Client{Transport: &http.Transport{Proxy: http.ProxyURL(proxyURL)}}
+	// Initiate transport with proxy and skip TLS
+	tr := &http.Transport{
+		Proxy:           http.ProxyURL(proxyURL),
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+
+	// Initiate transport without proxy and skip TLS
+	// tr := &http.Transport{
+	//	TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	// }
+
+	// Using Transport
+	httpClient := &http.Client{Transport: tr}
 
 	return httpClient
 }
@@ -64,6 +74,9 @@ func callGetOrigination(kaiClient *kaiwsdkv2.KAIHttpClient) {
 	// fmt.Println(vRS.ErrMsg)
 	// fmt.Println(vRS.Return[0].OriginCode)
 	// fmt.Println(vRS.Return[0].OriginName)
+
+	// if you want to retreive KAI Origin Response
+	// fmt.Println(string(kaiClient.KAIRealResponseBody))
 
 	json, _ := json.Marshal(vRS)
 	fmt.Println(string(json))
