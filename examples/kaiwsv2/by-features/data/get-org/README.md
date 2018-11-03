@@ -10,7 +10,7 @@ The following are the sections available in this guide.
 - [Build and Running](#build-and-running)
 
 ## Use Case
-Let’s retrive origination departure location from KAI Train Web Service Endpoint.
+Let’s retrieve origination departure location from KAI Train Web Service Endpoint.
 
 ![Get Origination Diagram](images/data.get_org.png "Get Origination Diagram")
 
