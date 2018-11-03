@@ -39,11 +39,11 @@ func TestMakeInternalGetOriginationRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, orgLen, len(result.Return), "sould be equal!")
-	assert.Equal(t, originCode, result.Return[0].OriginCode, "sould be equal!")
-	assert.Equal(t, originName, result.Return[0].OriginName, "sould be equal!")
+	assert.Equal(t, orgLen, len(result.Return), "should be equal!")
+	assert.Equal(t, originCode, result.Return[0].OriginCode, "should be equal!")
+	assert.Equal(t, originName, result.Return[0].OriginName, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -74,11 +74,11 @@ func TestMakeInternalGetDestinationRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, destLen, len(result.Return), "sould be equal!")
-	assert.Equal(t, destCode, result.Return[1].DestCode, "sould be equal!")
-	assert.Equal(t, destName, result.Return[1].DestName, "sould be equal!")
+	assert.Equal(t, destLen, len(result.Return), "should be equal!")
+	assert.Equal(t, destCode, result.Return[1].DestCode, "should be equal!")
+	assert.Equal(t, destName, result.Return[1].DestName, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -108,10 +108,10 @@ func TestMakeInternalGetPayTypeRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, ptLen, len(result.Return), "sould be equal!")
-	assert.Equal(t, ptName, result.Return[0].Name, "sould be equal!")
+	assert.Equal(t, ptLen, len(result.Return), "should be equal!")
+	assert.Equal(t, ptName, result.Return[0].Name, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -145,15 +145,15 @@ func TestMakeInternalGetScheduleRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, orgCode, result.Return.Origin, "sould be equal!")
-	assert.Equal(t, desCode, result.Return.Destination, "sould be equal!")
-	assert.Equal(t, departDate, result.Return.DepartureDate, "sould be equal!")
-	assert.Equal(t, schedLen, len(result.Return.Schedules), "sould be equal!")
+	assert.Equal(t, orgCode, result.Return.Origin, "should be equal!")
+	assert.Equal(t, desCode, result.Return.Destination, "should be equal!")
+	assert.Equal(t, departDate, result.Return.DepartureDate, "should be equal!")
+	assert.Equal(t, schedLen, len(result.Return.Schedules), "should be equal!")
 
-	assert.Equal(t, tripTrainNo0, result.Return.Schedules[0].TrainNo, "sould be equal!")
-	assert.Equal(t, tripTrainName0, result.Return.Schedules[0].TrainName, "sould be equal!")
+	assert.Equal(t, tripTrainNo0, result.Return.Schedules[0].TrainNo, "should be equal!")
+	assert.Equal(t, tripTrainName0, result.Return.Schedules[0].TrainName, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -189,17 +189,17 @@ func TestMakeInternalGetScheduleV2RSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, orgCode, result.Return.Origin, "sould be equal!")
-	assert.Equal(t, desCode, result.Return.Destination, "sould be equal!")
-	assert.Equal(t, departDate, result.Return.DepartureDate, "sould be equal!")
-	assert.Equal(t, schedLen, len(result.Return.Schedules), "sould be equal!")
+	assert.Equal(t, orgCode, result.Return.Origin, "should be equal!")
+	assert.Equal(t, desCode, result.Return.Destination, "should be equal!")
+	assert.Equal(t, departDate, result.Return.DepartureDate, "should be equal!")
+	assert.Equal(t, schedLen, len(result.Return.Schedules), "should be equal!")
 
-	assert.Equal(t, tripTrainNo0, result.Return.Schedules[0].TrainNo, "sould be equal!")
-	assert.Equal(t, tripTrainName0, result.Return.Schedules[0].TrainName, "sould be equal!")
-	assert.Equal(t, tripDepDate0, result.Return.Schedules[0].DepartureDate, "sould be equal!")
-	assert.Equal(t, tripArvDate0, result.Return.Schedules[0].ArriveDate, "sould be equal!")
+	assert.Equal(t, tripTrainNo0, result.Return.Schedules[0].TrainNo, "should be equal!")
+	assert.Equal(t, tripTrainName0, result.Return.Schedules[0].TrainName, "should be equal!")
+	assert.Equal(t, tripDepDate0, result.Return.Schedules[0].DepartureDate, "should be equal!")
+	assert.Equal(t, tripArvDate0, result.Return.Schedules[0].ArriveDate, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -236,19 +236,19 @@ func TestMakeInternalGetScheduleLiteRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, orgCode, result.Return.Origin, "sould be equal!")
-	assert.Equal(t, desCode, result.Return.Destination, "sould be equal!")
-	assert.Equal(t, departDate, result.Return.DepartureDate, "sould be equal!")
-	assert.Equal(t, schedLen, len(result.Return.Schedules), "sould be equal!")
+	assert.Equal(t, orgCode, result.Return.Origin, "should be equal!")
+	assert.Equal(t, desCode, result.Return.Destination, "should be equal!")
+	assert.Equal(t, departDate, result.Return.DepartureDate, "should be equal!")
+	assert.Equal(t, schedLen, len(result.Return.Schedules), "should be equal!")
 
-	assert.Equal(t, tripTrainNo0, result.Return.Schedules[0].TrainNo, "sould be equal!")
-	assert.Equal(t, tripTrainName0, result.Return.Schedules[0].TrainName, "sould be equal!")
-	assert.Equal(t, tripDepDate0, result.Return.Schedules[0].DepartureDate, "sould be equal!")
-	assert.Equal(t, tripArvDate0, result.Return.Schedules[0].ArriveDate, "sould be equal!")
+	assert.Equal(t, tripTrainNo0, result.Return.Schedules[0].TrainNo, "should be equal!")
+	assert.Equal(t, tripTrainName0, result.Return.Schedules[0].TrainName, "should be equal!")
+	assert.Equal(t, tripDepDate0, result.Return.Schedules[0].DepartureDate, "should be equal!")
+	assert.Equal(t, tripArvDate0, result.Return.Schedules[0].ArriveDate, "should be equal!")
 
-	assert.Equal(t, tripSeatAvailC0, result.Return.Schedules[0].AvailSubClass[0].SeatAvailable, "sould be equal!")
+	assert.Equal(t, tripSeatAvailC0, result.Return.Schedules[0].AvailSubClass[0].SeatAvailable, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -282,15 +282,15 @@ func TestMakeInternalGetSeatMapRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, orgCode, result.Return.Origin, "sould be equal!")
-	assert.Equal(t, desCode, result.Return.Destination, "sould be equal!")
-	assert.Equal(t, departDate, result.Return.DepartureDate, "sould be equal!")
-	assert.Equal(t, trainNo, result.Return.TrainNo, "sould be equal!")
-	assert.Equal(t, smLen, len(result.Return.SeatMaps), "sould be equal!")
+	assert.Equal(t, orgCode, result.Return.Origin, "should be equal!")
+	assert.Equal(t, desCode, result.Return.Destination, "should be equal!")
+	assert.Equal(t, departDate, result.Return.DepartureDate, "should be equal!")
+	assert.Equal(t, trainNo, result.Return.TrainNo, "should be equal!")
+	assert.Equal(t, smLen, len(result.Return.SeatMaps), "should be equal!")
 
-	assert.Equal(t, wagonCode, result.Return.SeatMaps[0].WagonCode, "sould be equal!")
+	assert.Equal(t, wagonCode, result.Return.SeatMaps[0].WagonCode, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -325,16 +325,16 @@ func TestMakeInternalGetSeatMapPerSubClassRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, orgCode, result.Return.Origin, "sould be equal!")
-	assert.Equal(t, desCode, result.Return.Destination, "sould be equal!")
-	assert.Equal(t, departDate, result.Return.DepartureDate, "sould be equal!")
-	assert.Equal(t, trainNo, result.Return.TrainNo, "sould be equal!")
-	assert.Equal(t, smLen, len(result.Return.SeatMaps), "sould be equal!")
+	assert.Equal(t, orgCode, result.Return.Origin, "should be equal!")
+	assert.Equal(t, desCode, result.Return.Destination, "should be equal!")
+	assert.Equal(t, departDate, result.Return.DepartureDate, "should be equal!")
+	assert.Equal(t, trainNo, result.Return.TrainNo, "should be equal!")
+	assert.Equal(t, smLen, len(result.Return.SeatMaps), "should be equal!")
 
-	assert.Equal(t, wagonCode, result.Return.SeatMaps[0].WagonCode, "sould be equal!")
-	assert.Equal(t, subClass0_0, result.Return.SeatMaps[0].Seats[0].SubClass, "sould be equal!")
+	assert.Equal(t, wagonCode, result.Return.SeatMaps[0].WagonCode, "should be equal!")
+	assert.Equal(t, subClass0_0, result.Return.SeatMaps[0].Seats[0].SubClass, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -369,16 +369,16 @@ func TestMakeInternalGetSeatNullRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, orgCode, result.Return.Origin, "sould be equal!")
-	assert.Equal(t, desCode, result.Return.Destination, "sould be equal!")
-	assert.Equal(t, departDate, result.Return.DepartureDate, "sould be equal!")
-	assert.Equal(t, trainNo, result.Return.TrainNo, "sould be equal!")
-	assert.Equal(t, smLen, len(result.Return.SeatNulls), "sould be equal!")
+	assert.Equal(t, orgCode, result.Return.Origin, "should be equal!")
+	assert.Equal(t, desCode, result.Return.Destination, "should be equal!")
+	assert.Equal(t, departDate, result.Return.DepartureDate, "should be equal!")
+	assert.Equal(t, trainNo, result.Return.TrainNo, "should be equal!")
+	assert.Equal(t, smLen, len(result.Return.SeatNulls), "should be equal!")
 
-	assert.Equal(t, wagonCode, result.Return.SeatNulls[0].WagonCode, "sould be equal!")
-	assert.Equal(t, statusAvail0_0, result.Return.SeatNulls[0].Seats[0].Status, "sould be equal!")
+	assert.Equal(t, wagonCode, result.Return.SeatNulls[0].WagonCode, "should be equal!")
+	assert.Equal(t, statusAvail0_0, result.Return.SeatNulls[0].Seats[0].Status, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -414,17 +414,17 @@ func TestMakeInternalGetSeatNullPerSubClassRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, orgCode, result.Return.Origin, "sould be equal!")
-	assert.Equal(t, desCode, result.Return.Destination, "sould be equal!")
-	assert.Equal(t, departDate, result.Return.DepartureDate, "sould be equal!")
-	assert.Equal(t, trainNo, result.Return.TrainNo, "sould be equal!")
-	assert.Equal(t, smLen, len(result.Return.SeatNulls), "sould be equal!")
+	assert.Equal(t, orgCode, result.Return.Origin, "should be equal!")
+	assert.Equal(t, desCode, result.Return.Destination, "should be equal!")
+	assert.Equal(t, departDate, result.Return.DepartureDate, "should be equal!")
+	assert.Equal(t, trainNo, result.Return.TrainNo, "should be equal!")
+	assert.Equal(t, smLen, len(result.Return.SeatNulls), "should be equal!")
 
-	assert.Equal(t, wagonCode, result.Return.SeatNulls[0].WagonCode, "sould be equal!")
-	assert.Equal(t, statusAvail0_0, result.Return.SeatNulls[0].Seats[0].Status, "sould be equal!")
-	assert.Equal(t, subClass0_0, result.Return.SeatNulls[0].Seats[0].SubClass, "sould be equal!")
+	assert.Equal(t, wagonCode, result.Return.SeatNulls[0].WagonCode, "should be equal!")
+	assert.Equal(t, statusAvail0_0, result.Return.SeatNulls[0].Seats[0].Status, "should be equal!")
+	assert.Equal(t, subClass0_0, result.Return.SeatNulls[0].Seats[0].SubClass, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -455,11 +455,11 @@ func TestMakeInternalGetAgentBalanceRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, agentCode, result.Return.AgentCode, "sould be equal!")
-	assert.Equal(t, agentName, result.Return.AgentName, "sould be equal!")
-	assert.Equal(t, agentBalance, result.Return.AgentBalance, "sould be equal!")
+	assert.Equal(t, agentCode, result.Return.AgentCode, "should be equal!")
+	assert.Equal(t, agentName, result.Return.AgentName, "should be equal!")
+	assert.Equal(t, agentBalance, result.Return.AgentBalance, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -490,11 +490,11 @@ func TestMakeInternalGetBalanceRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
-	assert.Equal(t, numCode, result.Return.NumCode, "sould be equal!")
-	assert.Equal(t, normalSales, result.Return.NormalSales, "sould be equal!")
+	assert.Equal(t, bookCode, result.Return.BookCode, "should be equal!")
+	assert.Equal(t, numCode, result.Return.NumCode, "should be equal!")
+	assert.Equal(t, normalSales, result.Return.NormalSales, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -526,13 +526,13 @@ func TestMakeInternalGetBookInfoRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
-	assert.Equal(t, numCode, result.Return.NumCode, "sould be equal!")
-	assert.Equal(t, normalSales, result.Return.NormalSales, "sould be equal!")
+	assert.Equal(t, bookCode, result.Return.BookCode, "should be equal!")
+	assert.Equal(t, numCode, result.Return.NumCode, "should be equal!")
+	assert.Equal(t, normalSales, result.Return.NormalSales, "should be equal!")
 
-	assert.Equal(t, paxName0, result.Return.PaxList[0].PaxName, "sould be equal!")
+	assert.Equal(t, paxName0, result.Return.PaxList[0].PaxName, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -566,14 +566,14 @@ func TestMakeInternalGetBookPriceInfoRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
-	assert.Equal(t, totalPriceAdult, result.Return.TotalPriceAdult, "sould be equal!")
-	assert.Equal(t, totalPriceChild, result.Return.TotalPriceChild, "sould be equal!")
-	assert.Equal(t, totalPriceInfant, result.Return.TotalPriceInfant, "sould be equal!")
-	assert.Equal(t, extraFee, result.Return.ExtraFee, "sould be equal!")
-	assert.Equal(t, totalPrice, result.Return.TotalPrice, "sould be equal!")
+	assert.Equal(t, bookCode, result.Return.BookCode, "should be equal!")
+	assert.Equal(t, totalPriceAdult, result.Return.TotalPriceAdult, "should be equal!")
+	assert.Equal(t, totalPriceChild, result.Return.TotalPriceChild, "should be equal!")
+	assert.Equal(t, totalPriceInfant, result.Return.TotalPriceInfant, "should be equal!")
+	assert.Equal(t, extraFee, result.Return.ExtraFee, "should be equal!")
+	assert.Equal(t, totalPrice, result.Return.TotalPrice, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -606,13 +606,13 @@ func TestMakeInternalBookingRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
-	assert.Equal(t, numCode, result.Return.NumCode, "sould be equal!")
-	assert.Equal(t, adultCount, result.Return.PaxNums.AdultCount, "sould be equal!")
-	assert.Equal(t, paxName0, result.Return.PaxNames[0].Name, "sould be equal!")
-	assert.Equal(t, wagonCode0, result.Return.Seats[0].WagonCode, "sould be equal!")
+	assert.Equal(t, bookCode, result.Return.BookCode, "should be equal!")
+	assert.Equal(t, numCode, result.Return.NumCode, "should be equal!")
+	assert.Equal(t, adultCount, result.Return.PaxNums.AdultCount, "should be equal!")
+	assert.Equal(t, paxName0, result.Return.PaxNames[0].Name, "should be equal!")
+	assert.Equal(t, wagonCode0, result.Return.Seats[0].WagonCode, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -646,14 +646,14 @@ func TestMakeInternalBookingWithArvInfoRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
-	assert.Equal(t, numCode, result.Return.NumCode, "sould be equal!")
-	assert.Equal(t, arriveDate, result.Return.ArriveDate, "sould be equal!")
-	assert.Equal(t, adultCount, result.Return.PaxNums.AdultCount, "sould be equal!")
-	assert.Equal(t, paxName0, result.Return.PaxNames[0].Name, "sould be equal!")
-	assert.Equal(t, wagonCode0, result.Return.Seats[0].WagonCode, "sould be equal!")
+	assert.Equal(t, bookCode, result.Return.BookCode, "should be equal!")
+	assert.Equal(t, numCode, result.Return.NumCode, "should be equal!")
+	assert.Equal(t, arriveDate, result.Return.ArriveDate, "should be equal!")
+	assert.Equal(t, adultCount, result.Return.PaxNums.AdultCount, "should be equal!")
+	assert.Equal(t, paxName0, result.Return.PaxNames[0].Name, "should be equal!")
+	assert.Equal(t, wagonCode0, result.Return.Seats[0].WagonCode, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -684,11 +684,11 @@ func TestMakeInternalCancelBookRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
-	assert.Equal(t, status, result.Return.Status, "sould be equal!")
-	assert.Equal(t, refundAmount, result.Return.RefundAmount, "sould be equal!")
+	assert.Equal(t, bookCode, result.Return.BookCode, "should be equal!")
+	assert.Equal(t, status, result.Return.Status, "should be equal!")
+	assert.Equal(t, refundAmount, result.Return.RefundAmount, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -720,13 +720,13 @@ func TestMakeInternalManualSeatRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
-	assert.Equal(t, wagonCode, result.Return.WagonCode, "sould be equal!")
-	assert.Equal(t, wagonNo, result.Return.WagonNo, "sould be equal!")
+	assert.Equal(t, bookCode, result.Return.BookCode, "should be equal!")
+	assert.Equal(t, wagonCode, result.Return.WagonCode, "should be equal!")
+	assert.Equal(t, wagonNo, result.Return.WagonNo, "should be equal!")
 
-	assert.Equal(t, seat0, result.Return.Seats[0].SeatNo, "sould be equal!")
+	assert.Equal(t, seat0, result.Return.Seats[0].SeatNo, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -757,11 +757,11 @@ func TestMakeInternalUpdatePaxRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
-	assert.Equal(t, adultCount, result.Return.PaxNums.AdultCount, "sould be equal!")
-	assert.Equal(t, name0, result.Return.PaxNames[0].Name, "sould be equal!")
+	assert.Equal(t, bookCode, result.Return.BookCode, "should be equal!")
+	assert.Equal(t, adultCount, result.Return.PaxNums.AdultCount, "should be equal!")
+	assert.Equal(t, name0, result.Return.PaxNames[0].Name, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -791,10 +791,10 @@ func TestMakeInternalPaymentRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
-	assert.Equal(t, bookBalance, result.Return.BookBalance, "sould be equal!")
+	assert.Equal(t, bookCode, result.Return.BookCode, "should be equal!")
+	assert.Equal(t, bookBalance, result.Return.BookBalance, "should be equal!")
 
 	assert.Nil(t, err)
 }
@@ -824,10 +824,10 @@ func TestMakeInternalCancelPaymentRSOK(t *testing.T) {
 	// fmt.Println(string(r))
 
 	// test logic
-	assert.Equal(t, errCode, result.ErrCode, "sould be equal!")
+	assert.Equal(t, errCode, result.ErrCode, "should be equal!")
 
-	assert.Equal(t, bookCode, result.Return.BookCode, "sould be equal!")
-	assert.Equal(t, normalSales, result.Return.NormalSales, "sould be equal!")
+	assert.Equal(t, bookCode, result.Return.BookCode, "should be equal!")
+	assert.Equal(t, normalSales, result.Return.NormalSales, "should be equal!")
 
 	assert.Nil(t, err)
 }
