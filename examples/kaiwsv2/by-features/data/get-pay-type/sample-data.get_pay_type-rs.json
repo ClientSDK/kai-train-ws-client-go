@@ -2,5 +2,11 @@
     "errCode": "0",
     "errMsg": null,
     "return": [
+        {
+            "name": "TUNAI"
+        },
+        {
+            "name": "EDC BNI"
+        }
     ]
 }
