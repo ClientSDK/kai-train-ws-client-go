@@ -1,6 +1,6 @@
-# Module/Method DATA:get_des (data.get_des)
+# Module/Method DATA:GET_DES (data.get_des)
 
-Module "Get Destination" (DATA:get_des) is a service method to retreive list of Destination (arrive location) information from KAI Train (RailTicket) Web Service [[1](https://railticket.kereta-api.co.id/)].
+Module "Get Destination" (DATA:GET_DES) is a service method to retreive list of Destination (arrive location) information from KAI Train (RailTicket) Web Service [[1](https://railticket.kereta-api.co.id/)].
 
 The following are the sections available in this guide.
 
@@ -38,7 +38,7 @@ go get github.com/ClientSDK/kai-train-ws-client-go/kaiwsdkv2
 Go is a complete programming language that supports custom project structures. Let's use the following package structure for this example.
 
 ```
-get-org
+get-des
    ├── build_and_run.sh
    └── main.go
 ```
