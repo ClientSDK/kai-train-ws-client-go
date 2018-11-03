@@ -194,7 +194,7 @@ func TestCallGetScheduleFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetScheduleV2False is a negative test function for "KAIHttpClient.CallGetScheduleV2" method
@@ -230,7 +230,7 @@ func TestCallGetScheduleV2False(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetScheduleLiteFalse is a negative test function for "KAIHttpClient.CallGetScheduleLite" method
@@ -266,7 +266,7 @@ func TestCallGetScheduleLiteFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetSeatMapFalse is a negative test function for "KAIHttpClient.CallGetSeatMap" method
@@ -303,7 +303,7 @@ func TestCallGetSeatMapFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetSeatMapPerSubClassFalse is a negative test function for "KAIHttpClient.CallGetSeatMapPerSubClass" method
@@ -341,7 +341,7 @@ func TestCallGetSeatMapPerSubClassFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetSeatNullFalse is a negative test function for "KAIHttpClient.CallGetSeatNull" method
@@ -378,7 +378,7 @@ func TestCallGetSeatNullFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetSeatNullPerSubClassFalse is a negative test function for "KAIHttpClient.CallGetSeatNullPerSubClass" method
@@ -416,7 +416,7 @@ func TestCallGetSeatNullPerSubClassFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetAgentBalanceFalse is a negative test function for "KAIHttpClient.CallGetAgentBalance" method
@@ -445,7 +445,7 @@ func TestCallGetAgentBalanceFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetBalanceFalse is a negative test function for "KAIHttpClient.CallGetBalance" method
@@ -479,7 +479,7 @@ func TestCallGetBalanceFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetBookInfoFalse is a negative test function for "KAIHttpClient.CallGetBookInfo" method
@@ -513,7 +513,7 @@ func TestCallGetBookInfoFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetBookPriceInfoFalse is a negative test function for "KAIHttpClient.CallGetBookPriceInfo" method
@@ -546,7 +546,7 @@ func TestCallGetBookPriceInfoFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallBookingFalse is a negative test function for "KAIHttpClient.CallBooking" method
@@ -607,7 +607,7 @@ func TestCallBookingFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallBookingWithArvInfoFalse is a negative test function for "KAIHttpClient.CallBookingWithArvInfo" method
@@ -668,7 +668,7 @@ func TestCallBookingWithArvInfoFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCancelBookFalse is a negative test function for "KAIHttpClient.CancelBook" method
@@ -702,7 +702,7 @@ func TestCancelBookFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallManualSeatFalse is a negative test function for "KAIHttpClient.CallManualSeat" method
@@ -738,7 +738,7 @@ func TestCallManualSeatFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallUpdatePaxFalse is a negative test function for "KAIHttpClient.CallUpdatePax" method
@@ -780,7 +780,7 @@ func TestCallUpdatePaxFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallPaymentFalse is a negative test function for "KAIHttpClient.CallPayment" method
@@ -814,7 +814,7 @@ func TestCallPaymentFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallCancelPaymentFalse is a negative test function for "KAIHttpClient.CallCancelPayment" method
@@ -847,5 +847,5 @@ func TestCallCancelPaymentFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
