@@ -8,6 +8,7 @@ package kaiwsdkv2
 
 import (
 	"encoding/json"
+	"log"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -32,6 +33,10 @@ func TestMakeInternalGetOriginationRSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalGetOriginationRS(vRS)
 
@@ -68,6 +73,10 @@ func TestMakeInternalGetDestinationRSOK(t *testing.T) {
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	result, err := MakeInternalGetDestinationRS(vRS)
 
 	// r, _ := json.Marshal(result)
@@ -101,6 +110,10 @@ func TestMakeInternalGetPayTypeRSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalGetPayTypeRS(vRS)
 
@@ -138,6 +151,10 @@ func TestMakeInternalGetScheduleRSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalGetScheduleRS(vRS)
 
@@ -182,6 +199,10 @@ func TestMakeInternalGetScheduleV2RSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalGetScheduleV2RS(vRS)
 
@@ -230,6 +251,10 @@ func TestMakeInternalGetScheduleLiteRSOK(t *testing.T) {
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	result, err := MakeInternalGetScheduleLiteRS(vRS)
 
 	// r, _ := json.Marshal(result)
@@ -276,6 +301,10 @@ func TestMakeInternalGetSeatMapRSOK(t *testing.T) {
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	result, err := MakeInternalGetSeatMapRS(vRS)
 
 	// r, _ := json.Marshal(result)
@@ -318,6 +347,10 @@ func TestMakeInternalGetSeatMapPerSubClassRSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalGetSeatMapPerSubClassRS(vRS)
 
@@ -362,6 +395,10 @@ func TestMakeInternalGetSeatNullRSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalGetSeatNullRS(vRS)
 
@@ -408,6 +445,10 @@ func TestMakeInternalGetSeatNullPerSubClassRSOK(t *testing.T) {
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	result, err := MakeInternalGetSeatNullPerSubClassRS(vRS)
 
 	// r, _ := json.Marshal(result)
@@ -449,6 +490,10 @@ func TestMakeInternalGetAgentBalanceRSOK(t *testing.T) {
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	result, err := MakeInternalGetAgentBalanceRS(vRS)
 
 	// r, _ := json.Marshal(result)
@@ -483,6 +528,10 @@ func TestMakeInternalGetBalanceRSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalGetBalanceRS(vRS)
 
@@ -519,6 +568,10 @@ func TestMakeInternalGetBookInfoRSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalGetBookInfoRS(vRS)
 
@@ -560,6 +613,10 @@ func TestMakeInternalGetBookPriceInfoRSOK(t *testing.T) {
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	result, err := MakeInternalGetBookPriceInfoRS(vRS)
 
 	// r, _ := json.Marshal(result)
@@ -599,6 +656,10 @@ func TestMakeInternalBookingRSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalBookingRS(vRS)
 
@@ -640,6 +701,10 @@ func TestMakeInternalBookingWithArvInfoRSOK(t *testing.T) {
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	result, err := MakeInternalBookingWithArvInfoRS(vRS)
 
 	// r, _ := json.Marshal(result)
@@ -678,6 +743,10 @@ func TestMakeInternalCancelBookRSOK(t *testing.T) {
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	result, err := MakeInternalCancelBookRS(vRS)
 
 	// r, _ := json.Marshal(result)
@@ -713,6 +782,10 @@ func TestMakeInternalManualSeatRSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalManualSeatRS(vRS)
 
@@ -751,6 +824,10 @@ func TestMakeInternalUpdatePaxRSOK(t *testing.T) {
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	result, err := MakeInternalUpdatePaxRS(vRS)
 
 	// r, _ := json.Marshal(result)
@@ -785,6 +862,10 @@ func TestMakeInternalPaymentRSOK(t *testing.T) {
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	result, err := MakeInternalPaymentRS(vRS)
 
 	// r, _ := json.Marshal(result)
@@ -817,6 +898,10 @@ func TestMakeInternalCancelPaymentRSOK(t *testing.T) {
 
 	// test function
 	err := json.Unmarshal(stdStr, &vRS)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := MakeInternalCancelPaymentRS(vRS)
 
