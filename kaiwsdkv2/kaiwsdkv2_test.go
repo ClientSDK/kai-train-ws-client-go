@@ -57,6 +57,10 @@ func TestCallFalse(t *testing.T) {
 	params := make(map[string]string)
 	err = kaiClient.Call("data", "get_org", params, false)
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	// test expected values
 	// errCode := "002000"
 	// errMsg := "Invalid Request. IP Address or Requester ID are not registered"
@@ -71,7 +75,7 @@ func TestCallFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetOriginationFalse is a negative test function for "KAIHttpClient.CallGetOrigination" method
@@ -100,7 +104,7 @@ func TestCallGetOriginationFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetDestinationFalse is a negative test function for "KAIHttpClient.CallGetDestination" method
@@ -129,7 +133,7 @@ func TestCallGetDestinationFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetPayTypeFalse is a negative test function for "KAIHttpClient.CallGetPayType" method
@@ -158,7 +162,7 @@ func TestCallGetPayTypeFalse(t *testing.T) {
 	assert.Equal(t, errCode002000, vRS.ErrCode, "should be equal!")
 	assert.Equal(t, errMsg002000, vRS.ErrMsg, "should be equal!")
 
-	assert.Nil(t, nil)
+	assert.Nil(t, err)
 }
 
 // TestCallGetScheduleFalse is a negative test function for "KAIHttpClient.CallGetSchedule" method
