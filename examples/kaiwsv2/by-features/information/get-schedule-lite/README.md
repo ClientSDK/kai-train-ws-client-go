@@ -106,10 +106,10 @@ func main() {
 	}
 
 	// call KAI web service method
-	callGetSchedule(kaiClient)
+	callGetScheduleLite(kaiClient)
 }
 
-func callGetSchedule(kaiClient *kaiwsdkv2.KAIHttpClient) {
+func callGetScheduleLite(kaiClient *kaiwsdkv2.KAIHttpClient) {
 
 	params := make(map[string]string)
 
@@ -118,7 +118,7 @@ func callGetSchedule(kaiClient *kaiwsdkv2.KAIHttpClient) {
 	currentDate := time.Now().Local()
 	params["dep_date"] = currentDate.AddDate(0, 0, 7).Format("20060102")
 
-	vRS, err := kaiClient.CallGetSchedule(params, false)
+	vRS, err := kaiClient.CallGetScheduleLite(params, false)
 
 	if err != nil {
 		log.Fatal(err)
