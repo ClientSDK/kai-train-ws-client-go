@@ -68,7 +68,7 @@ func callGetScheduleV2(kaiClient *kaiwsdkv2.KAIHttpClient) {
 	params["org"] = "BD"
 	params["des"] = "GMR"
 	currentDate := time.Now().Local()
-	params["dep_date"] = currentDate.AddDate(0, 1, 7).Format("20060102")
+	params["dep_date"] = currentDate.AddDate(0, 0, 7).Format("20060102")
 
 	vRS, err := kaiClient.CallGetScheduleV2(params, false)
 
