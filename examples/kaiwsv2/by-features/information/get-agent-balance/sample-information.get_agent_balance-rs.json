@@ -1,6 +1,9 @@
 {
     "errCode": "0",
     "errMsg": null,
-    "return": [
-    ]
+    "return": {
+        "agentCode": "KAI_AGENT_CODE",
+        "agentName": "KAI_AGENT_NAME",
+        "agentBalance": 20180008102
+    }
 }
