@@ -1,6 +1,133 @@
 {
     "errCode": "0",
     "errMsg": null,
-    "return": [
-    ]
+    "return": {
+        "origin": "BD",
+        "destination": "GMR",
+        "departureDate": "20191201",
+        "schedules": [
+            {
+                "trainNo": "10501",
+                "trainName": "ARGO PARAHYANGAN PREMIUM",
+                "departureDate": "20191201",
+                "arriveDate": "20191201",
+                "departureTime": "0415",
+                "arriveTime": "0725",
+                "availSubClass": [
+                    {
+                        "subClass": "C",
+                        "seatAvailable": 0,
+                        "seatClass": "K",
+                        "adultPrice": 100000,
+                        "childPrice": 0,
+                        "infantPrice": 0
+                    }
+                ]
+            },
+            {
+                "trainNo": "1111",
+                "trainName": "ARGO PARAHYANGAN",
+                "departureDate": "20191201",
+                "arriveDate": "20191201",
+                "departureTime": "0500",
+                "arriveTime": "0820",
+                "availSubClass": [
+                    {
+                        "subClass": "A",
+                        "seatAvailable": 0,
+                        "seatClass": "E",
+                        "adultPrice": 140000,
+                        "childPrice": 0,
+                        "infantPrice": 0
+                    }
+                ]
+            },
+            {
+                "trainNo": "710",
+                "trainName": "RANGKAS JAYA",
+                "departureDate": "20191201",
+                "arriveDate": "20191201",
+                "departureTime": "0800",
+                "arriveTime": "1115",
+                "availSubClass": [
+                    {
+                        "subClass": "C",
+                        "seatAvailable": 0,
+                        "seatClass": "K",
+                        "adultPrice": 80000,
+                        "childPrice": 0,
+                        "infantPrice": 0
+                    }
+                ]
+            },
+            {
+                "trainNo": "77A",
+                "trainName": "ARGO GOPAR",
+                "departureDate": "20191201",
+                "arriveDate": "20191201",
+                "departureTime": "1200",
+                "arriveTime": "1500",
+                "availSubClass": [
+                    {
+                        "subClass": "A",
+                        "seatAvailable": 0,
+                        "seatClass": "E",
+                        "adultPrice": 100000,
+                        "childPrice": 0,
+                        "infantPrice": 0
+                    },
+                    {
+                        "subClass": "B",
+                        "seatAvailable": 0,
+                        "seatClass": "B",
+                        "adultPrice": 90000,
+                        "childPrice": 0,
+                        "infantPrice": 0
+                    },
+                    {
+                        "subClass": "C",
+                        "seatAvailable": 0,
+                        "seatClass": "K",
+                        "adultPrice": 60000,
+                        "childPrice": 0,
+                        "infantPrice": 0
+                    }
+                ]
+            },
+            {
+                "trainNo": "P05",
+                "trainName": "ARGO PARAHYANGAN",
+                "departureDate": "20191201",
+                "arriveDate": "20191201",
+                "departureTime": "2000",
+                "arriveTime": "2300",
+                "availSubClass": [
+                    {
+                        "subClass": "A",
+                        "seatAvailable": 0,
+                        "seatClass": "E",
+                        "adultPrice": 200000,
+                        "childPrice": 0,
+                        "infantPrice": 0
+                    },
+                    {
+                        "subClass": "B",
+                        "seatAvailable": 0,
+                        "seatClass": "B",
+                        "adultPrice": 150000,
+                        "childPrice": 0,
+                        "infantPrice": 0
+                    },
+                    {
+                        "subClass": "C",
+                        "seatAvailable": 0,
+                        "seatClass": "K",
+                        "adultPrice": 60000,
+                        "childPrice": 0,
+                        "infantPrice": 0
+                    }
+                ]
+            }
+        ]
+    }
 }
