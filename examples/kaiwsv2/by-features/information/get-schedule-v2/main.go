@@ -7,9 +7,13 @@
 package main
 
 import (
+	"crypto/tls"
+	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"net/url"
+	"time"
 
 	"github.com/ClientSDK/kai-train-ws-client-go/kaiwsdkv2"
 )
@@ -25,10 +29,19 @@ func makeHTTPClient() *http.Client {
 	proxyURL, _ := url.Parse("http://proxy-ip-address:proxy-port")
 	//proxyURL, _ := url.Parse("http://proxy-user:proxy-password@proxy-ip-address:proxy-port")
 
-	// Initiate http client with transport
-	// httpClient := &http.Client{Transport: &http.Transport{}}
-	// Using Proxy if needed
-	httpClient := &http.Client{Transport: &http.Transport{Proxy: http.ProxyURL(proxyURL)}}
+	// Initiate transport with proxy and skip TLS
+	tr := &http.Transport{
+		Proxy:           http.ProxyURL(proxyURL),
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+
+	// Initiate transport without proxy and skip TLS
+	// tr := &http.Transport{
+	//	TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	// }
+
+	// Using Transport
+	httpClient := &http.Client{Transport: tr}
 
 	return httpClient
 }
@@ -45,22 +58,36 @@ func main() {
 	}
 
 	// call KAI web service method
-	callF(kaiClient)
+	callGetScheduleV2(kaiClient)
 }
 
-func callF(kaiClient *kaiwsdkv2.KAIHttpClient) {
+func callGetScheduleV2(kaiClient *kaiwsdkv2.KAIHttpClient) {
 
-	// params := make(map[string]string)
-	// vRS, err := kaiClient.Call...(false)
+	params := make(map[string]string)
 
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
+	params["org"] = "BD"
+	params["des"] = "GMR"
+	currentDate := time.Now().Local()
+	params["dep_date"] = currentDate.AddDate(0, 1, 7).Format("20060102")
+
+	vRS, err := kaiClient.CallGetScheduleV2(params, false)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// sample how to Access Response
 	// fmt.Println(vRS.ErrCode)
 	// fmt.Println(vRS.ErrMsg)
+	// fmt.Println(vRS.Return.Origin)
+	// fmt.Println(vRS.Return.Destination)
+	// fmt.Println(vRS.Return.DepartureDate)
+	// fmt.Println(vRS.Return.Schedules[0].TrainName)
+	// fmt.Println(vRS.Return.Schedules[0].AvailSubClass[0].SubClass)
 
-	// json, _ := json.Marshal(vRS)
-	// fmt.Println(string(json))
+	// if you want to retreive KAI Origin Response
+	// fmt.Println(string(kaiClient.KAIRealResponseBody))
+
+	json, _ := json.Marshal(vRS)
+	fmt.Println(string(json))
 }
