@@ -10,9 +10,9 @@
     - [06. Get Schedule V2 (information.get_schedule_v2)](information/get-schedule-v2/)
     - [07 Get Schedule Lite (information.get_schedule_lite)](information/get-schedule-lite/)
     - [08. Get Seat Map (information.get_seat_map)](information/get-seat-map/)
-    - [09. Get Seat Map Per SubClass (information.get_seat_map_per_subclass)](information/get-seat-map-per-subclas/)
+    - [09. Get Seat Map Per SubClass (information.get_seat_map_per_subclass)](information/get-seat-map-per-subclass/)
     - [10. Get Seat Null (information.get_seat_null)](information/get-seat-null/)
-    - [11. Get Seat Null Per SubClass (information.get_seat_null_per_subclass)](information/get-seat-null-per-sub-class/)
+    - [11. Get Seat Null Per SubClass (information.get_seat_null_per_subclass)](information/get-seat-null-per-subclass/)
     - [12. Get Book Info (information.get_book_info)]
     - [13. Get Book Price Info (information.get_book_price_info)]
     - [14. Get Balance (information.get_balance)]

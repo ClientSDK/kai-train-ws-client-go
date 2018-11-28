@@ -176,7 +176,66 @@ After the application is running, you will get the json response in `information
 ```
 
 ```json
-
+{
+    "err_code": 0,
+    "org": "BD",
+    "des": "GMR",
+    "dep_date": "20191201",
+    "schedule": [
+        [
+            "10501",
+            "ARGO PARAHYANGAN PREMIUM",
+            "20191201",
+            "20191201",
+            "0415",
+            "0725",
+            [
+                [
+                    "C",
+                    0,
+                    "K",
+                    100000,
+                    0,
+                    0
+                ]
+            ]
+        ],
+        [
+            "77A",
+            "ARGO GOPAR",
+            "20191201",
+            "20191201",
+            "1200",
+            "1500",
+            [
+                [
+                    "A",
+                    0,
+                    "E",
+                    100000,
+                    0,
+                    0
+                ],
+                [
+                    "B",
+                    0,
+                    "B",
+                    90000,
+                    0,
+                    0
+                ],
+                [
+                    "C",
+                    0,
+                    "K",
+                    60000,
+                    0,
+                    0
+                ]
+            ]
+        ]
+    ]
+}
 ```
 
 ### Sample Internal Response:
